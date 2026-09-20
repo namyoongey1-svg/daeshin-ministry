@@ -25,11 +25,18 @@ function addToSermonNote(word: AnalyzedWord, refLabel: string) {
 export default function VerseReader({
   verse,
   refLabel,
+  initialWord,
 }: {
   verse: Verse;
   refLabel: string;
+  /** 주소로 넘어온 낱말 번호. 특정 낱말을 가리키는 링크를 공유할 때 쓴다. */
+  initialWord?: number;
 }) {
-  const [selected, setSelected] = useState<number | null>(null);
+  const [selected, setSelected] = useState<number | null>(
+    initialWord !== undefined && initialWord >= 0 && initialWord < verse.words.length
+      ? initialWord
+      : null
+  );
   const [saved, setSaved] = useState(false);
   const active = selected === null ? null : verse.words[selected];
   const rtl = verse.lang === "hbo";

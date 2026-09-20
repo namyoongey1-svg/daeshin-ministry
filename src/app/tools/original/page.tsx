@@ -10,6 +10,8 @@ export default async function OriginalPage({
 }: PageProps<"/tools/original">) {
   const params = await searchParams;
   const input = typeof params.ref === "string" && params.ref.trim() ? params.ref : "요 3:16";
+  // ?w=2 처럼 낱말 번호를 붙이면 그 낱말이 열린 채로 시작한다.
+  const wordIndex = typeof params.w === "string" ? Number(params.w) : NaN;
   const reference = parseReference(input);
   const verse = reference
     ? await getVerse(reference.book.osis, reference.chapter, reference.verse)
@@ -58,7 +60,11 @@ export default async function OriginalPage({
         ) : (
           <>
             <h2 className="mb-3 text-lg font-bold">{formatReference(reference)}</h2>
-            <VerseReader verse={verse} refLabel={formatReference(reference)} />
+            <VerseReader
+              verse={verse}
+              refLabel={formatReference(reference)}
+              initialWord={Number.isInteger(wordIndex) ? wordIndex : undefined}
+            />
           </>
         )}
       </div>
