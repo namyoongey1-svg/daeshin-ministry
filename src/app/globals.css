@@ -53,3 +53,33 @@ body {
   direction: rtl;
   line-height: 2.4;
 }
+
+@page {
+  size: A4;
+  margin: 14mm;
+}
+
+/* 인쇄 — 편집 화면은 빼고 주보 지면만 남긴다. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .print-sheet {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  /* 순서표와 목록이 쪽 사이에서 잘리지 않게 한다. */
+  .print-sheet tr,
+  .print-sheet li {
+    break-inside: avoid;
+  }
+}

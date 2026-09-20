@@ -17,6 +17,16 @@ const CARDS = [
     title: "설교 노트",
     body: "원어 연구에서 담은 낱말을 개요에 붙여 한 편의 설교 초안으로 정리하고 내려받습니다.",
   },
+  {
+    href: "/tools/bulletin",
+    title: "주보 · 순서지",
+    body: "예배 종류를 고르면 기본 순서가 채워집니다. 광고와 주간 일정을 붙여 A4로 바로 인쇄합니다.",
+  },
+  {
+    href: "/tools/video",
+    title: "스케치 영상 기획",
+    body: "행사별로 놓치기 쉬운 촬영 장면을 목록으로 챙기고, 편집 구성과 자막을 미리 짭니다.",
+  },
 ] as const;
 
 export default async function Home() {
@@ -48,7 +58,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="mt-8 grid gap-4 md:grid-cols-3">
+      <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {CARDS.map((card) => (
           <Link
             key={card.href}

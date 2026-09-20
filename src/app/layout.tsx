@@ -16,6 +16,8 @@ const NAV = [
   { href: "/jobs", label: "청빙·구직" },
   { href: "/tools/original", label: "원어 파싱" },
   { href: "/tools/sermon", label: "설교 노트" },
+  { href: "/tools/bulletin", label: "주보" },
+  { href: "/tools/video", label: "영상 기획" },
 ] as const;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
