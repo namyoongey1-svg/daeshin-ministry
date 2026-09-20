@@ -2,6 +2,8 @@
 
 대신 교단 사역자를 위한 청빙·구직 및 설교 준비 플랫폼.
 
+**배포 주소: https://daeshin-ministry.vercel.app**
+
 ## 실행
 
 ```bash
@@ -163,10 +165,29 @@ Supabase 설정에서 챙겨야 할 것:
   메일 링크가 사이트로 돌아옵니다. 개발용 `http://localhost:3000/**` 는 등록해
   두었고, 배포하면 그 주소도 같은 형식(`https://도메인/**`)으로 추가하세요.
 
+## 배포
+
+Vercel CLI로 올립니다. `vercel link` 가 만든 `.vercel/` 과 키가 든 `.env.local`
+은 `.gitignore` 에 들어 있습니다.
+
+```bash
+npx vercel --prod
+```
+
+Supabase 쪽에 배포 주소가 등록되어 있어야 로그인이 됩니다. 둘 다 넣어 뒀습니다.
+
+- Site URL: `https://daeshin-ministry.vercel.app`
+- Redirect URLs: `https://daeshin-ministry.vercel.app/**`, `http://localhost:3000/**`
+
+> **수집 자동화와 배포가 아직 이어져 있지 않습니다.** GitHub Actions가 매일
+> `posts.json` 을 갱신해도, CLI 배포는 그걸 자동으로 올리지 않습니다. 저장소를
+> GitHub에 올리고 Vercel과 연결하면 커밋이 곧 재배포가 됩니다. 그 전까지는
+> 수집 뒤에 위 명령을 한 번 실행해야 새 공고가 사이트에 반영됩니다.
+
 ## 다음 단계
 
-1. 운영진 대시보드 — 가입 승인과 공고 검수를 화면에서 처리
-2. 배포(Vercel) 후 Redirect URL에 배포 주소 추가
+1. 저장소를 GitHub에 올리고 Vercel과 연결 — 수집 결과가 자동으로 배포됨
+2. 운영진 대시보드 — 가입 승인과 공고 검수를 화면에서 처리
 3. 카카오 로그인 연동 (카카오 개발자 앱 등록 필요)
 4. 직접 등록 청빙공고 — 교회가 올리고 운영진이 검수
 5. 수집 공고를 `scraped_posts` 테이블로 옮기기 (지금은 JSON 파일에서 읽음)
