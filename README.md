@@ -189,16 +189,27 @@ Supabase 쪽에 배포 주소가 등록되어 있어야 로그인이 됩니다. 
 `robots.txt`, `sitemap.xml`, 구조화 데이터(JSON-LD)가 붙어 있습니다.
 로그인 관련 화면(`/account`, `/login`, `/auth/`)은 색인에서 뺐습니다.
 
-색인은 자동으로 되지만, 검색엔진에 직접 알리면 훨씬 빨라집니다.
+### 구글 — 등록 완료
 
-1. [Google Search Console](https://search.google.com/search-console) 에 속성 추가
-   → 확인용 문자열을 `NEXT_PUBLIC_GOOGLE_VERIFICATION` 에 넣고 배포
-   → 사이트맵으로 `sitemap.xml` 제출
-2. [네이버 서치어드바이저](https://searchadvisor.naver.com) 도 같은 방식
-   (`NEXT_PUBLIC_NAVER_VERIFICATION`). 사역자들은 네이버를 더 많이 씁니다.
+Search Console 속성(`https://daeshin-ministry.vercel.app/`)을 등록하고 소유권을
+확인했습니다. 계정은 daero.kids@gmail.com 입니다.
+
+소유권 확인은 **HTML 파일 방식**을 씁니다. `public/google691ab6c6e8fabc6c.html`
+을 지우면 확인이 풀리므로 그대로 두세요.
+
+사이트맵도 제출했고 상태는 `성공`, 페이지 6개를 읽어 갔습니다.
+
+### 네이버 — 아직
+
+사역자들은 네이버를 더 많이 쓰므로 같이 등록하는 편이 좋습니다.
+[서치어드바이저](https://searchadvisor.naver.com) 에서 사이트를 등록하고,
+소유확인 방법으로 **HTML 파일**을 고르면 `naver...html` 파일명을 알려 줍니다.
+그 파일을 `public/` 에 같은 이름으로 두고 배포하면 됩니다.
+
+메타태그 방식을 쓰려면 `NEXT_PUBLIC_NAVER_VERIFICATION` 에 확인 문자열을 넣습니다.
 
 ```bash
-npx vercel env add NEXT_PUBLIC_GOOGLE_VERIFICATION production
+npx vercel env add NEXT_PUBLIC_NAVER_VERIFICATION production
 ```
 
 ## 다음 단계
