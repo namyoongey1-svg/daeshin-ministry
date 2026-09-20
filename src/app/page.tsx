@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { SAMPLE_JOBS, formatPay } from "@/lib/jobs";
+import { SOURCE_LABELS, queryJobs } from "@/lib/scrape/store";
 
 const CARDS = [
   {
     href: "/jobs",
     title: "청빙·구직",
-    body: "교단 내 청빙공고를 지역·직분·형태로 추려 봅니다. 사례비는 범위로 공개하거나, 비공개 시 사유를 밝힙니다.",
+    body: "갓피플·백석대·총신대 게시판에 흩어진 청빙공고를 한곳에 모아 지역·직분으로 추려 봅니다.",
   },
   {
     href: "/tools/original",
@@ -19,8 +19,9 @@ const CARDS = [
   },
 ] as const;
 
-export default function Home() {
-  const recent = SAMPLE_JOBS.slice(0, 3);
+export default async function Home() {
+  const { posts, all } = await queryJobs();
+  const recent = posts.slice(0, 5);
 
   return (
     <div>
@@ -31,8 +32,8 @@ export default function Home() {
           청빙 정보와 설교 준비를 함께 나누는 자리
         </h1>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
-          톡방에서 흩어지던 청빙 소식을 한곳에 모으고, 원어 본문과 설교 자료를
-          사역자끼리 열어 둡니다. 가입은 소속 교회·노회 확인 후 운영진 승인으로 이뤄집니다.
+          여러 게시판에 흩어진 청빙 소식을 한곳에 모으고, 원어 본문과 설교 자료를
+          사역자끼리 열어 둡니다. 지금 {all.toLocaleString()}건의 공고를 모아 두었습니다.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link href="/jobs" className="rounded bg-accent px-4 py-2 text-sm text-background">
@@ -68,12 +69,17 @@ export default function Home() {
           </Link>
         </div>
         <ul className="mt-3 divide-y divide-line rounded-lg border border-line bg-surface">
-          {recent.map((job) => (
-            <li key={job.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-3 text-sm">
-              <span className="rounded bg-accent-soft px-2 py-0.5 text-xs">{job.position}</span>
-              <span className="font-medium">{job.church}</span>
-              <span className="text-xs text-muted">{job.region} · {job.employment}</span>
-              <span className="ml-auto text-xs text-muted">{formatPay(job)}</span>
+          {recent.map((post) => (
+            <li
+              key={`${post.source}:${post.externalId}`}
+              className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-3 text-sm"
+            >
+              <span className="rounded bg-accent-soft px-2 py-0.5 text-xs">
+                {post.region ?? "지역미상"}
+              </span>
+              <span className="font-medium">{post.church ?? post.title}</span>
+              <span className="text-xs text-muted">{post.positions.join(", ")}</span>
+              <span className="ml-auto text-xs text-muted">{SOURCE_LABELS[post.source]}</span>
             </li>
           ))}
         </ul>
