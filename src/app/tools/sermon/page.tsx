@@ -1,63 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
-
-interface Clipping {
-  ref: string;
-  text: string;
-  lemma: string;
-  summary: string;
-  gloss: string;
-  notes: string[];
-  at: number;
-}
-
-interface Outline {
-  passage: string;
-  title: string;
-  bigIdea: string;
-  points: string[];
-  application: string;
-}
-
-const EMPTY: Outline = {
-  passage: "",
-  title: "",
-  bigIdea: "",
-  points: ["", "", ""],
-  application: "",
-};
-
-const CLIP_KEY = "daeshin.sermon.clippings";
-const OUTLINE_KEY = "daeshin.sermon.outline";
+import {
+  getServerSnapshot,
+  getSnapshot,
+  removeClipping,
+  setOutline,
+  subscribe,
+  type Outline,
+} from "@/lib/sermon-store";
 
 export default function SermonPage() {
-  const [clippings, setClippings] = useState<Clipping[]>([]);
-  const [outline, setOutline] = useState<Outline>(EMPTY);
-  const [loaded, setLoaded] = useState(false);
+  const { clippings, outline } = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
 
-  useEffect(() => {
-    try {
-      const c = localStorage.getItem(CLIP_KEY);
-      if (c) setClippings(JSON.parse(c));
-      const o = localStorage.getItem(OUTLINE_KEY);
-      if (o) setOutline({ ...EMPTY, ...JSON.parse(o) });
-    } catch {
-      // 저장된 값이 깨졌으면 빈 상태로 시작한다.
-    }
-    setLoaded(true);
-  }, []);
-
-  useEffect(() => {
-    if (loaded) localStorage.setItem(OUTLINE_KEY, JSON.stringify(outline));
-  }, [outline, loaded]);
-
-  function removeClipping(at: number) {
-    const next = clippings.filter((c) => c.at !== at);
-    setClippings(next);
-    localStorage.setItem(CLIP_KEY, JSON.stringify(next));
-  }
+  const patch = (changes: Partial<Outline>) => setOutline({ ...outline, ...changes });
 
   function toMarkdown() {
     const lines = [
@@ -114,19 +75,19 @@ export default function SermonPage() {
             className={field}
             placeholder="본문 (예: 요한복음 3:16)"
             value={outline.passage}
-            onChange={(e) => setOutline({ ...outline, passage: e.target.value })}
+            onChange={(e) => patch({ passage: e.target.value })}
           />
           <input
             className={field}
             placeholder="설교 제목"
             value={outline.title}
-            onChange={(e) => setOutline({ ...outline, title: e.target.value })}
+            onChange={(e) => patch({ title: e.target.value })}
           />
           <textarea
             className={`${field} h-20`}
             placeholder="중심 메시지 — 한 문장으로"
             value={outline.bigIdea}
-            onChange={(e) => setOutline({ ...outline, bigIdea: e.target.value })}
+            onChange={(e) => patch({ bigIdea: e.target.value })}
           />
           {outline.points.map((point, i) => (
             <input
@@ -137,12 +98,12 @@ export default function SermonPage() {
               onChange={(e) => {
                 const points = [...outline.points];
                 points[i] = e.target.value;
-                setOutline({ ...outline, points });
+                patch({ points });
               }}
             />
           ))}
           <button
-            onClick={() => setOutline({ ...outline, points: [...outline.points, ""] })}
+            onClick={() => patch({ points: [...outline.points, ""] })}
             className="text-xs text-accent hover:underline"
           >
             + 대지 추가
@@ -151,7 +112,7 @@ export default function SermonPage() {
             className={`${field} h-24`}
             placeholder="적용 — 청중이 이번 주에 무엇을 할 것인가"
             value={outline.application}
-            onChange={(e) => setOutline({ ...outline, application: e.target.value })}
+            onChange={(e) => patch({ application: e.target.value })}
           />
           <div className="flex gap-2">
             <button onClick={download} className="rounded bg-accent px-4 py-2 text-sm text-background">

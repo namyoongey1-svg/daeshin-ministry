@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { addClipping } from "@/lib/sermon-store";
 import type { AnalyzedWord, Verse } from "@/lib/bible/types";
 
 /** 히브리어 본문의 형태소 구분 기호를 화면에서는 뗀다. */
@@ -9,11 +10,8 @@ function display(word: AnalyzedWord) {
   return word.lang === "hbo" ? word.text.replace(/\//g, "") : word.text;
 }
 
-function addToSermonNote(verse: Verse, word: AnalyzedWord, refLabel: string) {
-  const key = "daeshin.sermon.clippings";
-  const raw = localStorage.getItem(key);
-  const list = raw ? (JSON.parse(raw) as unknown[]) : [];
-  list.unshift({
+function addToSermonNote(word: AnalyzedWord, refLabel: string) {
+  addClipping({
     ref: refLabel,
     text: display(word),
     lemma: word.lemma,
@@ -22,7 +20,6 @@ function addToSermonNote(verse: Verse, word: AnalyzedWord, refLabel: string) {
     notes: word.sermonNotes,
     at: Date.now(),
   });
-  localStorage.setItem(key, JSON.stringify(list.slice(0, 200)));
 }
 
 export default function VerseReader({
@@ -159,7 +156,7 @@ export default function VerseReader({
                 이 단어의 다른 용례 보기
               </Link>
               <button
-                onClick={() => { addToSermonNote(verse, active, refLabel); setSaved(true); }}
+                onClick={() => { addToSermonNote(active, refLabel); setSaved(true); }}
                 className="rounded bg-accent px-3 py-2 text-sm text-background"
               >
                 {saved ? "설교 노트에 담았습니다" : "설교 노트에 담기"}
