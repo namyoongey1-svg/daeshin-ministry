@@ -37,6 +37,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 </Link>
               ))}
             </nav>
+
+            <Link href="/account" className="ml-auto text-sm text-muted hover:text-accent">
+              내 정보
+            </Link>
           </div>
         </header>
 
