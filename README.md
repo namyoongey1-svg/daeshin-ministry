@@ -107,7 +107,7 @@ SBLGNT는 CC BY-SA이므로 **출처 표시가 필수**입니다(푸터에 기�
 1. Supabase 프로젝트를 만들고 `supabase/schema.sql`, `supabase/scraped_posts.sql` 실행
 2. `.env.example`을 `.env.local`로 복사해 키 입력
 3. 카카오 로그인 연동 + 가입 승인 플로우
-4. GitHub에 저장소를 올려 자동 수집 워크플로를 켜기 (아래 참고)
+4. GitHub에 저장소를 올려 자동 수집 워크플로를 켜기 (위 "청빙공고 수집" 참고)
 5. 운영진 대시보드(회원 승인 · 공고 검수)
 
 ## 스택
