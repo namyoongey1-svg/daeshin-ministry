@@ -43,6 +43,7 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
   const pick = (k: string) => (typeof params[k] === "string" ? params[k] : "");
 
   const filter = {
+    church: pick("church"),
     region: pick("region"),
     position: pick("position"),
     employment: pick("employment"),
@@ -130,6 +131,19 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
         )}
       </form>
 
+      {filter.church && (
+        <div className="mt-6 flex flex-wrap items-center gap-2 rounded-card border border-line bg-surface px-4 py-3 text-sm">
+          <b>{filter.church}</b>
+          <span className="text-muted">의 공고만 보고 있습니다</span>
+          <Link
+            href={linkTo({ church: "", page: "" })}
+            className="ml-auto text-accent underline-offset-4 hover:underline"
+          >
+            전체 보기
+          </Link>
+        </div>
+      )}
+
       <p className="mt-6 text-sm text-muted">
         <b className="text-foreground">{total.toLocaleString()}건</b>
         {filtered && ` · 전체 ${all.toLocaleString()}건 중`}
@@ -188,10 +202,30 @@ function JobCard({
     <li className="group flex flex-col rounded-card border border-line bg-surface p-5 transition-all hover:border-line-strong hover:shadow-card">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h2 className="truncate text-lg font-bold">{post.church ?? post.title}</h2>
+          <h2 className="truncate text-lg font-bold">
+            {post.church ? (
+              <Link
+                href={linkTo({ church: post.church, page: "" })}
+                className="underline-offset-4 hover:text-accent hover:underline"
+                title={`${post.church}의 공고만 보기`}
+              >
+                {post.church}
+              </Link>
+            ) : (
+              post.title
+            )}
+          </h2>
           <p className="mt-1 flex items-center gap-1 text-sm text-muted">
             <PinIcon />
             {post.location}
+            {post.churchPostings >= 3 && (
+              <span
+                className="ml-1 text-highlight"
+                title="최근 1년 동안 이 교회가 올린 서로 다른 공고 수입니다. 부서를 늘리는 중일 수도, 사람이 자주 바뀌는 중일 수도 있습니다."
+              >
+                · 최근 1년 청빙 {post.churchPostings}회
+              </span>
+            )}
           </p>
         </div>
 

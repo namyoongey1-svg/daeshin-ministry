@@ -1,13 +1,14 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import HymnFinder from "@/components/HymnFinder";
 import { createLocalStore, newId } from "@/lib/local-store";
 import {
   SERVICE_NAMES,
   buildOrder,
   emptyBulletin,
   formatKoreanDate,
-  tidyReference,
+  tidyNote,
   type Bulletin,
   type Notice,
   type OrderItem,
@@ -150,7 +151,7 @@ export default function BulletinPage() {
                     placeholder="비고 — 찬송가 21장 / 요 3:16 / 설교 제목"
                     value={item.note}
                     onChange={(e) => patchOrder(item.id, { note: e.target.value })}
-                    onBlur={(e) => patchOrder(item.id, { note: tidyReference(e.target.value) })}
+                    onBlur={(e) => patchOrder(item.id, { note: tidyNote(e.target.value) })}
                   />
                   <div className="mt-1 flex gap-2 text-xs text-muted">
                     <button onClick={() => moveOrder(i, -1)} className="hover:text-accent">↑</button>
@@ -174,6 +175,8 @@ export default function BulletinPage() {
               + 순서 추가
             </button>
           </div>
+
+          <HymnFinder />
 
           <RepeatableSection<Notice>
             heading="광고 · 소식"

@@ -1,5 +1,6 @@
 import { newId } from "./local-store";
 import { formatReference, parseReference } from "./bible/books";
+import { tidyHymn } from "./hymns";
 
 export interface OrderItem {
   id: string;
@@ -124,6 +125,20 @@ export function buildOrder(serviceName: string): OrderItem[] {
 export function tidyReference(note: string): string {
   const reference = parseReference(note);
   return reference ? formatReference(reference) : note;
+}
+
+/**
+ * 비고 칸을 손봐 준다.
+ *
+ *   "요3:16"    → "요한복음 3:16"
+ *   "찬송가 21장" → "찬송가 21장 (주 예수 이름 높이어)"
+ *
+ * 둘 다 아니면 적은 그대로 둔다. 설교 제목처럼 자유롭게 쓰는 칸이기 때문이다.
+ */
+export function tidyNote(note: string): string {
+  const withHymn = tidyHymn(note);
+  if (withHymn !== note) return withHymn;
+  return tidyReference(note);
 }
 
 export function emptyBulletin(): Bulletin {
