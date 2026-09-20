@@ -1,4 +1,4 @@
-import { fetchText, pick, pickAll, stripTags } from "../html";
+import { fetchText, pick, pickAll, stableId, stripTags } from "../html";
 import { extractDepartments, normalizePositions, normalizeRegion, parseDate } from "../normalize";
 import type { ScrapedPost, SourceAdapter } from "../types";
 
@@ -12,12 +12,17 @@ const PER_PAGE = 100;
  *
  * 목록 화면이 ajax_file.php로 HTML 조각을 받아 그리므로, 같은 요청을 그대로 쓴다.
  * 응답은 euc-kr이다.
+ *
+ * 주의: 목록의 rc_idxx는 고정 글번호가 아니라 요청마다 새로 발급되는 토큰이다.
+ * (같은 공고를 두 번 받으면 토큰이 서로 다르다.) 링크로는 계속 쓸 수 있지만
+ * 식별자로는 못 쓰므로, 교회명과 제목으로 안정적인 id를 따로 만든다.
  */
 export const godpeople: SourceAdapter = {
   id: "godpeople",
   label: "갓피플취업",
   homepage: REFERER,
   pageSize: PER_PAGE,
+  activeListing: true,
 
   async fetchPage(page) {
     const body = new URLSearchParams({
@@ -47,9 +52,9 @@ export const godpeople: SourceAdapter = {
       const church = pick(row, /<td class="tplCname">([\s\S]*?)<\/td>/i);
       if (!church) continue;
 
-      const idMatch = row.match(/<td id='([A-Za-z0-9]+)' class="tplTit/i);
-      if (!idMatch) continue;
-      const externalId = idMatch[1];
+      const tokenMatch = row.match(/<td id='([A-Za-z0-9]+)' class="tplTit/i);
+      if (!tokenMatch) continue;
+      const token = tokenMatch[1];
 
       // 화면의 글자는 말줄임표로 잘려 있고, title 속성에 전문이 들어 있다.
       const title =
@@ -64,8 +69,8 @@ export const godpeople: SourceAdapter = {
 
       posts.push({
         source: "godpeople",
-        externalId,
-        url: `${BASE}/?GO=recruit_view&rc_idxx=${externalId}`,
+        externalId: stableId(church, title),
+        url: `${BASE}/?GO=recruit_view&rc_idxx=${token}`,
         title: stripTags(title),
         church,
         regionRaw,

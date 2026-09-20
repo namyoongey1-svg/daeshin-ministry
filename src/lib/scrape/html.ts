@@ -44,6 +44,13 @@ export interface FetchOptions {
 const USER_AGENT =
   "daeshin-ministry-bot/1.0 (church ministry job aggregator; contact: 1yoon1hy@gmail.com)";
 
+const MAX_ATTEMPTS = 3;
+const REQUEST_TIMEOUT_MS = 20_000;
+
+/**
+ * 자동 수집은 사람이 지켜보지 않으므로, 한 번 끊겼다고 그날 수집을 통째로
+ * 버리지 않도록 몇 번 다시 시도한다. 4xx는 다시 걸어도 같은 답이라 바로 포기한다.
+ */
 export async function fetchText(url: string, options: FetchOptions = {}): Promise<string> {
   const { encoding = "utf-8", method = "GET", body, referer } = options;
 
@@ -54,11 +61,51 @@ export async function fetchText(url: string, options: FetchOptions = {}): Promis
     headers["X-Requested-With"] = "XMLHttpRequest";
   }
 
-  const res = await fetch(url, { method, headers, body });
-  if (!res.ok) throw new Error(`${method} ${url} → HTTP ${res.status}`);
+  let lastError: unknown;
 
-  const buffer = await res.arrayBuffer();
-  return new TextDecoder(encoding).decode(buffer);
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetch(url, {
+        method,
+        headers,
+        body,
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      });
+
+      if (!res.ok) {
+        const error = new Error(`${method} ${url} → HTTP ${res.status}`);
+        if (res.status >= 400 && res.status < 500) throw error;
+        lastError = error;
+      } else {
+        const buffer = await res.arrayBuffer();
+        return new TextDecoder(encoding).decode(buffer);
+      }
+    } catch (err) {
+      if (err instanceof Error && /HTTP 4\d\d/.test(err.message)) throw err;
+      lastError = err;
+    }
+
+    if (attempt < MAX_ATTEMPTS) await sleep(1500 * attempt);
+  }
+
+  throw lastError instanceof Error ? lastError : new Error(String(lastError));
+}
+
+/**
+ * 출처가 고정 글번호를 주지 않을 때, 내용에서 안정적인 식별자를 만든다.
+ *
+ * 갓피플은 목록을 받을 때마다 같은 공고에 다른 토큰(rc_idxx)을 붙여 준다.
+ * 그 토큰을 식별자로 쓰면 수집할 때마다 같은 공고가 새 글로 쌓인다.
+ * FNV-1a 해시라 실행 환경이 달라도 같은 값이 나온다.
+ */
+export function stableId(...parts: (string | null | undefined)[]): string {
+  const input = parts.map((p) => (p ?? "").trim()).join("|");
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < input.length; i++) {
+    hash ^= input.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return hash.toString(36).padStart(7, "0");
 }
 
 /** 상대에게 부담을 주지 않도록 요청 사이에 쉬어 간다. */

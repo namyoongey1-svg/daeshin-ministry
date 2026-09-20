@@ -25,6 +25,8 @@ export interface JobFilter {
   position?: string;
   source?: string;
   department?: string;
+  /** 마감된 공고까지 볼지 여부. 기본은 모집 중인 것만 본다. */
+  includeClosed?: boolean;
 }
 
 /** 화면에 내보내는 한 건 — 같은 공고의 재게시를 하나로 묶은 결과다. */
@@ -35,9 +37,8 @@ export interface JobListing extends ScrapedPost {
 
 /**
  * 교회들은 목록 위로 올리려고 같은 공고를 여러 번 다시 올린다.
- * (한 교회가 같은 글을 20번까지 올린 경우도 있다.)
- * 글번호가 달라 수집 단계에서는 각각 남지만, 화면에서는 묶어서 보여준다.
- * 재게시가 잦다는 것은 아직 사람을 못 구했다는 뜻이라 그 횟수도 함께 알린다.
+ * 화면에서는 하나로 묶되, 몇 번 올라와 있는지는 함께 알린다.
+ * 재게시가 잦다는 것은 아직 사람을 못 구했다는 뜻이라 구직자에게 쓸모가 있다.
  */
 function collapseReposts(posts: ScrapedPost[]): JobListing[] {
   const groups = new Map<string, JobListing>();
@@ -47,11 +48,11 @@ function collapseReposts(posts: ScrapedPost[]): JobListing[] {
     const existing = groups.get(key);
 
     if (!existing) {
-      groups.set(key, { ...post, repostCount: 1 });
+      groups.set(key, { ...post, repostCount: post.listingCount ?? 1 });
       continue;
     }
 
-    existing.repostCount++;
+    existing.repostCount += post.listingCount ?? 1;
     // 가장 최근 것을 대표로 남긴다.
     if ((post.postedAt ?? "") > (existing.postedAt ?? "")) {
       groups.set(key, { ...post, repostCount: existing.repostCount });
@@ -68,12 +69,16 @@ export interface JobQueryResult {
   total: number;
   /** 필터를 적용하기 전 전체 건수 — "전체 N건 중 M건" 표시에 쓴다. */
   all: number;
+  /** 목록에서 내려가 마감으로 본 건수 */
+  closed: number;
   departments: string[];
   collectedAt: string | null;
 }
 
 export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult> {
-  const all = await loadScrapedPosts();
+  const everything = await loadScrapedPosts();
+  const closed = everything.filter((p) => p.closedAt).length;
+  const all = filter.includeClosed ? everything : everything.filter((p) => !p.closedAt);
 
   const filtered = all.filter((post) => {
     if (filter.region && post.region !== (filter.region as Region)) return false;
@@ -85,7 +90,7 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
 
   const posts = collapseReposts(filtered);
   const departments = [...new Set(all.flatMap((p) => p.departments))].sort();
-  const collectedAt = all.reduce<string | null>(
+  const collectedAt = everything.reduce<string | null>(
     (latest, p) => (!latest || p.collectedAt > latest ? p.collectedAt : latest),
     null
   );
@@ -94,6 +99,7 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
     posts,
     total: posts.length,
     all: collapseReposts(all).length,
+    closed,
     departments,
     collectedAt,
   };

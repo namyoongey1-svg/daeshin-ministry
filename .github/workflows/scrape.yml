@@ -1,0 +1,78 @@
+name: 청빙공고 수집
+
+on:
+  schedule:
+    # 매일 07:00 KST (= 22:00 UTC 전날). 전날 올라온 공고까지 담아 아침에 보게 한다.
+    # GitHub의 예약 실행은 혼잡할 때 수십 분 밀릴 수 있다.
+    - cron: "0 22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# 이전 수집이 돌고 있으면 기다린다. 같은 파일을 두 곳에서 고치면 push가 충돌한다.
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # 한 곳이 실패해도 나머지 수집분은 남긴다. 실패 여부는 마지막에 따진다.
+      - name: 공고 수집
+        id: scrape
+        continue-on-error: true
+        run: npm run scrape -- --pages 25 --prune 12
+
+      - name: 수집 결과 요약
+        if: always()
+        run: |
+          node -e '
+            const posts = require("./src/data/scraped/posts.json");
+            const open = posts.filter(p => !p.closedAt);
+            const bySource = {};
+            for (const p of open) bySource[p.source] = (bySource[p.source] ?? 0) + 1;
+            const lines = [
+              "## 청빙공고 수집",
+              "",
+              `모집 중 **${open.length}건** / 마감 ${posts.length - open.length}건`,
+              "",
+              "| 출처 | 건수 |",
+              "| --- | ---: |",
+              ...Object.entries(bySource).map(([s, n]) => `| ${s} | ${n} |`),
+            ];
+            require("fs").appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n") + "\n");
+          '
+
+      - name: 변경분 커밋
+        if: always()
+        run: |
+          if git diff --quiet -- src/data/scraped/posts.json; then
+            echo "바뀐 공고가 없어 커밋하지 않습니다."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/scraped/posts.json
+          git commit -m "청빙공고 수집 $(date -u -d '+9 hours' +'%Y-%m-%d')"
+          # 수집 중에 누군가 다른 커밋을 올렸을 수 있다.
+          git pull --rebase --autostash
+          git push
+
+      - name: 수집 실패 여부 확인
+        if: steps.scrape.outcome == 'failure'
+        run: |
+          echo "한 곳 이상에서 수집이 실패했습니다. 위 '공고 수집' 단계 로그를 확인하세요."
+          exit 1

@@ -30,7 +30,19 @@ export interface ScrapedPost {
   deadline: string | null;
   /** "채용시까지"처럼 날짜가 아닌 마감 표기 */
   deadlineText: string | null;
+  /** 처음 수집한 시각. 다시 볼 때마다 바꾸지 않는다 — 아래 주석 참고. */
   collectedAt: string;
+  /**
+   * 마지막 수집 때 출처 목록에 이 공고가 몇 줄로 올라와 있었는가.
+   * 교회가 목록 위로 올리려고 같은 글을 다시 올리면 2 이상이 된다.
+   */
+  listingCount?: number;
+  /**
+   * 출처 목록에서 사라진 시각. 갓피플처럼 목록이 "현재 모집 중"을 뜻하는
+   * 곳에서만 채워진다. 게시판형 출처(백석대·총신대)는 지난 글도 계속 남아
+   * 있어 사라짐을 마감으로 볼 수 없다.
+   */
+  closedAt?: string | null;
 }
 
 export interface SourceAdapter {
@@ -39,6 +51,11 @@ export interface SourceAdapter {
   homepage: string;
   /** 한 페이지에 실리는 건수 — 진행 표시에 쓴다. */
   pageSize: number;
+  /**
+   * 목록이 "현재 모집 중인 공고 전체"를 뜻하는가.
+   * 참이면 끝까지 훑어, 목록에서 빠진 공고를 마감으로 표시한다.
+   */
+  activeListing?: boolean;
   /** 1부터 시작. 더 없으면 빈 배열을 돌려준다. */
   fetchPage(page: number): Promise<ScrapedPost[]>;
 }
