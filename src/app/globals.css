@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf9f7;
+  --surface: #ffffff;
+  --foreground: #1b1a17;
+  --muted: #6b6760;
+  --line: #e4e0d9;
+  --accent: #1f4d3d;
+  --accent-soft: #eaf1ed;
+  --highlight: #b45309;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #14130f;
+    --surface: #1c1b17;
+    --foreground: #ece9e2;
+    --muted: #9c968c;
+    --line: #2f2d27;
+    --accent: #8fd4b4;
+    --accent-soft: #1d2a24;
+    --highlight: #e0a458;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-highlight: var(--highlight);
+  --font-sans: var(--font-kr), system-ui, sans-serif;
+  --font-greek: var(--font-greek), "Times New Roman", serif;
+  --font-hebrew: var(--font-hebrew), "Times New Roman", serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* 원어 본문 — 자간과 행간을 넉넉히 둬야 악센트·모음부호가 겹치지 않는다. */
+.grc {
+  font-family: var(--font-greek);
+  line-height: 2;
+}
+.hbo {
+  font-family: var(--font-hebrew);
+  direction: rtl;
+  line-height: 2.4;
+}
