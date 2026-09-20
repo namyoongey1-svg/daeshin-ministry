@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { getCallbackUrl } from "@/lib/site-url";
 
 type State = { kind: "idle" | "sending" | "sent" } | { kind: "error"; message: string };
 
@@ -16,7 +17,7 @@ export default function LoginPage() {
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithOtp({
         email,
-        options: { emailRedirectTo: `${location.origin}/auth/callback` },
+        options: { emailRedirectTo: getCallbackUrl() },
       });
       if (error) throw error;
       setState({ kind: "sent" });
