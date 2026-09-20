@@ -44,7 +44,7 @@ export default async function Home() {
           설교 준비는 더 깊게.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-muted">
-          세 곳의 청빙게시판을 모아 지역과 근무 형태로 추려 보여 드립니다.
+          세 곳의 청빙게시판을 매일 모아 지역과 근무 형태로 추려 보여 드립니다.
           원어 성경과 주보·영상 도구도 함께 쓰실 수 있습니다.
         </p>
 

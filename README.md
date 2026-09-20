@@ -179,10 +179,10 @@ Supabase 쪽에 배포 주소가 등록되어 있어야 로그인이 됩니다. 
 - Site URL: `https://daeshin-ministry.vercel.app`
 - Redirect URLs: `https://daeshin-ministry.vercel.app/**`, `http://localhost:3000/**`
 
-> **수집 자동화와 배포가 아직 이어져 있지 않습니다.** GitHub Actions가 매일
-> `posts.json` 을 갱신해도, CLI 배포는 그걸 자동으로 올리지 않습니다. 저장소를
-> GitHub에 올리고 Vercel과 연결하면 커밋이 곧 재배포가 됩니다. 그 전까지는
-> 수집 뒤에 위 명령을 한 번 실행해야 새 공고가 사이트에 반영됩니다.
+저장소는 [namyoongey1-svg/daeshin-ministry](https://github.com/namyoongey1-svg/daeshin-ministry)
+(Private)이고 Vercel과 연결되어 있습니다. **main 에 커밋이 올라가면 곧 배포됩니다.**
+GitHub Actions가 매일 아침 공고를 모아 커밋하므로, 새 공고는 손대지 않아도
+사이트에 반영됩니다.
 
 ## 검색 노출
 
