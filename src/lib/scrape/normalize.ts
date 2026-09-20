@@ -1,4 +1,10 @@
-import { POSITIONS, REGIONS, type Position, type Region } from "@/lib/jobs";
+import {
+  POSITIONS,
+  REGIONS,
+  type Employment,
+  type Position,
+  type Region,
+} from "@/lib/jobs";
 
 /**
  * 출처마다 지역을 적는 방식이 다르다.
@@ -42,8 +48,11 @@ const REGION_KEYS: [Region, string[]][] = [
 /** 광역 단위를 못 찾으면 null. "전국"처럼 특정할 수 없는 표기도 null이다. */
 export function normalizeRegion(raw: string | null | undefined): Region | null {
   if (!raw) return null;
-  const text = raw.replace(/[[\]()]/g, " ");
+  const text = raw.replace(/[[\]()]/g, " ").trim();
   if (/전국|전지역/.test(text)) return null;
+  // 갓피플은 "서울 외"처럼 적는다. 서울이 아니라 서울 바깥이라는 뜻이므로
+  // 그대로 두면 수도권 밖 교회가 전부 서울로 잡힌다.
+  if (/\s*외$/.test(text)) return null;
 
   for (const [region, keys] of REGION_KEYS) {
     if (keys.some((k) => text.includes(k))) return region;
@@ -135,4 +144,50 @@ function iso(year: number, month: number, day: number): string | null {
 export function splitBracket(title: string): { bracket: string | null; rest: string } {
   const m = title.match(/^\s*\[([^\]]+)\]\s*(.*)$/);
   return m ? { bracket: m[1].trim(), rest: m[2].trim() } : { bracket: null, rest: title.trim() };
+}
+
+/* ------------------------------------------------------------------ */
+/* 구직자가 가장 먼저 보는 두 가지 — 근무 형태와 위치                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * 전임인지 파트인지는 게시판이 따로 칸을 두지 않는다.
+ * 갓피플은 "전임전도사"처럼 직분 꼬리표에 묻어 있고, 나머지는 제목 문장에만 있다.
+ *
+ * "준전임"이 "전임"을 품고 있으므로 좁은 말부터 본다.
+ */
+const EMPLOYMENT_KEYS: [Employment, string[]][] = [
+  ["준전임", ["준전임", "반전임"]],
+  ["협동", ["협동"]],
+  ["파트", ["파트", "주일만", "주일 사역", "주말만", "시간제"]],
+  ["전임", ["전임", "풀타임", "상근"]],
+];
+
+/** 못 알아보면 null. 없는 정보를 지어내지 않는다. */
+export function inferEmployment(
+  sources: (string | null | undefined)[],
+  positions: Position[] = []
+): Employment | null {
+  const text = sources.filter(Boolean).join(" ");
+  for (const [employment, keys] of EMPLOYMENT_KEYS) {
+    if (keys.some((k) => text.includes(k))) return employment;
+  }
+  // 담임목사는 따로 적지 않아도 전임이다.
+  if (positions.includes("담임목사")) return "전임";
+  return null;
+}
+
+/**
+ * 화면에 보여 줄 위치.
+ *
+ * 백석대는 "[서울시 용산구]"처럼 구까지 적어 주고, 갓피플은 "경기"까지만 준다.
+ * 더 자세한 쪽을 쓰되, 광역 이름만 반복하는 경우에는 정리된 값을 쓴다.
+ */
+export function locationLabel(regionRaw: string | null, region: Region | null): string {
+  const raw = regionRaw?.replace(/[[\]]/g, "").trim();
+  if (raw && /[시군구]\s|[시군구]$/.test(raw)) return raw;
+  if (region) return region;
+  // "서울 외"는 서울이 아니라는 뜻이다. 핀 옆에 놓으면 어색하니 말을 붙여 준다.
+  if (raw && /\s*외$/.test(raw)) return `${raw.replace(/\s*외$/, "")} 외 지역`;
+  return raw ?? "지역 미표기";
 }

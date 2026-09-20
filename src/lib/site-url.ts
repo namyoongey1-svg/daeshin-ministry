@@ -1,20 +1,30 @@
 /**
- * 메일 링크가 돌아올 주소.
+ * 이 사이트의 주소.
  *
- * 브라우저의 location.origin에 기대면 취약하다. 샌드박스 iframe이나 file:// 에서는
- * origin이 문자열 "null"이 되고, 그대로 쓰면 "null/auth/callback" 같은 주소가
- * 메일에 박혀 링크가 죽는다. 배포하면 도메인도 달라진다.
+ * 메일 링크가 돌아올 곳이자, 검색엔진에 알려 줄 정식 주소(canonical)다.
+ * 서버(사이트맵·메타데이터)와 브라우저(로그인 링크) 양쪽에서 쓰이므로
+ * window 에만 기대면 안 된다.
  *
- * 그래서 NEXT_PUBLIC_SITE_URL 을 먼저 보고, 없을 때만 origin을 쓰되
- * http(s) 주소일 때만 받아들인다.
+ * 순서대로 본다.
+ *   1. NEXT_PUBLIC_SITE_URL   — 직접 지정한 값
+ *   2. VERCEL_PROJECT_PRODUCTION_URL — Vercel이 넣어 주는 운영 도메인
+ *   3. window.location.origin — 브라우저에서만. 샌드박스 iframe에서는
+ *      origin이 문자열 "null"이 되므로 http(s)일 때만 받아들인다.
+ *   4. 개발 기본값
  */
 const FALLBACK = "http://localhost:3000";
 
+function clean(url: string): string {
+  return url.replace(/\/+$/, "");
+}
+
 export function getSiteUrl(): string {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (configured && /^https?:\/\//.test(configured)) {
-    return configured.replace(/\/+$/, "");
-  }
+  if (configured && /^https?:\/\//.test(configured)) return clean(configured);
+
+  // Vercel은 도메인만 넣어 준다 (스킴 없음).
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (vercel) return clean(`https://${vercel.replace(/^https?:\/\//, "")}`);
 
   if (typeof window !== "undefined") {
     const origin = window.location.origin;

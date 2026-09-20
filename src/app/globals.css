@@ -1,39 +1,77 @@
 @import "tailwindcss";
 
+/*
+  색과 간격의 기준.
+
+  글은 거의 검정, 배경은 살짝 따뜻한 흰색, 선은 아주 옅게 둔다. 색을 쓰는 곳은
+  강조 한 군데뿐이다. 교회 사이트가 흔히 색을 많이 써서 어수선해지는 것을 피한다.
+*/
 :root {
-  --background: #faf9f7;
+  --background: #fbfbfa;
   --surface: #ffffff;
-  --foreground: #1b1a17;
-  --muted: #6b6760;
-  --line: #e4e0d9;
-  --accent: #1f4d3d;
-  --accent-soft: #eaf1ed;
-  --highlight: #b45309;
+  --surface-sunken: #f5f5f3;
+  --foreground: #16161a;
+  --muted: #6e7076;
+  --faint: #9a9ca2;
+  --line: #e9e9e6;
+  --line-strong: #d8d8d4;
+  --accent: #0f6b4f;
+  --accent-hover: #0c5740;
+  --accent-soft: #edf4f0;
+  --highlight: #b4530a;
+  --highlight-soft: #fdf3ea;
+
+  --radius-sm: 0.5rem;
+  --radius: 0.875rem;
+  --radius-lg: 1.25rem;
+
+  --shadow-card: 0 1px 2px rgba(20, 20, 25, 0.04), 0 10px 30px -18px rgba(20, 20, 25, 0.22);
+  --shadow-lift: 0 2px 6px rgba(20, 20, 25, 0.06), 0 18px 40px -20px rgba(20, 20, 25, 0.28);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #14130f;
-    --surface: #1c1b17;
-    --foreground: #ece9e2;
-    --muted: #9c968c;
-    --line: #2f2d27;
-    --accent: #8fd4b4;
-    --accent-soft: #1d2a24;
-    --highlight: #e0a458;
+    --background: #0e0f11;
+    --surface: #17181b;
+    --surface-sunken: #1e1f23;
+    --foreground: #ececef;
+    --muted: #9b9da4;
+    --faint: #6e7076;
+    --line: #26272b;
+    --line-strong: #34353a;
+    --accent: #5fc79c;
+    --accent-hover: #7ad4ae;
+    --accent-soft: #14231d;
+    --highlight: #e5a05c;
+    --highlight-soft: #241a10;
+
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 30px -18px rgba(0, 0, 0, 0.8);
+    --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.55), 0 18px 40px -20px rgba(0, 0, 0, 0.9);
   }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-sunken: var(--surface-sunken);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   --color-accent-soft: var(--accent-soft);
   --color-highlight: var(--highlight);
-  --font-sans: var(--font-kr), system-ui, sans-serif;
+  --color-highlight-soft: var(--highlight-soft);
+
+  --radius-card: var(--radius);
+  --radius-pill: 999px;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+
+  --font-sans: var(--font-kr), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-greek: var(--font-greek), "Times New Roman", serif;
   --font-hebrew: var(--font-hebrew), "Times New Roman", serif;
 }
@@ -41,17 +79,38 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+/* 제목은 자간을 조여야 한글에서도 단단하게 보인다. */
+h1, h2, h3 {
+  letter-spacing: -0.025em;
+}
+
+/* 본문 읽는 줄은 넉넉하게 */
+p, li, dd {
+  line-height: 1.7;
+}
+
+/* 키보드로 다닐 때만 테두리를 보인다. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
 /* 원어 본문 — 자간과 행간을 넉넉히 둬야 악센트·모음부호가 겹치지 않는다. */
 .grc {
   font-family: var(--font-greek);
   line-height: 2;
+  letter-spacing: 0;
 }
 .hbo {
   font-family: var(--font-hebrew);
   direction: rtl;
   line-height: 2.4;
+  letter-spacing: 0;
 }
 
 @page {
@@ -72,6 +131,7 @@ body {
 
   .print-sheet {
     border: none !important;
+    box-shadow: none !important;
     margin: 0 !important;
     padding: 0 !important;
     max-width: none !important;

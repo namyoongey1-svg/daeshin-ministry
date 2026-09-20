@@ -4,7 +4,7 @@ export const POSITIONS = [
   "담임목사", "부목사", "전도사", "교육전도사", "찬양사역자", "선교사", "행정간사",
 ] as const;
 
-export const EMPLOYMENT = ["전임", "파트", "협동"] as const;
+export const EMPLOYMENT = ["전임", "준전임", "파트", "협동"] as const;
 
 export const REGIONS = [
   "서울", "경기", "인천", "강원", "충북", "충남·대전·세종", "전북",
