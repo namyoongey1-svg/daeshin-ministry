@@ -137,13 +137,31 @@ SBLGNT는 CC BY-SA이므로 **출처 표시가 필수**입니다(푸터에 기�
 맨 처음에는 승인해 줄 운영진이 없으므로, 첫 사람만
 `supabase/bootstrap_admin.sql`을 한 번 실행해 직접 운영진으로 올립니다.
 
+### 개발 중에는 메일을 이 컴퓨터에서 열어야 합니다
+
+`localhost`로 개발할 때 메일 링크는 `http://localhost:3000/auth/callback` 으로
+돌아옵니다. 휴대폰이나 카카오톡·메일 앱에서 누르면 **그 기기의 localhost**를
+찾으러 가서 실패합니다("접근할 수 없습니다"). 링크는 사이트를 띄운 컴퓨터의
+브라우저에서 열어야 합니다. 배포하면 실제 도메인이 되므로 사라지는 문제입니다.
+
+### 6자리 코드 로그인 (SMTP 붙인 뒤)
+
+휴대폰으로 메일을 보는 사람이 많아 코드 입력 화면도 만들어 뒀지만, 기본으로는
+꺼져 있습니다. Supabase 기본 메일은 링크만 보내고, 코드를 넣으려면 메일
+템플릿에 `{{ .Token }}` 을 넣어야 하는데 **템플릿 편집은 custom SMTP를 붙여야
+열립니다**. 순서는 이렇습니다.
+
+1. Authentication > Emails > SMTP Settings 에서 SMTP 연결 (Resend 등)
+2. Confirm sign up / Magic link or OTP 템플릿에 `{{ .Token }}` 추가
+3. `.env.local` 에 `NEXT_PUBLIC_EMAIL_OTP=1`
+
+SMTP를 붙이면 무료 기본 메일의 **시간당 2통** 제한도 같이 풀립니다.
+
 Supabase 설정에서 챙겨야 할 것:
 
 - **Authentication > URL Configuration > Redirect URLs** 에 접속 주소를 넣어야
   메일 링크가 사이트로 돌아옵니다. 개발용 `http://localhost:3000/**` 는 등록해
   두었고, 배포하면 그 주소도 같은 형식(`https://도메인/**`)으로 추가하세요.
-- 무료 플랜의 기본 메일 발송은 **시간당 2통**입니다. 회원이 늘면 SMTP를 따로
-  연결해야 합니다.
 
 ## 다음 단계
 
