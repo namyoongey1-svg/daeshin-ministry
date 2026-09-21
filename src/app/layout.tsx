@@ -101,13 +101,25 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
 
         <header className="no-print sticky top-0 z-40 border-b border-line bg-background/85 backdrop-blur-xl">
-          <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-5">
+          {/*
+            휴대폰에서는 메뉴를 다음 줄로 내린다. 한 줄에 다 넣으면 로고와
+            "내 정보"가 양쪽을 차지해 메뉴가 67px로 짓물린다 — 옆으로 밀어도
+            메뉴가 있는 줄 자체를 모른다.
+          */}
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3 px-5 py-2.5 lg:h-16 lg:flex-nowrap lg:py-0">
             <Link href="/" className="shrink-0" aria-label="대신 교역자 사역자톡방 홈">
               <Logo />
             </Link>
 
-            {/* 좁은 화면에서는 옆으로 밀어서 본다 */}
-            <nav className="-mx-1 flex flex-1 items-center gap-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <Link
+              href="/account"
+              className="order-1 ml-auto shrink-0 rounded-pill border border-line px-3.5 py-1.5 text-sm font-medium text-muted transition-colors hover:border-line-strong hover:text-foreground lg:order-none"
+            >
+              내 정보
+            </Link>
+
+            {/* 메뉴가 한 줄을 넘으면 옆으로 밀어서 본다 */}
+            <nav className="order-2 -mx-1 mt-1.5 flex w-full items-center gap-1 overflow-x-auto px-1 [scrollbar-width:none] lg:order-none lg:mt-0 lg:w-auto lg:flex-1 [&::-webkit-scrollbar]:hidden">
               {NAV.map((item) => (
                 <Link
                   key={item.href}
@@ -118,13 +130,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 </Link>
               ))}
             </nav>
-
-            <Link
-              href="/account"
-              className="shrink-0 rounded-pill border border-line px-3.5 py-1.5 text-sm font-medium text-muted transition-colors hover:border-line-strong hover:text-foreground"
-            >
-              내 정보
-            </Link>
           </div>
         </header>
 

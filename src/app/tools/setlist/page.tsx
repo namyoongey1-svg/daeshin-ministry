@@ -119,24 +119,30 @@ export default function SetlistPage() {
             <input className={field} value={setlist.leader}
               onChange={(e) => patch({ leader: e.target.value })} />
           </label>
-          <button
-            onClick={() => navigator.clipboard.writeText(toText())}
-            className="rounded-pill bg-accent px-5 py-2 text-sm font-semibold text-background transition-colors hover:bg-accent-hover"
-          >
-            단톡방용 복사
-          </button>
-          <button
-            onClick={() => window.print()}
-            className="rounded-pill border border-line px-5 py-2 text-sm font-medium transition-colors hover:border-line-strong"
-          >
-            인쇄
-          </button>
-          <button
-            onClick={() => { if (confirm("적은 내용을 모두 지울까요?")) store.set(emptySetlist()); }}
-            className="rounded-pill border border-line px-5 py-2 text-sm font-medium transition-colors hover:border-line-strong"
-          >
-            새로 시작
-          </button>
+          {/* 버튼은 한 덩어리로 묶어 둔다. 좌우로 흘러가면 입력칸 사이에 끼어 보인다. */}
+          <div className="flex w-full flex-wrap gap-2 sm:w-auto">
+            <button
+              type="button"
+              onClick={() => navigator.clipboard.writeText(toText())}
+              className="rounded-pill bg-accent px-5 py-2 text-sm font-semibold text-background transition-colors hover:bg-accent-hover"
+            >
+              단톡방용 복사
+            </button>
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="rounded-pill border border-line px-5 py-2 text-sm font-medium transition-colors hover:border-line-strong"
+            >
+              인쇄
+            </button>
+            <button
+              type="button"
+              onClick={() => { if (confirm("적은 내용을 모두 지울까요?")) store.set(emptySetlist()); }}
+              className="rounded-pill border border-line px-5 py-2 text-sm font-medium transition-colors hover:border-line-strong"
+            >
+              새로 시작
+            </button>
+          </div>
         </div>
       </div>
 
@@ -221,12 +227,27 @@ export default function SetlistPage() {
                   </p>
                 ))}
 
-                <div className="mt-2 flex gap-3 text-xs text-muted">
-                  <button onClick={() => move(i, -1)} className="hover:text-accent">↑</button>
-                  <button onClick={() => move(i, 1)} className="hover:text-accent">↓</button>
+                {/* 휴대폰에서 엄지로 누를 수 있어야 해서 글자보다 크게 잡았다. */}
+                <div className="mt-2 flex items-center gap-1 text-xs text-muted">
                   <button
+                    type="button"
+                    onClick={() => move(i, -1)}
+                    disabled={i === 0}
+                    aria-label={`${i + 1}번 곡을 위로`}
+                    className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-sunken hover:text-accent disabled:pointer-events-none disabled:opacity-30"
+                  >↑</button>
+                  <button
+                    type="button"
+                    onClick={() => move(i, 1)}
+                    disabled={i === setlist.songs.length - 1}
+                    aria-label={`${i + 1}번 곡을 아래로`}
+                    className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-sunken hover:text-accent disabled:pointer-events-none disabled:opacity-30"
+                  >↓</button>
+                  <button
+                    type="button"
                     onClick={() => patch({ songs: setlist.songs.filter((s) => s.id !== song.id) })}
-                    className="ml-auto hover:text-highlight"
+                    aria-label={`${i + 1}번 곡 삭제`}
+                    className="ml-auto flex h-9 items-center rounded-lg px-3 transition-colors hover:bg-sunken hover:text-highlight"
                   >삭제</button>
                 </div>
               </li>
@@ -234,8 +255,9 @@ export default function SetlistPage() {
           </ul>
 
           <button
+            type="button"
             onClick={() => patch({ songs: [...setlist.songs, emptySong()] })}
-            className="mt-3 text-xs text-accent hover:underline"
+            className="mt-3 flex h-10 items-center rounded-lg px-3 text-xs font-medium text-accent transition-colors hover:bg-sunken"
           >+ 곡 추가</button>
 
           <div className="mt-8">
