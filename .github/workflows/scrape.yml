@@ -56,6 +56,17 @@ jobs:
             require("fs").appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n") + "\n");
           '
 
+      # 열쇠가 없으면 스스로 건너뛴다. 알림 때문에 수집이 막히면 안 된다.
+      - name: 새 공고 알림
+        if: always()
+        continue-on-error: true
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEXT_PUBLIC_SITE_URL: https://daeshin-ministry.vercel.app
+        run: npm run notify
+
       - name: 변경분 커밋
         if: always()
         run: |

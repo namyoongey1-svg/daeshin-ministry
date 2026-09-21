@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "import:bible": "node scripts/import-bible.mjs",
-    "scrape": "tsx scripts/scrape.ts"
+    "scrape": "tsx scripts/scrape.ts",
+    "notify": "tsx scripts/notify.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
