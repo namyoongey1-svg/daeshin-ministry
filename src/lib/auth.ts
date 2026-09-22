@@ -16,8 +16,17 @@ export interface Profile {
 }
 
 export interface Session {
-  email: string;
+  /**
+   * 메일 주소가 없을 수 있다.
+   *
+   * 카카오는 이메일을 선택 동의 항목으로 두어, 동의하지 않으면 주소가 오지
+   * 않는다. 콘티 저장에는 필요 없지만 공고 알림은 메일로 가므로, 없는 채로
+   * 두면 알림을 켜 놓고 아무것도 못 받는 일이 생긴다.
+   */
+  email: string | null;
   userId: string;
+  /** 어느 것으로 들어왔는가 — kakao / google / email */
+  provider: string | null;
   /** 가입 정보를 아직 안 냈으면 null */
   profile: Profile | null;
 }
@@ -37,8 +46,9 @@ export async function getSession(): Promise<Session | null> {
     .maybeSingle();
 
   return {
-    email: data.user.email ?? "",
+    email: data.user.email ?? null,
     userId: data.user.id,
+    provider: (data.user.app_metadata?.provider as string | undefined) ?? null,
     profile: (profile as Profile | null) ?? null,
   };
 }

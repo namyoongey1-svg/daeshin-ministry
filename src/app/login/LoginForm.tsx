@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { getCallbackUrl, getSiteUrl } from "@/lib/site-url";
+import { callbackWithNext, getSiteUrl } from "@/lib/site-url";
 import { explainAuthError } from "@/lib/auth-errors";
+import { SocialLogin } from "@/components/SocialLogin";
 
 /**
  * 메일에 6자리 코드가 함께 오는가.
@@ -17,7 +18,13 @@ const CODE_LOGIN_ENABLED = process.env.NEXT_PUBLIC_EMAIL_OTP === "1";
 
 type Stage = "form" | "sent";
 
-export default function LoginForm({ initialError }: { initialError?: string }) {
+export default function LoginForm({
+  initialError,
+  next,
+}: {
+  initialError?: string;
+  next?: string;
+}) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -36,7 +43,7 @@ export default function LoginForm({ initialError }: { initialError?: string }) {
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithOtp({
         email,
-        options: { emailRedirectTo: getCallbackUrl() },
+        options: { emailRedirectTo: callbackWithNext(next) },
       });
       if (error) throw error;
       setStage("sent");
@@ -59,7 +66,7 @@ export default function LoginForm({ initialError }: { initialError?: string }) {
         type: "email",
       });
       if (error) throw error;
-      router.push("/account");
+      router.push(next ?? "/account");
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
@@ -74,8 +81,18 @@ export default function LoginForm({ initialError }: { initialError?: string }) {
     <div className="mx-auto max-w-sm">
       <h1 className="text-xl font-bold">로그인</h1>
       <p className="mt-2 text-sm leading-relaxed text-muted">
-        비밀번호 없이 메일로 들어옵니다. 처음이면 그대로 가입이 됩니다.
+        비밀번호는 쓰지 않습니다. 처음이면 그대로 가입이 됩니다.
       </p>
+
+      <div className="mt-6">
+        <SocialLogin next={next} />
+      </div>
+
+      <div className="my-6 flex items-center gap-3 text-xs text-faint">
+        <span className="h-px flex-1 bg-line" />
+        메일로 들어오기
+        <span className="h-px flex-1 bg-line" />
+      </div>
 
       {explained && (
         <div className="mt-4 rounded border border-highlight px-3 py-2 text-xs leading-relaxed">
@@ -84,7 +101,7 @@ export default function LoginForm({ initialError }: { initialError?: string }) {
       )}
 
       {stage === "form" ? (
-        <form onSubmit={send} className="mt-6 space-y-3">
+        <form onSubmit={send} className="space-y-3">
           <input
             type="email"
             required

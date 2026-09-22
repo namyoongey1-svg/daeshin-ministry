@@ -231,3 +231,70 @@ export function reviewSetlist(songs: Song[]): Hint[] {
 export function totalMinutes(songs: Song[]): number {
   return songs.reduce((sum, s) => sum + (Number(s.minutes) || 0), 0);
 }
+
+/* ------------------------------------------------------------------ */
+
+/** 한 콘티에 담을 수 있는 곡 수. 한 예배에 이보다 많이 부르지는 않는다. */
+export const MAX_SONGS = 40;
+
+const MAX_TEXT = 200;
+const MAX_NOTE = 2000;
+
+function text(raw: unknown, limit = MAX_TEXT): string {
+  return typeof raw === "string" ? raw.slice(0, limit) : "";
+}
+
+function oneOf<T extends string>(raw: unknown, allowed: readonly T[], fallback: T): T {
+  return allowed.includes(raw as T) ? (raw as T) : fallback;
+}
+
+/**
+ * 저장된 콘티를 지금 모양으로 맞춘다.
+ *
+ * 두 군데에서 쓴다. 하나는 브라우저 저장본 — 항목이 늘어난 뒤에도 옛 저장본을
+ * 열 수 있어야 한다. 다른 하나는 계정 저장 — 이쪽은 브라우저가 보낸 값이므로
+ * 믿을 수 없다. 모르는 칸은 버리고, 분위기·연결처럼 정해진 값만 받는 칸은
+ * 목록에 없으면 기본값으로 돌린다. 길이도 여기서 자른다.
+ */
+export function reviveSetlist(raw: unknown): Setlist {
+  const base = emptySetlist();
+  if (!raw || typeof raw !== "object") return base;
+  const input = raw as Record<string, unknown>;
+
+  const songs = Array.isArray(input.songs)
+    ? input.songs.slice(0, MAX_SONGS).map((item): Song => {
+        const s = (item ?? {}) as Record<string, unknown>;
+        return {
+          id: text(s.id, 40) || newId(),
+          title: text(s.title),
+          originalKey: text(s.originalKey, 10),
+          key: text(s.key, 10),
+          bpm: text(s.bpm, 5),
+          meter: text(s.meter, 10) || "4/4",
+          mood: oneOf(s.mood, MOODS, "빠른 찬양"),
+          link: oneOf(s.link, LINKS, "바로"),
+          minutes: text(s.minutes, 5),
+          note: text(s.note, MAX_NOTE),
+        };
+      })
+    : base.songs;
+
+  const team = Object.fromEntries(
+    PARTS.map((part) => [part, text((input.team as Record<string, unknown>)?.[part])])
+  );
+
+  return {
+    // 날짜는 달력 입력이 주는 모양만 받는다. 아니면 오늘로 둔다.
+    date: /^\d{4}-\d{2}-\d{2}$/.test(text(input.date, 10)) ? text(input.date, 10) : base.date,
+    serviceName: text(input.serviceName) || base.serviceName,
+    leader: text(input.leader),
+    team,
+    songs: songs.length ? songs : base.songs,
+    note: text(input.note, MAX_NOTE),
+  };
+}
+
+/** 저장 목록에 보일 이름. 따로 적지 않으므로 예배 이름과 날짜로 짓는다. */
+export function setlistTitle(setlist: Setlist): string {
+  return `${setlist.serviceName} ${setlist.date}`.trim().slice(0, MAX_TEXT);
+}

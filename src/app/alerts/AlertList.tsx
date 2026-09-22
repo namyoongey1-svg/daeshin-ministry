@@ -20,7 +20,8 @@ export default function AlertList({
   email,
 }: {
   alerts: AlertRow[];
-  email: string;
+  /** 카카오로 들어왔고 이메일 동의를 안 했으면 없다. */
+  email: string | null;
 }) {
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -119,9 +120,18 @@ export default function AlertList({
         </ul>
       )}
 
-      <p className="mt-6 text-xs leading-relaxed text-faint">
-        알림은 <b>{email}</b> 으로 갑니다. 주소를 바꾸시려면 그 주소로 다시 로그인하세요.
-      </p>
+      {email ? (
+        <p className="mt-6 text-xs leading-relaxed text-faint">
+          알림은 <b>{email}</b> 으로 갑니다. 주소를 바꾸시려면 그 주소로 다시 로그인하세요.
+        </p>
+      ) : (
+        /* 메일 주소가 없으면 조건을 아무리 잡아도 아무것도 오지 않는다. */
+        <p className="mt-6 rounded border border-highlight px-3 py-2 text-xs leading-relaxed">
+          <b>이 계정에는 메일 주소가 없습니다.</b> 카카오는 메일 주소를 선택 동의로
+          받기 때문입니다. 조건은 저장되지만 메일은 가지 않습니다 — 메일 주소로
+          한 번 더 로그인하시면 그때부터 받으십니다.
+        </p>
+      )}
     </div>
   );
 }

@@ -38,3 +38,16 @@ export function getSiteUrl(): string {
 export function getCallbackUrl(): string {
   return `${getSiteUrl()}/auth/callback`;
 }
+
+/**
+ * 로그인을 마치고 보던 화면으로 되돌아오는 콜백 주소.
+ *
+ * 콘티를 쓰다 저장하려고 로그인한 사람을 /account 로 보내면, 쓰던 것을
+ * 두고 온 셈이 된다. 우리 사이트 안의 경로만 받는다 — 바깥 주소를 그대로
+ * 붙이면 로그인 직후 남의 사이트로 튕겨 보낼 수 있다.
+ */
+export function callbackWithNext(next?: string): string {
+  const base = getCallbackUrl();
+  if (!next || !/^\/(?!\/)/.test(next)) return base;
+  return `${base}?next=${encodeURIComponent(next)}`;
+}

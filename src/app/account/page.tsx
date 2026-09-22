@@ -4,6 +4,12 @@ import { getSupabaseEnv } from "@/lib/supabase/env";
 import ProfileForm from "./ProfileForm";
 import { signOut } from "./actions";
 
+/** 메일 주소가 없을 때 대신 보여 줄 이름 */
+const PROVIDER_LABEL: Record<string, string> = {
+  kakao: "카카오 계정",
+  google: "구글 계정",
+};
+
 const STATUS_NOTE: Record<string, string> = {
   대기: "운영진이 소속 교회와 노회를 확인한 뒤 승인합니다. 보통 하루 안에 끝납니다.",
   승인: "승인되었습니다. 청빙공고의 교회 연락처를 볼 수 있습니다.",
@@ -43,7 +49,21 @@ export default async function AccountPage() {
   return (
     <div className="mx-auto max-w-md">
       <h1 className="text-xl font-bold">내 정보</h1>
-      <p className="mt-1 text-sm text-muted">{session.email}</p>
+      <p className="mt-1 text-sm text-muted">
+        {session.email ?? PROVIDER_LABEL[session.provider ?? ""] ?? "로그인함"}
+      </p>
+
+      {/*
+        카카오는 이메일을 선택 동의로 받는다. 동의하지 않았으면 주소가 없는데,
+        그대로 두면 알림을 켜 놓고 아무것도 못 받게 된다. 미리 알려 둔다.
+      */}
+      {!session.email && (
+        <p className="mt-3 rounded border border-line bg-sunken px-3 py-2 text-xs leading-relaxed text-muted">
+          이 계정에는 <b>메일 주소가 없습니다.</b> 콘티 저장과 로그인은 그대로
+          되지만, 새 공고 알림은 메일로 가므로 받을 수 없습니다. 알림까지
+          받으시려면 메일 주소로 한 번 더 로그인해 주세요.
+        </p>
+      )}
 
       {!profile ? (
         <>
