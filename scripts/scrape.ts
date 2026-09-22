@@ -11,7 +11,7 @@
  * 모으는 것은 교회명·지역·직분·마감일 같은 사실 정보와 원문 링크뿐이다.
  * 게시물 본문과 담당자 연락처는 가져오지 않는다.
  */
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { ADAPTERS, adapterFor, collect, keyOf, markClosed, mergePosts } from "@/lib/scrape";
 import type { ScrapedPost } from "@/lib/scrape/types";
@@ -97,7 +97,7 @@ async function main() {
   console.log(`기존 ${existing.length}건 / 대상 ${targets.map((t) => t.label).join(", ")}\n`);
 
   let merged = existing;
-  let failed = 0;
+  const failures: { label: string; error: string }[] = [];
 
   for (const adapter of targets) {
     console.log(`▸ ${adapter.label}`);
@@ -110,7 +110,7 @@ async function main() {
     });
 
     if (result.error) {
-      failed++;
+      failures.push({ label: adapter.label, error: result.error });
       console.error(`  실패: ${result.error}`);
       continue;
     }
@@ -151,7 +151,40 @@ async function main() {
     if (count) console.log(`  ${adapter.label}: ${count}건`);
   }
 
-  if (failed) process.exitCode = 1;
+  await reportFailures(failures, targets.length);
+
+  // 한 곳이 안 되는 날은 나머지 두 곳 수집분이 남는다. 그날치가 통째로 없는
+  // 경우에만 실패로 본다. 한 곳이 흔들릴 때마다 메일이 오면 정작 다 끊긴 날을
+  // 놓치게 된다. 어디가 왜 안 됐는지는 아래 요약에 적어 둔다.
+  if (failures.length === targets.length) process.exitCode = 1;
+}
+
+/**
+ * 어느 곳이 왜 안 됐는지를 실행 요약에 적는다.
+ *
+ * 이유가 로그 안에만 있으면 알림 메일은 "실패했음"까지만 알려 주고, 로그는
+ * 로그인해야 열린다. 요약은 실행 페이지에 그대로 붙어 누구나 볼 수 있다.
+ * GitHub Actions 밖에서 돌릴 때는 이 변수가 없으므로 아무것도 하지 않는다.
+ */
+async function reportFailures(
+  failures: { label: string; error: string }[],
+  total: number
+): Promise<void> {
+  const summaryFile = process.env.GITHUB_STEP_SUMMARY;
+  if (!summaryFile || failures.length === 0) return;
+
+  const lines = [
+    failures.length === total
+      ? "### 수집한 곳이 한 곳도 없습니다"
+      : `### ${failures.length}곳이 실패했습니다 (나머지 ${total - failures.length}곳은 받았습니다)`,
+    "",
+    "| 출처 | 이유 |",
+    "| --- | --- |",
+    // 막대는 표의 칸 구분자라 그대로 두면 줄이 깨진다.
+    ...failures.map((f) => `| ${f.label} | ${f.error.replaceAll("|", "\\|")} |`),
+    "",
+  ];
+  await appendFile(summaryFile, lines.join("\n") + "\n");
 }
 
 main().catch((err) => {

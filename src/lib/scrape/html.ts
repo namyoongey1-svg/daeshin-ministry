@@ -88,7 +88,25 @@ export async function fetchText(url: string, options: FetchOptions = {}): Promis
     if (attempt < MAX_ATTEMPTS) await sleep(1500 * attempt);
   }
 
-  throw lastError instanceof Error ? lastError : new Error(String(lastError));
+  throw new Error(`${method} ${url} — ${describe(lastError)}`);
+}
+
+/**
+ * 왜 끊겼는지까지 적는다.
+ *
+ * fetch 가 실패하면 메시지는 "fetch failed" 한 줄뿐이고, 실제 이유(주소를 못
+ * 찾았는지, 상대가 거절했는지, 시간이 다 됐는지)는 cause 에 들어 있다.
+ * 자동 수집은 로그를 나중에 읽으므로 그 한 줄로는 손을 쓸 수 없다.
+ */
+function describe(err: unknown): string {
+  if (!(err instanceof Error)) return String(err);
+  if (err.name === "TimeoutError") return `${REQUEST_TIMEOUT_MS / 1000}초 안에 응답이 없음`;
+
+  const cause = err.cause;
+  const code = cause && typeof cause === "object" && "code" in cause ? String(cause.code) : null;
+  const detail = cause instanceof Error ? cause.message : null;
+
+  return [err.message, code, code === detail ? null : detail].filter(Boolean).join(" / ");
 }
 
 /**
