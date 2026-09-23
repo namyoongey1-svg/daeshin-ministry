@@ -10,10 +10,16 @@ import { callbackWithNext } from "@/lib/site-url";
  * 매직링크는 메일함을 열었다 와야 하고, 휴대폰에서는 그 사이에 창이 닫히기
  * 쉽다. 교역자는 대부분 카카오를 쓰므로 카카오를 먼저 둔다.
  *
- * 카카오는 이메일을 주지 않는 경우가 있다(선택 동의 항목이다). 콘티 저장에는
- * 이메일이 필요 없고, 메일 알림은 주소가 없으면 건너뛰므로 그대로 둔다.
- * 대신 /account 에서 주소가 없다는 것을 알려 준다.
+ * 카카오는 기본으로 꺼 둔다. Supabase 가 인가 요청에 `account_email` 을 항상
+ * 끼워 보내는데, 카카오에서 그 동의항목은 비즈 앱 심사를 통과해야 열린다.
+ * 그 전에는 누르는 족족 KOE205 로 끝난다 — 누르면 반드시 실패하는 버튼을
+ * 사이트에 두면, 들어오는 사람은 사이트가 고장 난 것으로 알게 된다.
+ * 심사가 끝나면 NEXT_PUBLIC_KAKAO_LOGIN=1 로 켜면 된다.
+ *
+ * 켰을 때를 위해 카카오는 메일 주소를 주지 않을 수 있다는 점을 그대로 다뤄 둔다.
+ * 콘티 저장에는 메일이 필요 없고, 메일 알림은 주소가 없으면 건너뛴다.
  */
+const KAKAO_ENABLED = process.env.NEXT_PUBLIC_KAKAO_LOGIN === "1";
 const PROVIDERS = [
   {
     id: "kakao" as const,
@@ -42,6 +48,7 @@ const PROVIDERS = [
 ];
 
 export function SocialLogin({ next }: { next?: string }) {
+  const providers = PROVIDERS.filter((p) => p.id !== "kakao" || KAKAO_ENABLED);
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -65,7 +72,7 @@ export function SocialLogin({ next }: { next?: string }) {
 
   return (
     <div className="space-y-2">
-      {PROVIDERS.map((p) => (
+      {providers.map((p) => (
         <button
           key={p.id}
           type="button"

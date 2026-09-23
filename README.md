@@ -253,7 +253,29 @@ https://pkjmvceeafeekhxxexcn.supabase.co/auth/v1/callback
 받은 값은 Supabase > Authentication > Sign In / Providers 에 넣습니다.
 저장소에는 넣지 않습니다 — 이 저장소는 공개입니다.
 
-> **카카오는 메일 주소를 주지 않을 수 있습니다.** 선택 동의 항목이기 때문입니다.
+#### 카카오는 지금 꺼 두었습니다 (KOE205)
+
+**Supabase 는 카카오 인가 요청에 `account_email` 을 항상 끼워 보냅니다.**
+그런데 카카오에서 그 동의항목은 `권한 없음` 으로 잠겨 있어, 누르는 족족
+`KOE205 — 설정하지 않은 동의 항목: account_email` 로 끝납니다.
+
+클라이언트에서는 미리 막을 수 없습니다. `signInWithOAuth` 의 `scopes` 는 기본값을
+**대체하는 것이 아니라 덧붙입니다** — 직접 확인했습니다.
+
+```
+scope = account_email profile_image profile_nickname profile_nickname profile_image
+```
+
+그래서 버튼을 `NEXT_PUBLIC_KAKAO_LOGIN` 뒤에 두고 기본으로 꺼 두었습니다.
+누르면 반드시 실패하는 버튼을 두면, 들어오는 사람은 사이트가 고장 난 것으로 알게 됩니다.
+
+푸려면 카카오에서 **비즈 앱 전환 → 비즈니스 정보 심사 → 개인정보 동의항목 심사**를
+거쳐야 합니다. 사업자번호는 없어도 되지만(본인인증 + 약관 동의로 갈음), **심사가
+끝나기를 기다려야 합니다.** 전환에 필요한 앱 아이콘은 `public/kakao-app-icon.png`
+에 두었습니다. 통과하면 `account_email` 을 **선택 동의**로 두고 환경변수를
+`1` 로 바꾸면 됩니다.
+
+> **카카오는 켰 뒤에도 메일 주소를 주지 않을 수 있습니다.** 선택 동의 항목이기 때문입니다.
 > 콘티 저장과 로그인은 그대로 되지만 공고 알림은 메일로 가므로, 주소가 없으면
 > `/account` 와 `/alerts` 에서 그 사실을 알려 줍니다.
 
