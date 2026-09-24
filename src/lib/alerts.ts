@@ -1,5 +1,6 @@
 import type { Employment, Position, Region } from "./jobs";
 import type { JobListing } from "./scrape/listings";
+import { denominationFit } from "./denomination";
 
 /**
  * 새 공고 알림 구독.
@@ -9,6 +10,7 @@ import type { JobListing } from "./scrape/listings";
 export interface JobAlert {
   id: string;
   region: Region | null;
+  denomination: string | null;
   position: Position | null;
   employment: Employment | null;
   active: boolean;
@@ -19,12 +21,15 @@ export interface JobAlert {
 /** 저장할 때 쓰는 모양 — 빈 문자열은 null로 눕힌다. */
 export interface AlertInput {
   region: string | null;
+  /** 바라는 교단. 교단이 안 적힌 공고는 걸러 내지 않는다. */
+  denomination: string | null;
   position: string | null;
   employment: string | null;
 }
 
 export function normalizeAlertInput(form: {
   region?: string;
+  denomination?: string;
   position?: string;
   employment?: string;
 }): AlertInput {
@@ -34,6 +39,7 @@ export function normalizeAlertInput(form: {
   };
   return {
     region: clean(form.region),
+    denomination: clean(form.denomination),
     position: clean(form.position),
     employment: clean(form.employment),
   };
@@ -41,13 +47,16 @@ export function normalizeAlertInput(form: {
 
 /** 사람이 읽을 수 있는 한 줄로. "경기 · 교육전도사 · 파트" */
 export function describeAlert(alert: AlertInput): string {
-  const parts = [alert.region, alert.position, alert.employment].filter(Boolean);
+  const parts = [alert.region, alert.denomination, alert.position, alert.employment].filter(Boolean);
   return parts.length ? parts.join(" · ") : "모든 새 공고";
 }
 
 /** 이 공고가 구독 조건에 드는가. 비워 둔 칸은 아무거나 통과시킨다. */
 export function matchesAlert(post: JobListing, alert: AlertInput): boolean {
   if (alert.region && post.region !== alert.region) return false;
+  // 교단을 모르는 공고는 빼지 않는다. 목록 거르기와 같은 규칙이다 — 안 적혀
+  // 있다는 이유로 메일에서 빼면, 정작 맞는 자리를 영영 못 보게 된다.
+  if (alert.denomination && denominationFit(post, alert.denomination) === "다름") return false;
   if (alert.position && !post.positions.includes(alert.position as Position)) return false;
   if (alert.employment && post.employment !== alert.employment) return false;
   return true;

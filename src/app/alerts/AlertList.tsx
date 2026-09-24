@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { EMPLOYMENT, POSITIONS, REGIONS } from "@/lib/jobs";
+import { DENOMINATIONS } from "@/lib/denomination";
 import { addAlert, removeAlert, toggleAlert } from "./actions";
 
 export interface AlertRow {
@@ -42,13 +43,17 @@ export default function AlertList({
       >
         <h2 className="text-sm font-bold">조건 추가</h2>
         <p className="mt-1 text-xs text-muted">
-          비워 두면 전체입니다. 셋 다 비우면 올라오는 모든 공고를 받습니다.
+          비워 두면 전체입니다. 모두 비우면 올라오는 모든 공고를 받습니다.
         </p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           <select name="region" className={field} defaultValue="">
             <option value="">지역 전체</option>
             {REGIONS.map((r) => <option key={r} value={r}>{r}</option>)}
+          </select>
+          <select name="denomination" className={field} defaultValue="">
+            <option value="">교단 전체</option>
+            {DENOMINATIONS.map((d) => <option key={d} value={d}>{d}</option>)}
           </select>
           <select name="position" className={field} defaultValue="">
             <option value="">직분 전체</option>

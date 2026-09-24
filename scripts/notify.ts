@@ -94,7 +94,7 @@ async function main() {
 
   const { data, error } = await supabase
     .from("job_alerts")
-    .select("id, profile_id, region, position, employment, last_notified_at")
+    .select("id, profile_id, region, denomination, position, employment, last_notified_at")
     .eq("active", true);
 
   if (error) throw new Error(`구독을 읽지 못했습니다: ${error.message}`);

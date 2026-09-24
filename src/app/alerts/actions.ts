@@ -18,6 +18,7 @@ export async function addAlert(formData: FormData): Promise<ActionResult> {
 
   const input = normalizeAlertInput({
     region: String(formData.get("region") ?? ""),
+    denomination: String(formData.get("denomination") ?? ""),
     position: String(formData.get("position") ?? ""),
     employment: String(formData.get("employment") ?? ""),
   });
@@ -27,6 +28,7 @@ export async function addAlert(formData: FormData): Promise<ActionResult> {
     .select("id")
     .eq("profile_id", auth.user.id)
     .is("region", input.region)
+    .is("denomination", input.denomination)
     .is("position", input.position)
     .is("employment", input.employment)
     .maybeSingle();

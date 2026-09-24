@@ -77,5 +77,5 @@ grant select on job_posts_public to anon, authenticated;
 -- ---------------------------------------------------------------- 알림
 -- 교단은 구직자가 가장 먼저 거르는 조건이라, 알림에도 걸 수 있어야 한다.
 -- 비워 두면 "전체"를 뜻한다 — 지역·직분 칸과 같은 규칙이다.
-alter table alerts
+alter table job_alerts
   add column if not exists denomination text;
