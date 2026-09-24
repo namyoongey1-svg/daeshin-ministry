@@ -81,6 +81,8 @@ export interface JobQueryResult {
   collectedAt: string | null;
   /** 지역 고르기 칸에 보여 줄 시·도별·시군구별 건수 */
   places: PlaceCount[];
+  /** 교단을 알 수 있는 공고 수. 교단으로 걸렀을 때 왜 많이 남는지 밝히는 데 쓴다. */
+  denominationKnown: number;
 }
 
 export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult> {
@@ -136,6 +138,9 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
     return true;
   });
   const places = countPlaces(forCounts);
+  const denominationKnown = everyListing.filter(
+    (p) => p.denomination || p.accepts.length > 0 || p.acceptsAll
+  ).length;
   const collectedAt = everything.reduce<string | null>(
     (latest, p) => (!latest || p.collectedAt > latest ? p.collectedAt : latest),
     null
@@ -149,6 +154,7 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
     departments,
     collectedAt,
     places,
+    denominationKnown,
   };
 }
 

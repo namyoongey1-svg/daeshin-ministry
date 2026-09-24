@@ -1,16 +1,1291 @@
 {
-  "baekseok:59479": {
+  "baekseok:54904": {
     "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:54906": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:54909": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:54914": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:54915": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:54980": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55126": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55176": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55178": {
+    "own": "예장 고신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55179": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55181": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55183": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55184": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55185": {
+    "own": "기장",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55186": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:55304": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:55307": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55308": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55315": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55448": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55449": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55450": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55451": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55452": {
+    "own": "기독교한국침례회",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55453": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55454": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55481": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55648": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55650": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55651": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:55652": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55653": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:55655": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55659": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55663": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55666": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55681": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55811": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55812": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55813": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55814": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55815": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55817": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55818": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:55925": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56059": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56109": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56111": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56112": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56113": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56118": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:56119": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56120": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56170": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56178": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56384": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56385": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56386": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56445": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56524": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56526": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56527": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56528": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56538": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56553": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:56629": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56630": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56631": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56632": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56649": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56653": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56686": {
+    "own": "기독교한국침례회",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56689": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56808": {
+    "own": "기독교대한감리회",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56809": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56811": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56812": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56814": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56815": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:56884": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57015": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57016": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57019": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57020": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57021": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57040": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57056": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57139": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57211": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57212": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57382": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57383": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57384": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57385": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57386": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57389": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57460": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57461": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57737": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57738": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57739": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57743": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57746": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57803": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57805": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57825": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57911": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57912": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57913": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57968": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57969": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57971": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:57983": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58050": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58051": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58052": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58072": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58074": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58093": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58094": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58095": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58097": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58159": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58160": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58161": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58163": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58164": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58165": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58166": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58167": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58168": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58169": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58170": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58190": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58191": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58195": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58196": {
+    "own": "예장 고신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58197": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58272": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58273": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58274": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58275": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58276": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58277": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58279": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58330": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58331": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58366": {
+    "own": "예장 고신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58367": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58428": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58474": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58475": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58476": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58477": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58478": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58479": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58480": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58482": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:58485": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58486": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58487": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58488": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58510": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58511": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58543": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58544": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58545": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58583": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58584": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58585": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58587": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58588": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58589": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58590": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58591": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58666": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58667": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58669": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58670": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58671": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58672": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58673": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58674": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58675": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58676": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58677": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58678": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:58750": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58751": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:58752": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58910": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58913": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58914": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58915": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58916": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58917": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58918": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58974": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58976": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:58977": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59002": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:59034": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59045": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59076": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59078": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59079": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59081": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59082": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59083": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59084": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59085": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59086": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59087": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59088": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59089": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59090": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59091": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59092": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59135": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59137": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59138": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59139": {
+    "own": "예장 고신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59143": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59144": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59145": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59193": {
+    "own": "예장 고신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59194": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59195": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59196": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59197": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59198": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59199": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59200": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59291": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59292": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59293": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59294": {
+    "own": "예장 고신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59295": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59296": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59297": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59298": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59299": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:59300": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59327": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59330": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59332": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59333": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59337": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59338": {
+    "own": "예장 고신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59356": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59371": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59372": {
+    "own": "기독교한국침례회",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59373": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59374": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59376": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59479": {
+    "own": "예장 합신",
     "accepts": [],
     "acceptsAll": false
   },
   "baekseok:59480": {
     "own": null,
     "accepts": [],
-    "acceptsAll": false
+    "acceptsAll": true
   },
   "baekseok:59481": {
-    "own": null,
+    "own": "예장 백석",
     "accepts": [],
     "acceptsAll": false
   },
@@ -53,6 +1328,943 @@
     "own": "독립교단",
     "accepts": [],
     "acceptsAll": true
+  },
+  "minitries:167946847": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:167963599": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168001693": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168009329": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168109125": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168115814": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168120562": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168139362": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168161516": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168173143": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168213755": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168223081": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168241629": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168255045": {
+    "own": null,
+    "accepts": [
+      "기독교대한하나님의성회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:168260851": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168283016": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168290444": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168305357": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168314475": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168323420": {
+    "own": null,
+    "accepts": [
+      "예장 합동"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:168377072": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168378485": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168378486": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168380960": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168390445": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168393745": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168395862": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168401257": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168407147": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168419702": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168421610": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168433033": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168435177": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168444122": {
+    "own": null,
+    "accepts": [
+      "기독교대한하나님의성회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:168448550": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168462884": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168511286": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168514893": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168515096": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168515355": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168519624": {
+    "own": "기장",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168549106": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168567703": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168567717": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168585437": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168585507": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168613950": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168617729": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168625079": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168628050": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168628098": {
+    "own": "기장",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168646682": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168668774": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168684611": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168684752": {
+    "own": null,
+    "accepts": [
+      "기독교대한감리회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:168696007": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168698073": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168702650": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168703871": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168708990": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168712814": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168713430": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168715434": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168718688": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168760876": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168781517": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168791055": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168796528": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168801962": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168809739": {
+    "own": "기독교한국침례회",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168847863": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168851591": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168851698": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168868032": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168871313": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168872971": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168873091": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168884011": {
+    "own": "기장",
+    "accepts": [
+      "기독교대한감리회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:168905531": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168909755": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168930870": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168948751": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168948893": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168961385": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168963082": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168964055": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168964224": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168964935": {
+    "own": null,
+    "accepts": [
+      "예장 합동"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:168969845": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168971368": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:168988237": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:168993475": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169043497": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169072721": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:169118896": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:169171826": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169189697": {
+    "own": "기독교대한하나님의성회",
+    "accepts": [
+      "기독교대한하나님의성회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:169196400": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169247863": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169254303": {
+    "own": null,
+    "accepts": [
+      "기독교대한감리회",
+      "기독교대한성결교회",
+      "기독교한국침례회",
+      "기독교대한하나님의성회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:169294816": {
+    "own": "예장 합동",
+    "accepts": [
+      "예장 합동"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:169300773": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169484834": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169575830": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169591394": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:169594546": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169629667": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169695673": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169697822": {
+    "own": null,
+    "accepts": [
+      "기독교대한감리회",
+      "기독교대한성결교회",
+      "기독교한국침례회",
+      "기독교대한하나님의성회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:169745103": {
+    "own": "예장 합동",
+    "accepts": [
+      "기독교대한감리회",
+      "기독교대한성결교회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:169843315": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169864524": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169884193": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:169901913": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:169975699": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:170018007": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:170113165": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:170161753": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:170228883": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:170288421": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:170302349": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:170345420": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:170351566": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:170396430": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:170400635": {
+    "own": "기독교대한감리회",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:170438071": {
+    "own": null,
+    "accepts": [
+      "기독교대한감리회",
+      "기독교대한성결교회",
+      "기독교한국침례회",
+      "기독교대한하나님의성회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:170488855": {
+    "own": "기독교대한하나님의성회",
+    "accepts": [
+      "기독교대한하나님의성회"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:170545239": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:170679766": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:170727362": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:170890284": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:170940783": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:170980715": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:170985879": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171068195": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:171072217": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171088113": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171155548": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171242119": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171315894": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171414886": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:171444210": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171528776": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171530861": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171588390": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:171623643": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171656155": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171764136": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171787477": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171904562": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:171932917": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:172377686": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:172832175": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:172834556": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:172856692": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:172857912": {
+    "own": "기독교대한성결교회",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:172875037": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:172911917": {
+    "own": "예장 합동",
+    "accepts": [
+      "예장 합동"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:172925760": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:172930326": {
+    "own": "예장 통합",
+    "accepts": [
+      "예장 통합",
+      "예장 합동"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:172973100": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:172984425": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:173102105": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:173103069": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:173443507": {
+    "own": null,
+    "accepts": [
+      "예장 합동"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:173493960": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:173501092": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:173644100": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:173673852": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:173760487": {
+    "own": "기독교한국침례회",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:173766416": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:173842950": {
+    "own": null,
+    "accepts": [
+      "예장 고신",
+      "예장 합신",
+      "예장 백석"
+    ],
+    "acceptsAll": false
+  },
+  "minitries:173876065": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:174138081": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:174328689": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:174401229": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:174575550": {
+    "own": null,
+    "accepts": [
+      "예장 합동",
+      "예장 합신",
+      "예장 대신",
+      "예장 백석"
+    ],
+    "acceptsAll": false
   },
   "minitries:174640998": {
     "own": "예장 합동",

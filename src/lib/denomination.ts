@@ -184,14 +184,16 @@ export interface FromBody {
 }
 
 const OWN_FIELD = [
-  /소속\s*교단\s*[/·]?\s*교파\s*[:：]?\s*([^\n]{1,40})/,
-  /(?:^|[\s．.])교단\s*[:：]\s*([^\n]{1,40})/,
-  /교단\s*\/?\s*교파\s*[:：]?\s*([^\n]{1,40})/,
+  /소속\s*교단\s*[/·]?\s*교파\s*[:：\-–]?\s*([^\n]{1,40})/,
+  // 칸 이름은 "교단"보다 "교단명"이 훨씬 흔하고, 구분자로 붙임표를 쓰기도 한다.
+  //   "2. 교단명 : 백석 ( 서울강북노회 )"   "2. 교단명 - 합신 (동서울노회)"
+  // 처음에 "교단 :" 만 보다가 백석대 266건 중 238건을 놓쳤다.
+  /(?:소속\s*)?교단\s*(?:명|\/\s*교파)?\s*[:：\-–]\s*([^\n]{1,40})/,
 ];
 
 const ACCEPT_FIELD = [
-  /지원\s*가능\s*교단\s*[/·]?\s*교파\s*[:：]?\s*([^\n]{1,90})/,
-  /지원\s*가능\s*한?\s*교단\s*[:：]?\s*([^\n]{1,90})/,
+  /지원\s*가능\s*교단\s*[/·]?\s*교파\s*[:：\-–]?\s*([^\n]{1,90})/,
+  /지원\s*가능\s*한?\s*교단\s*(?:명)?\s*[:：\-–]?\s*([^\n]{1,90})/,
 ];
 
 /**
@@ -213,7 +215,10 @@ export function readFromBody(text: string): FromBody {
   const ownRaw = grab(OWN_FIELD);
   const acceptRaw = grab(ACCEPT_FIELD);
 
-  const acceptsAll = /초교파|교단\s*무관|모든\s*교단|교단\s*불문/.test(acceptRaw);
+  // "교단명 : 초교파 교회" 처럼 소속 칸에 적어 두기도 한다. 교단 이름이 아니라
+  // 가리지 않는다는 뜻이므로 소속이 아니라 지원 가능 쪽으로 읽는다.
+  const 가림없음 = /초교파|교단\s*무관|모든\s*교단|교단\s*불문/;
+  const acceptsAll = 가림없음.test(acceptRaw) || 가림없음.test(ownRaw);
   const accepts: Denomination[] = [];
   if (!acceptsAll) {
     // "합동, 합신, 대신, 백석" 처럼 여럿이 온다. 하나씩 끊어 맞춘다.
@@ -223,7 +228,11 @@ export function readFromBody(text: string): FromBody {
     }
   }
 
-  return { own: normalizeDenomination(ownRaw), accepts, acceptsAll };
+  return {
+    own: 가림없음.test(ownRaw) ? null : normalizeDenomination(ownRaw),
+    accepts,
+    acceptsAll,
+  };
 }
 
 /** 교단을 따질 때 필요한 것만 추린 모양. JobListing 과 등록 공고가 함께 쓴다. */

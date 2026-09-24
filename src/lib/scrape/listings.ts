@@ -288,9 +288,19 @@ export function applyDenominations(
   return listings.map((listing) => {
     const entry = book[`${listing.source}:${listing.externalId}`];
     if (!entry) return listing;
+
+    // 본문에서 무엇이라도 읽었으면 게시판 짐작은 버린다. 해군중앙교회는 백석대
+    // 게시판에 올렸지만 본문에 "교단명 : 초교파"라고 적혀 있다. 짐작을 남겨 두면
+    // 교단을 가리지 않는 교회에 "예장 백석"이라는 딱지가 붙는다.
+    const read = Boolean(entry.own) || entry.accepts.length > 0 || entry.acceptsAll;
+
     return {
       ...listing,
-      denomination: entry.own ? { name: entry.own, basis: "본문" } : listing.denomination,
+      denomination: entry.own
+        ? { name: entry.own, basis: "본문" }
+        : read
+          ? null
+          : listing.denomination,
       accepts: entry.accepts,
       acceptsAll: entry.acceptsAll,
     };

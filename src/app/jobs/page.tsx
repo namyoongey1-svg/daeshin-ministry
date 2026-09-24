@@ -55,7 +55,8 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
   };
   const page = Math.max(1, Number(pick("page")) || 1);
 
-  const { posts, total, all, departments, collectedAt, places } = await queryJobs(filter);
+  const { posts, total, all, departments, collectedAt, places, denominationKnown } =
+    await queryJobs(filter);
   const pageCount = Math.max(1, Math.ceil(total / PER_PAGE));
   const current = Math.min(page, pageCount);
   const visible = posts.slice((current - 1) * PER_PAGE, current * PER_PAGE);
@@ -160,8 +161,9 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
       */}
       {filter.denomination && (
         <p className="mt-2 text-xs leading-relaxed text-faint">
-          게시판이 교단을 적어 두지 않아 822건 중 361건만 교단을 알 수 있습니다.
-          교단이 <b className="font-medium">확실히 다른</b> 공고만 뺐고, 모르는 공고는
+          게시판이 교단을 적어 두지 않아 {all.toLocaleString()}건 중{" "}
+          {denominationKnown.toLocaleString()}건만 교단을 알 수 있습니다. 교단이{" "}
+          <b className="font-medium">확실히 다른</b> 공고만 뺐고, 모르는 공고는
           남겨 두었습니다 — 숨겼다가 정작 맞는 자리를 놓치면 안 되기 때문입니다.
         </p>
       )}

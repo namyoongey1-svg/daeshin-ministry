@@ -51,6 +51,13 @@ jobs:
           fi
           npm run geocode
 
+      # 새로 올라온 공고의 본문에서 교단만 읽는다. 본문은 저장하지 않는다.
+      # 한 번 읽은 글은 다시 읽지 않으므로 평소에는 몇 건이면 끝난다.
+      - name: 교단 읽기
+        if: always()
+        continue-on-error: true
+        run: npm run denominations -- --delay 2000
+
       - name: 수집 결과 요약
         if: always()
         run: |
