@@ -79,7 +79,7 @@ const SEOUL_GU = [
 ];
 
 /** 해외는 나라·도시 이름으로 적혀 온다. 국내 지명과 겹치지 않는 말만 골랐다. */
-const OVERSEAS =
+const OVERSEAS_NAMES =
   /해외|국외|미국|미주|캐나다|중국|일본|호주|뉴질랜드|베트남|필리핀|태국|인도|독일|영국|프랑스|러시아|몽골|캄보디아|대만|홍콩|싱가포르|남미|북미|유럽|아프리카|칠레|브라질|멕시코|아르헨티나|남아프리카|케냐|우즈베키스탄|카자흐|키르기스/;
 
 export interface Place {
@@ -104,7 +104,7 @@ export function parsePlace(raw: string | null | undefined): Place {
   if (/전국|전지역/.test(text)) return EMPTY;
   if (/\s*외$/.test(text)) return EMPTY;
   // 나라 이름이 보이면 국내 지명을 더 찾지 않는다.
-  if (OVERSEAS.test(text)) return { sido: "해외", sigungu: text === "해외" ? null : text };
+  if (OVERSEAS_NAMES.test(text)) return { sido: "해외", sigungu: text === "해외" ? null : text };
 
   let rest = text;
   let sido: Sido | null = null;
@@ -139,6 +139,45 @@ export function parsePlace(raw: string | null | undefined): Place {
   }
 
   return { sido, sigungu: rest || null };
+}
+
+/**
+ * 문장 안에 섞인 지명을 찾는다.
+ *
+ * 지역 칸이 따로 없는 게시판은 제목에 몰아 적는다.
+ *   "대전 전민새생명교회 부교역자 초빙"
+ *   "부산 기장군 정관신도시에 위치한 …"
+ *   "[캐나다 에드몬톤 명성장로교회]"
+ * 교회 이름이 아니라 진짜 지명인지는 parsePlace 가 판단한다.
+ */
+export function findPlaceIn(text: string | null | undefined): string | null {
+  if (!text) return null;
+  const cleaned = text.replace(/[[\]()]/g, " ").replace(/\s+/g, " ");
+
+  // "성남시 분당구"처럼 둘이 붙어 나오면 함께 넘긴다.
+  const pair = cleaned.match(/[가-힣]{2,6}(?:시|군)\s+[가-힣]{2,6}(?:구|군)/);
+  if (pair && parsePlace(pair[0]).sido) return pair[0];
+
+  // 시·군·구로 끝나는 낱말
+  for (const word of cleaned.match(/[가-힣]{2,10}(?:특별자치시|특별자치도|광역시|특별시|시|군|구)/g) ?? []) {
+    if (parsePlace(word).sido) return word;
+  }
+
+  // 나라 이름이 보이면 해외다. 맞은 말만 돌려준다 — "호주에"가 아니라 "호주".
+  const abroad = cleaned.match(OVERSEAS_NAMES);
+  if (abroad) return abroad[0];
+
+  // 시·도 이름만 적힌 경우. "서울"과 "서울대학교"는 다르므로 뒤에 올 수 있는
+  // 조사만 허용하고, 다른 글자가 이어지면 지명으로 보지 않는다.
+  // 공백은 이미 하나로 줄여 두었으므로 \s 대신 진짜 빈칸을 쓴다. 템플릿 문자열
+  // 안에서 \s 는 정규식이 보기 전에 그냥 s 가 되어 조용히 틀린다.
+  const 조사 = "(?:에서|에게|에|의|은|는|이|가|으로|로|시|도)?";
+  for (const name of SIDO) {
+    if (name === "해외") continue;
+    if (new RegExp("(^|[ ·,])" + name + 조사 + "(?=[ ·,]|$)").test(cleaned)) return name;
+  }
+
+  return null;
 }
 
 /** 화면에 적는 이름. "서울 강남구" */

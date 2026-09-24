@@ -2,9 +2,10 @@ import { sleep } from "./html";
 import { aats } from "./sources/aats";
 import { baekseok } from "./sources/baekseok";
 import { godpeople } from "./sources/godpeople";
+import { minitries } from "./sources/minitries";
 import type { ScrapedPost, SourceAdapter, SourceId } from "./types";
 
-export const ADAPTERS: SourceAdapter[] = [godpeople, baekseok, aats];
+export const ADAPTERS: SourceAdapter[] = [godpeople, baekseok, aats, minitries];
 
 export function adapterFor(id: string): SourceAdapter | undefined {
   return ADAPTERS.find((a) => a.id === id);

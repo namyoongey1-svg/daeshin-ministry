@@ -87,7 +87,6 @@ const NAV = [
   { href: "/tools/bulletin", label: "주보" },
   { href: "/tools/poster", label: "포스터" },
   { href: "/tools/roster", label: "명단·출석" },
-  { href: "/tools/video", label: "영상 기획" },
 ] as const;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

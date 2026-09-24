@@ -44,12 +44,6 @@ const TOOLS = [
     body: "예배 종류를 고르면 기본 순서가 채워집니다. 광고와 주간 일정을 붙여 A4로 바로 인쇄합니다.",
     meta: "예배 6종 · A4 인쇄",
   },
-  {
-    href: "/tools/video",
-    title: "스케치 영상 기획",
-    body: "행사별로 놓치기 쉬운 촬영 장면을 목록으로 챙기고, 편집 구성과 자막을 미리 짭니다.",
-    meta: "행사 6종 · 샷 리스트",
-  },
 ] as const;
 
 export default async function Home() {

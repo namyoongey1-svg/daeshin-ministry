@@ -75,6 +75,19 @@ export function parseDate(raw: string | null | undefined, now = new Date()): str
     return iso(now.getFullYear(), now.getMonth() + 1, now.getDate());
   }
 
+  // 게시판에 따라 최근 글을 "1일전", "3시간전"처럼 적어 준다.
+  const ago = text.match(/^(\d{1,3})\s*(분|시간|일|주|개월)\s*전$/);
+  if (ago) {
+    const n = Number(ago[1]);
+    const days = ago[2] === "일" ? n : ago[2] === "주" ? n * 7 : ago[2] === "개월" ? n * 30 : 0;
+    const when = new Date(now);
+    when.setDate(when.getDate() - days);
+    return iso(when.getFullYear(), when.getMonth() + 1, when.getDate());
+  }
+  if (/^(방금|오늘)/.test(text)) {
+    return iso(now.getFullYear(), now.getMonth() + 1, now.getDate());
+  }
+
   const short = text.match(/^(\d{1,2})[.\-/](\d{1,2})$/);
   if (short) {
     const month = Number(short[1]);
