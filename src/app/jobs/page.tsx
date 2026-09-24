@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { RegionPicker } from "./RegionPicker";
 import type { Metadata } from "next";
-import { EMPLOYMENT, POSITIONS, REGIONS, type Employment } from "@/lib/jobs";
+import { EMPLOYMENT, POSITIONS, type Employment } from "@/lib/jobs";
 import { SOURCE_LABELS, queryJobs, type JobListing } from "@/lib/scrape/store";
 import { ADAPTERS } from "@/lib/scrape";
 
@@ -52,7 +53,7 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
   };
   const page = Math.max(1, Number(pick("page")) || 1);
 
-  const { posts, total, all, departments, collectedAt } = await queryJobs(filter);
+  const { posts, total, all, departments, collectedAt, places } = await queryJobs(filter);
   const pageCount = Math.max(1, Math.ceil(total / PER_PAGE));
   const current = Math.min(page, pageCount);
   const visible = posts.slice((current - 1) * PER_PAGE, current * PER_PAGE);
@@ -114,7 +115,7 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
       </header>
 
       <form className="no-print mt-7 flex flex-wrap items-center gap-2">
-        {select("region", "지역", REGIONS.map((r) => ({ value: r, text: r })))}
+        <RegionPicker counts={places} selected={filter.region ?? ""} />
         {select("employment", "근무 형태", EMPLOYMENT.map((e) => ({ value: e, text: e })))}
         {select("position", "직분", POSITIONS.map((p) => ({ value: p, text: p })))}
         {departments.length > 0 &&

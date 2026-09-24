@@ -1,4 +1,5 @@
-import { inferEmployment, locationLabel, normalizeRegion } from "./normalize";
+import { inferEmployment } from "./normalize";
+import { parsePlace, placeLabel, type Place } from "@/lib/region";
 import type { ScrapedPost } from "./types";
 import type { Employment } from "@/lib/jobs";
 
@@ -17,6 +18,8 @@ export interface JobListing extends ScrapedPost {
   employment: Employment | null;
   /** 화면에 쓸 위치. 구까지 알면 구까지 */
   location: string;
+  /** 시·도와 시·군·구로 나눈 위치. 필터가 이것을 본다. */
+  place: Place;
   /**
    * 이 교회가 최근 1년 안에 올린 서로 다른 청빙공고 수.
    *
@@ -40,13 +43,15 @@ export function decorate(
 ): JobListing {
   // 저장된 region 을 그대로 믿지 않고 원문 표기에서 다시 읽는다. 예전에 "서울 외"를
   // 서울로 잘못 넣어 둔 값들이 남아 있어, 여기서 고쳐야 다시 수집하지 않아도 맞는다.
-  const region = normalizeRegion(post.regionRaw) ?? normalizeRegion(post.title);
+  const fromRaw = parsePlace(post.regionRaw);
+  const place = fromRaw.sido ? fromRaw : parsePlace(post.title);
   return {
     ...post,
-    region,
+    region: place.sido,
+    place,
     repostCount,
     employment: inferEmployment([...post.tagsRaw, post.title], post.positions),
-    location: locationLabel(post.regionRaw, region),
+    location: placeLabel(place),
     churchPostings,
   };
 }

@@ -6,14 +6,19 @@ export const POSITIONS = [
 
 export const EMPLOYMENT = ["전임", "준전임", "파트", "협동"] as const;
 
-export const REGIONS = [
-  "서울", "경기", "인천", "강원", "충북", "충남·대전·세종", "전북",
-  "전남·광주", "경북·대구", "경남·부산·울산", "제주", "해외",
-] as const;
+/**
+ * 지역은 17개 시·도로 나눈다.
+ *
+ * 예전에는 "충남·대전·세종"처럼 묶어 둔 자리가 있었다. 공고가 적을
+ * 때는 그래도 됐지만, 대전에서 사역할 사람에게 천안 공고를 섞어 보여 주는
+ * 셈이었다. 시·군·구까지는 src/lib/region.ts 가 다룬다.
+ */
+export { SIDO as REGIONS } from "./region";
+import type { Sido } from "./region";
+export type Region = Sido;
 
 export type Position = (typeof POSITIONS)[number];
 export type Employment = (typeof EMPLOYMENT)[number];
-export type Region = (typeof REGIONS)[number];
 
 export interface JobPost {
   id: string;
