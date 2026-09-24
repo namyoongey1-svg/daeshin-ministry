@@ -277,6 +277,19 @@ function JobCard({
 
       <div className="mt-4 flex items-center gap-2 border-t border-line pt-3 text-xs text-faint">
         <span>{SOURCE_LABELS[post.source]}</span>
+        {/* 다른 게시판에도 같은 자리가 올라와 있으면 접어 두되 숨기지는 않는다. */}
+        {post.alsoOn.map((other) => (
+          <a
+            key={other.source}
+            href={other.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline-offset-4 hover:text-muted hover:underline"
+            title={`${SOURCE_LABELS[other.source]}에도 같은 자리가 올라와 있습니다`}
+          >
+            · {SOURCE_LABELS[other.source]}
+          </a>
+        ))}
         {post.postedAt && <span>· {formatDate(post.postedAt)}</span>}
         {post.repostCount > 1 && (
           <span

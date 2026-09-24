@@ -64,11 +64,17 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
 
   const selectedPlaces = parseKeys(filter.region);
 
+  // 게시판을 가로질러 접은 글도 그 게시판에서 찾을 수 있어야 한다. 접혔다고
+  // 백석대 필터에서 사라지면, 백석대에서 보고 온 사람이 공고를 못 찾는다.
+  const onSource = (post: JobListing, source: string) =>
+    post.source === source || post.alsoOn.some((a) => a.source === source);
+
+
   const filtered = everyListing.filter((post) => {
     if (filter.church && post.church !== filter.church) return false;
     if (!matchesPlace(post.place, selectedPlaces)) return false;
     if (filter.position && !post.positions.includes(filter.position as Position)) return false;
-    if (filter.source && post.source !== filter.source) return false;
+    if (filter.source && !onSource(post, filter.source)) return false;
     if (filter.department && !post.departments.includes(filter.department)) return false;
     if (filter.employment && post.employment !== (filter.employment as Employment)) return false;
     return true;
@@ -81,7 +87,7 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
   const forCounts = everyListing.filter((post) => {
     if (filter.church && post.church !== filter.church) return false;
     if (filter.position && !post.positions.includes(filter.position as Position)) return false;
-    if (filter.source && post.source !== filter.source) return false;
+    if (filter.source && !onSource(post, filter.source)) return false;
     if (filter.department && !post.departments.includes(filter.department)) return false;
     if (filter.employment && post.employment !== (filter.employment as Employment)) return false;
     return true;

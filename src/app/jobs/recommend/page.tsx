@@ -8,7 +8,7 @@ import { RegionPicker } from "../RegionPicker";
 export const metadata: Metadata = {
   title: "나에게 맞는 청빙",
   description:
-    "희망 지역·직분·근무 형태를 적어 두면 962건의 청빙공고를 조건에 가까운 순서로 추려 보여 줍니다. 왜 추천했는지도 함께 적습니다.",
+    "희망 지역·직분·근무 형태를 적어 두면 모아 둔 청빙공고를 조건에 가까운 순서로 추려 보여 줍니다. 왜 추천했는지도 함께 적습니다.",
   alternates: { canonical: "/jobs/recommend" },
 };
 
