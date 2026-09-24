@@ -46,6 +46,8 @@ interface KakaoMarker {
 interface KakaoMap {
   setCenter(latlng: KakaoLatLng): void;
   setLevel(level: number): void;
+  /** 지도 칸 크기가 바뀐 뒤 다시 재게 한다. */
+  relayout(): void;
 }
 interface Kakao {
   maps: {
@@ -120,11 +122,20 @@ export function MapView({ pins, appKey }: { pins: MapPin[]; appKey: string }) {
   useEffect(() => {
     let alive = true;
     let clusterer: { clear(): void } | null = null;
+    let watching: ResizeObserver | null = null;
+    /** 사람이 지도를 만졌는가. 만진 뒤에는 자동으로 자리를 바꾸지 않는다. */
+    let touched = false;
+    // 치울 때 ref 가 이미 바뀌어 있을 수 있어 지금 값을 붙잡아 둔다.
+    const container = box.current;
 
     loadSdk(appKey)
       .then((kakao) => {
-        if (!alive || !box.current) return;
-        const map = new kakao.maps.Map(box.current, {
+        if (!alive || !container) return;
+        // 카카오는 지도를 칸 안에 제 DOM 으로 그리고 걷어내는 방법을 주지 않는다.
+        // 리액트가 개발 모드에서 effect 를 두 번 돌면 같은 칸에 지도가 둘
+        // 생기고, 먼저 만들어진 쪽이 위에 남아 범위를 못 받은 지도가 보인다.
+        container.innerHTML = "";
+        const map = new kakao.maps.Map(container, {
           center: new kakao.maps.LatLng(KOREA.lat, KOREA.lng),
           level: KOREA.level,
         });
@@ -148,6 +159,38 @@ export function MapView({ pins, appKey }: { pins: MapPin[]; appKey: string }) {
           return marker;
         });
         cluster.addMarkers(markers);
+
+        // 핀이 모두 들어오도록 지도를 맞춘다. 남한 한가운데를 고정으로 잡으면
+        // 지도 칸의 가로세로 비에 따라 나라가 한쪽으로 밀리고 화면 절반이
+        // 바다가 된다. 지역을 걸러 몇 곳만 남았을 때도 알아서 좁혀 준다.
+        const bounds = new kakao.maps.LatLngBounds();
+        for (const pin of pins) bounds.extend(new kakao.maps.LatLng(pin.lat, pin.lng));
+
+        // 칸이 다 그려진 뒤에 맞춰야 한다. 카카오는 지도를 만들 때 잰 칸 크기를
+        // 계속 쓰기 때문에, 그때 폭이 덜 잡혀 있으면 나중에 칸이 커져도 배율이
+        // 그대로라 한국이 화면 한쪽으로 밀리고 절반이 바다가 된다. 한 번만
+        // 맞추면 될 것 같지만, 칸 크기는 글꼴·이미지가 늦게 오면서 여러 번
+        // 바뀐다. 그래서 칸이 바뀔 때마다 다시 맞춘다.
+        const fit = () => {
+          map.relayout();
+          if (!bounds.isEmpty()) map.setBounds(bounds);
+        };
+
+        const watcher = new ResizeObserver(() => {
+          // 사람이 지도를 움직이기 시작하면 더는 끼어들지 않는다.
+          if (touched) return;
+          fit();
+        });
+        watcher.observe(container);
+        watching = watcher;
+
+        // 끌거나 배율을 바꾸면 그때부터는 보는 사람 뜻대로 둔다.
+        for (const type of ["dragstart", "zoom_start"])
+          kakao.maps.event.addListener(map, type, () => {
+            touched = true;
+          });
+
+        fit();
         setReady(true);
       })
       .catch((err: Error) => alive && setError(err.message));
@@ -155,6 +198,8 @@ export function MapView({ pins, appKey }: { pins: MapPin[]; appKey: string }) {
     return () => {
       alive = false;
       clusterer?.clear();
+      watching?.disconnect();
+      if (container) container.innerHTML = "";
     };
   }, [pins, appKey]);
 
