@@ -22,6 +22,7 @@ import {
 export function SaveBar({
   signedIn,
   initialItems,
+  onItemsChange,
   setlist,
   savedId,
   onSavedIdChange,
@@ -30,6 +31,8 @@ export function SaveBar({
   /** null 은 "아직 모름". 로그인 안 한 것과 구별해야 칸이 깜빡이지 않는다. */
   signedIn: boolean | null;
   initialItems: SetlistSummary[];
+  /** 달력이 같은 목록을 보므로 저장·삭제 된 것을 밖으로 알린다. */
+  onItemsChange?: (items: SetlistSummary[]) => void;
   setlist: Setlist;
   savedId: string | null;
   onSavedIdChange: (id: string | null) => void;
@@ -69,7 +72,9 @@ export function SaveBar({
         return;
       }
       onSavedIdChange(result.id ?? null);
-      setItems(await listSetlists());
+      const next = await listSetlists();
+      setItems(next);
+      onItemsChange?.(next);
       setMessage(asNew || !savedId ? "저장했습니다." : "덮어썼습니다.");
     });
 
@@ -95,7 +100,9 @@ export function SaveBar({
         return;
       }
       if (savedId === id) onSavedIdChange(null);
-      setItems(await listSetlists());
+      const next = await listSetlists();
+      setItems(next);
+      onItemsChange?.(next);
     });
 
   // 알아보는 동안은 자리만 비워 둔다. 글을 넣었다 바꾸면 화면이 뛴다.

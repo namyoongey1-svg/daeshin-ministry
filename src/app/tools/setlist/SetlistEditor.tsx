@@ -3,9 +3,10 @@
 import { useEffect, useState, useSyncExternalStore, useTransition } from "react";
 import { createLocalStore } from "@/lib/local-store";
 import { SaveBar } from "./SaveBar";
-import { SheetLibrary } from "./SheetLibrary";
-import { getSaveState, type SaveState } from "./actions";
-import { listSheets, type Sheet } from "@/lib/sheets";
+import { Calendar } from "./Calendar";
+import { getSaveState, loadSetlist, type SaveState } from "./actions";
+import { listSongs, type LibrarySong } from "@/lib/song-library";
+import type { SetlistSummary } from "./actions";
 import { buildSetlistPdf, downloadPdf } from "@/lib/setlist-pdf";
 import {
   FORM_PARTS,
@@ -58,7 +59,9 @@ export default function SetlistEditor() {
 
   /** 저장과 악보는 로그인해야 쓰므로 화면이 뜼고 나서 따로 물어본다. */
   const [state, setState] = useState<SaveState | null>(null);
-  const [sheets, setSheets] = useState<Sheet[]>([]);
+  const [library, setLibrary] = useState<LibrarySong[]>([]);
+  /** 달력에 올릴 저장본 목록. 저장·삭제 때 SaveBar 가 갱신해 준다. */
+  const [saved, setSaved] = useState<SetlistSummary[]>([]);
   const [pdfBusy, startPdf] = useTransition();
   const [pdfNote, setPdfNote] = useState<string | null>(null);
 
@@ -68,9 +71,10 @@ export default function SetlistEditor() {
       const next = await getSaveState().catch(() => ({ signedIn: false, items: [] }));
       if (!alive) return;
       setState(next);
+      setSaved(next.items);
       if (!next.signedIn) return;
-      const loaded = await listSheets().catch(() => []);
-      if (alive) setSheets(loaded);
+      const loaded = await listSongs().catch(() => []);
+      if (alive) setLibrary(loaded);
     })();
     return () => {
       alive = false;
@@ -79,6 +83,21 @@ export default function SetlistEditor() {
 
   const patch = (changes: Partial<Setlist>) =>
     store.update((current) => ({ ...current, ...changes }));
+
+  /** 달력에서 빈 날을 누르면 그 날짜로 새 콘티를 시작한다. */
+  function startOn(date: string) {
+    store.set({ ...emptySetlist(), date });
+    savedIdStore.set(null);
+  }
+
+  /** 달력에서 콘티가 있는 날을 누르면 불러온다. */
+  function openSaved(id: string) {
+    loadSetlist(id).then((loaded) => {
+      if (!loaded) return;
+      store.set(loaded);
+      savedIdStore.set(id);
+    });
+  }
 
   const patchSong = (id: string, changes: Partial<Song>) =>
     patch({ songs: setlist.songs.map((s) => (s.id === id ? { ...s, ...changes } : s)) });
@@ -91,12 +110,35 @@ export default function SetlistEditor() {
     patch({ songs: next });
   }
 
+  /**
+   * 라이브러리 곡을 고르면 빈 칸만 채운다.
+   *
+   * 이미 적어 둔 값을 덮어쓰지 않는다 — 그날만 다르게 부르려고 고쳐 둔 것을
+   * 곡을 연결했다고 되돌리면 쓴 사람은 무슨 일이 일어난 지 모른다.
+   */
+  function pickFromLibrary(songId: string, libraryId: string) {
+    const item = library.find((s) => s.id === libraryId);
+    const song = setlist.songs.find((s) => s.id === songId);
+    if (!item || !song) {
+      patchSong(songId, { libraryId: "" });
+      return;
+    }
+    patchSong(songId, {
+      libraryId,
+      title: song.title.trim() || item.title,
+      originalKey: song.originalKey.trim() || item.originalKey,
+      bpm: song.bpm.trim() || item.bpm,
+      meter: song.meter.trim() || item.meter,
+      form: song.form.trim() || item.form,
+    });
+  }
+
   /** 콘티 한 장 + 곡별 악보를 PDF 하나로. */
   function makePdf() {
     setPdfNote(null);
     startPdf(async () => {
       try {
-        const { bytes, skipped } = await buildSetlistPdf(setlist, sheets);
+        const { bytes, skipped } = await buildSetlistPdf(setlist, library);
         downloadPdf(bytes, `${setlist.serviceName} ${setlist.date}.pdf`.replace(/[\/:*?"<>|]/g, " "));
         setPdfNote(
           skipped.length
@@ -221,13 +263,18 @@ export default function SetlistEditor() {
 
         <SaveBar
           signedIn={state ? state.signedIn : null}
-          initialItems={state?.items ?? []}
+          initialItems={saved}
+          onItemsChange={setSaved}
           setlist={setlist}
           savedId={savedId}
           onSavedIdChange={savedIdStore.set}
           onLoad={store.set}
         />
       </div>
+
+      {state?.signedIn && (
+        <Calendar items={saved} currentDate={setlist.date} onPick={startOn} onOpen={openSaved} />
+      )}
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_22rem]">
         {/* ------------------------------------------------------- 곡 목록 */}
@@ -333,18 +380,19 @@ export default function SetlistEditor() {
                   </div>
                 </div>
 
-                {state?.signedIn && (
+                {state?.signedIn && library.length > 0 && (
                   <label className="mt-3 block">
-                    <span className={label}>악보</span>
+                    <span className={label}>라이브러리 곡 연결 — 악보가 따라옵니다</span>
                     <select
                       className={field}
-                      value={song.sheetId}
-                      onChange={(e) => patchSong(song.id, { sheetId: e.target.value })}
+                      value={song.libraryId}
+                      onChange={(e) => pickFromLibrary(song.id, e.target.value)}
                     >
-                      <option value="">— 없음</option>
-                      {sheets.map((sheet) => (
-                        <option key={sheet.id} value={sheet.id}>
-                          {sheet.title}
+                      <option value="">— 연결 안 함</option>
+                      {library.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.title}
+                          {item.sheets.length > 0 ? ` (악보 ${item.sheets.length})` : ""}
                         </option>
                       ))}
                     </select>
@@ -419,13 +467,6 @@ export default function SetlistEditor() {
             </label>
           </div>
 
-          {state?.signedIn && (
-            <SheetLibrary
-              sheets={sheets}
-              onChange={setSheets}
-              usedIds={new Set(setlist.songs.map((s) => s.sheetId).filter(Boolean))}
-            />
-          )}
         </section>
 
         {/* ------------------------------------------------------- 미리보기 */}

@@ -83,6 +83,7 @@ const NAV = [
   { href: "/tools/original", label: "원어 파싱" },
   { href: "/tools/sermon", label: "설교 노트" },
   { href: "/tools/setlist", label: "콘티" },
+  { href: "/tools/songs", label: "곡" },
   { href: "/tools/bulletin", label: "주보" },
   { href: "/tools/video", label: "영상 기획" },
 ] as const;

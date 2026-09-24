@@ -2,6 +2,7 @@
 
 import { PDFDocument, type PDFPage } from "pdf-lib";
 import { sheetBytes, type Sheet } from "@/lib/sheets";
+import type { LibrarySong } from "@/lib/song-library";
 import {
   formatKey,
   singingKey,
@@ -60,7 +61,7 @@ function songSpec(song: Song): string {
 }
 
 /** 콘티 첫 장을 캔버스에 그린다. */
-function drawCover(setlist: Setlist, sheetTitles: Map<string, string>): HTMLCanvasElement {
+function drawCover(setlist: Setlist, sheetCount: Map<string, number>): HTMLCanvasElement {
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(A4.width * SCALE);
   canvas.height = Math.round(A4.height * SCALE);
@@ -101,7 +102,7 @@ function drawCover(setlist: Setlist, sheetTitles: Map<string, string>): HTMLCanv
     const extras = [
       i > 0 && song.link !== "바로" ? `${song.link}로 연결` : "",
       song.note.trim(),
-      song.sheetId && sheetTitles.has(song.sheetId) ? `악보 첨부` : "",
+      (sheetCount.get(song.libraryId) ?? 0) > 0 ? `악보 ${sheetCount.get(song.libraryId)}장` : "",
     ].filter(Boolean).join("  ·  ");
     if (extras) line(ctx, extras, 10, { color: "#666666", gap: 3, indent: 20 });
 
@@ -192,15 +193,18 @@ export interface BuildResult {
  * 무엇을 뺐는지 돌려준다 — 주일 아침에 필요한 것은 완벽한 파일이 아니라
  * 당장 쓸 수 있는 파일이다.
  */
-export async function buildSetlistPdf(setlist: Setlist, sheets: Sheet[]): Promise<BuildResult> {
-  const byId = new Map(sheets.map((s) => [s.id, s]));
-  const titles = new Map(sheets.map((s) => [s.id, s.title]));
+export async function buildSetlistPdf(
+  setlist: Setlist,
+  library: LibrarySong[]
+): Promise<BuildResult> {
+  const byId = new Map(library.map((s) => [s.id, s]));
+  const counts = new Map(library.map((s) => [s.id, s.sheets.length]));
 
   const pdf = await PDFDocument.create();
   pdf.setTitle(`${setlist.serviceName} ${setlist.date}`.trim());
 
   // 1) 콘티 장
-  const cover = drawCover(setlist, titles);
+  const cover = drawCover(setlist, counts);
   const png = await pdf.embedPng(cover.toDataURL("image/png"));
   const coverPage = pdf.addPage([A4.width, A4.height]);
   coverPage.drawImage(png, { x: 0, y: 0, width: A4.width, height: A4.height });
@@ -208,10 +212,12 @@ export async function buildSetlistPdf(setlist: Setlist, sheets: Sheet[]): Promis
   // 2) 곡 순서대로 악보
   const skipped: string[] = [];
   for (const song of setlist.songs) {
-    if (!song.title.trim() || !song.sheetId) continue;
-    const sheet = byId.get(song.sheetId);
-    if (!sheet) continue;
+    if (!song.title.trim() || !song.libraryId) continue;
+    // 한 곡에 여러 장이 붙을 수 있다 — 코드보와 악보를 따로 올리는 팀이 많다.
+    for (const sheet of byId.get(song.libraryId)?.sheets ?? []) await append(song, sheet);
+  }
 
+  async function append(song: Song, sheet: Sheet) {
     try {
       const bytes = await sheetBytes(sheet.path);
 
@@ -219,7 +225,7 @@ export async function buildSetlistPdf(setlist: Setlist, sheets: Sheet[]): Promis
         const src = await PDFDocument.load(bytes, { ignoreEncryption: true });
         const pages = await pdf.copyPages(src, src.getPageIndices());
         for (const page of pages) pdf.addPage(page);
-        continue;
+        return;
       }
 
       // pdf-lib 은 PNG 와 JPEG 만 안다. webp 는 브라우저로 한 번 옮겨 그린다.

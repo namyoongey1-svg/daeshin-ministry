@@ -107,8 +107,13 @@ export interface Song {
    * 자주 쓰는 마디는 단추로 집어넣는다.
    */
   form: string;
-  /** 연결한 악보(sheets.id). 없으면 빈 문자열 */
-  sheetId: string;
+  /**
+   * 라이브러리 곡(library_songs.id). 직접 적은 곡이면 빈 문자열.
+   *
+   * 악보는 이 곡을 따라온다. 콘티에 악보를 직접 붙이면 같은 곡을 다음 달에
+   * 또 부를 때 다시 올려야 한다.
+   */
+  libraryId: string;
   note: string;
 }
 
@@ -141,7 +146,7 @@ export function emptySong(): Song {
     link: "바로",
     minutes: "",
     form: "",
-    sheetId: "",
+    libraryId: "",
     note: "",
   };
 }
@@ -292,7 +297,7 @@ export function reviveSetlist(raw: unknown): Setlist {
           link: oneOf(s.link, LINKS, "바로"),
           minutes: text(s.minutes, 5),
           form: text(s.form, MAX_TEXT),
-          sheetId: text(s.sheetId, 40),
+          libraryId: text(s.libraryId, 40),
           note: text(s.note, MAX_NOTE),
         };
       })
