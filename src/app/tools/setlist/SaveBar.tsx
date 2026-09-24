@@ -122,7 +122,7 @@ export function SaveBar({
           href="/login?next=/tools/setlist"
           className="ml-2 inline-block font-semibold text-accent hover:underline"
         >
-          카카오·구글로 로그인 →
+          구글로 로그인 →
         </Link>
       </div>
     );
