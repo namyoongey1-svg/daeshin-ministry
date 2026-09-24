@@ -313,11 +313,19 @@ SBLGNT는 CC BY-SA이므로 **출처 표시가 필수**입니다(푸터에 기�
 구독 정보를 모두 읽어야 해서 **서비스 롤 열쇠**가 필요하고, 메일 발송에는
 **Resend 열쇠**가 필요합니다. 둘 다 GitHub 저장소 Secrets 에 넣습니다.
 
+넣어야 하는 Secret 은 둘입니다. 프로젝트 주소는 비밀이 아니라 워크플로우에 적어 두었습니다.
+
 | Secret | 어디서 |
 |---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase > Settings > API Keys |
-| `SUPABASE_SERVICE_ROLE_KEY` | 같은 곳의 secret key. **공개 저장소이므로 코드에 적지 마세요** |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase > Settings > API Keys > `service_role`. **이 열쇠는 RLS를 통째로 뚫습니다** — 새어나가면 명단까지 전부 읽힙니다. 공개 저장소이므로 코드에 절대 적지 마세요 |
 | `RESEND_API_KEY` | [resend.com](https://resend.com) 무료 가입 |
+
+> **Resend 는 도메인을 인증해야 남에게 메일을 보냅니다.** 문서에 "보내려면
+> 최소 한 개의 도메인을 등록하고 인증해야 한다"고 적혀 있습니다. 예제에 나오는
+> `onboarding@resend.dev` 는 시험용이라 가입한 본인 주소로만 갑니다.
+> 즉, 도메인 없이도 **내 알림은 받지만 다른 교역자는 못 받습니다.**
+> `vercel.app` 하위 주소는 DNS 를 고칠 수 없어 인증이 안 됩니다 — 모두에게
+> 보내려면 도메인이 하나 필요합니다(연 만원대).
 
 열쇠가 없으면 알림 단계는 아무것도 하지 않고 넘어갑니다. 수집은 그대로 돕니다.
 보낼 대상만 확인하려면 `npm run notify -- --dry` 를 쓰세요.

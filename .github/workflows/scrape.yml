@@ -62,7 +62,9 @@ jobs:
         if: always()
         continue-on-error: true
         env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          # 프로젝트 주소는 비밀이 아니다. 공개 주소라 여기 적어 두면 넣어야 할
+          # Secret 이 둘로 줄어든다 — 손으로 하는 설정은 적을수록 덜 틀린다.
+          NEXT_PUBLIC_SUPABASE_URL: https://pkjmvceeafeekhxxexcn.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NEXT_PUBLIC_SITE_URL: https://daeshin-ministry.vercel.app
