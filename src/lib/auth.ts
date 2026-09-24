@@ -9,6 +9,7 @@ export interface Profile {
   name: string;
   phone: string | null;
   church_name: string;
+  /** 화면에는 "교단"으로 보인다. 처음에 노회를 받을 생각으로 지은 칸 이름이다. */
   presbytery: string;
   position: string;
   role: MemberRole;

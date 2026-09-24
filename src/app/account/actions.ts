@@ -22,7 +22,7 @@ export async function saveProfile(formData: FormData): Promise<ActionResult> {
   const position = text("position");
 
   if (!name || !churchName || !presbytery || !position) {
-    return { error: "이름·소속 교회·노회·직분은 모두 적어 주세요." };
+    return { error: "이름·소속 교회·교단·직분은 모두 적어 주세요." };
   }
 
   const { error } = await supabase.from("profiles").upsert({

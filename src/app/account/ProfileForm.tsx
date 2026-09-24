@@ -7,7 +7,9 @@ import type { Profile } from "@/lib/auth";
 const FIELDS = [
   { name: "name", label: "이름", required: true },
   { name: "church_name", label: "소속 교회", required: true },
-  { name: "presbytery", label: "노회", required: true },
+  // 칸 이름은 presbytery 로 두었다. 이미 저장된 가입 정보가 그 이름으로 들어
+  // 있어, 바꾸려면 DB 변경과 배포 시각을 맞춰야 한다.
+  { name: "presbytery", label: "교단", required: true },
   { name: "position", label: "직분 (담임목사·부목사·전도사 등)", required: true },
   { name: "phone", label: "연락처 (선택)", required: false },
 ] as const;

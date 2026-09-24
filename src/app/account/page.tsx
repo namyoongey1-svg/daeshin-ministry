@@ -11,7 +11,7 @@ const PROVIDER_LABEL: Record<string, string> = {
 };
 
 const STATUS_NOTE: Record<string, string> = {
-  대기: "운영진이 소속 교회와 노회를 확인한 뒤 승인합니다. 보통 하루 안에 끝납니다.",
+  대기: "운영진이 소속 교회와 교단을 확인한 뒤 승인합니다. 보통 하루 안에 끝납니다.",
   승인: "승인되었습니다. 청빙공고의 교회 연락처를 볼 수 있습니다.",
   거절: "가입이 반려되었습니다. 소속 확인이 필요하면 운영진에게 문의해 주세요.",
 };
@@ -84,7 +84,7 @@ export default async function AccountPage() {
             <dl className="mt-3 grid grid-cols-[5rem_1fr] gap-y-1 text-sm">
               <dt className="text-muted">이름</dt><dd>{profile.name}</dd>
               <dt className="text-muted">소속 교회</dt><dd>{profile.church_name}</dd>
-              <dt className="text-muted">노회</dt><dd>{profile.presbytery}</dd>
+              <dt className="text-muted">교단</dt><dd>{profile.presbytery}</dd>
               <dt className="text-muted">직분</dt><dd>{profile.position}</dd>
               {profile.phone && (<><dt className="text-muted">연락처</dt><dd>{profile.phone}</dd></>)}
             </dl>

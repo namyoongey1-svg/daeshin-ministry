@@ -10,7 +10,7 @@ create table profiles (
   name        text not null,
   phone       text,
   church_name text not null,
-  presbytery  text not null,          -- 노회
+  presbytery  text not null,          -- 화면 라벨은 "교단". 처음에 노회를 받을 생각으로 지은 이름이다
   position    text not null,          -- 직분
   role        member_role   not null default '사역자',
   status      member_status not null default '대기',
