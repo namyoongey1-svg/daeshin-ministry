@@ -44,6 +44,8 @@ export interface JobFilter {
   region?: string;
   position?: string;
   source?: string;
+  /** 교단. 모르는 공고는 걸러 내지 않고 남긴다. */
+  denomination?: string;
   department?: string;
   /** 전임·준전임·파트 */
   employment?: string;
@@ -81,6 +83,16 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
   const onSource = (post: JobListing, source: string) =>
     post.source === source || post.alsoOn.some((a) => a.source === source);
 
+  /**
+   * 교단으로 거를 때 교단을 모르는 공고는 남긴다.
+   *
+   * 822건 중 461건이 교단 미표기다. 모르는 것을 어긋난 것으로 치면 목록의
+   * 절반이 사라지고, 사라진 쪽에 정작 맞는 자리가 섞여 있다. 아는 것만 걸러
+   * 낸다 — 확실히 다른 교단인 공고만 뺀다.
+   */
+  const keepDenomination = (post: JobListing, wanted: string | undefined) =>
+    !wanted || !post.denomination || post.denomination.name === wanted;
+
 
   const filtered = everyListing.filter((post) => {
     if (filter.church && post.church !== filter.church) return false;
@@ -89,6 +101,7 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
     if (filter.source && !onSource(post, filter.source)) return false;
     if (filter.department && !post.departments.includes(filter.department)) return false;
     if (filter.employment && post.employment !== (filter.employment as Employment)) return false;
+    if (!keepDenomination(post, filter.denomination)) return false;
     return true;
   });
 
@@ -102,6 +115,7 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
     if (filter.source && !onSource(post, filter.source)) return false;
     if (filter.department && !post.departments.includes(filter.department)) return false;
     if (filter.employment && post.employment !== (filter.employment as Employment)) return false;
+    if (!keepDenomination(post, filter.denomination)) return false;
     return true;
   });
   const places = countPlaces(forCounts);

@@ -3,6 +3,7 @@ import { RegionPicker } from "./RegionPicker";
 import type { Metadata } from "next";
 import { EMPLOYMENT, POSITIONS, type Employment } from "@/lib/jobs";
 import { SOURCE_LABELS, queryJobs, type JobListing } from "@/lib/scrape/store";
+import { DENOMINATIONS } from "@/lib/denomination";
 import { ADAPTERS } from "@/lib/scrape";
 
 export const metadata: Metadata = {
@@ -50,6 +51,7 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
     employment: pick("employment"),
     department: pick("department"),
     source: pick("source"),
+    denomination: pick("denomination"),
   };
   const page = Math.max(1, Number(pick("page")) || 1);
 
@@ -120,6 +122,7 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
         {select("position", "직분", POSITIONS.map((p) => ({ value: p, text: p })))}
         {departments.length > 0 &&
           select("department", "부서", departments.map((d) => ({ value: d, text: d })))}
+        {select("denomination", "교단", DENOMINATIONS.map((d) => ({ value: d, text: d })))}
         {select("source", "출처", ADAPTERS.map((a) => ({ value: a.id, text: a.label })))}
 
         <button className="rounded-pill bg-foreground px-5 py-2 text-sm font-medium text-background transition-opacity hover:opacity-85">
@@ -150,6 +153,18 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
         {filtered && ` · 전체 ${all.toLocaleString()}건 중`}
         {pageCount > 1 && ` · ${current}/${pageCount}쪽`}
       </p>
+
+      {/*
+        교단으로 걸렀는데도 건수가 별로 안 줄면 필터가 안 먹은 줄 안다.
+        왜 많이 남는지 한 줄로 밝힌다.
+      */}
+      {filter.denomination && (
+        <p className="mt-2 text-xs leading-relaxed text-faint">
+          게시판이 교단을 적어 두지 않아 822건 중 361건만 교단을 알 수 있습니다.
+          교단이 <b className="font-medium">확실히 다른</b> 공고만 뺐고, 모르는 공고는
+          남겨 두었습니다 — 숨겼다가 정작 맞는 자리를 놓치면 안 되기 때문입니다.
+        </p>
+      )}
 
       {total === 0 ? (
         <p className="mt-10 rounded-card border border-dashed border-line py-16 text-center text-sm text-muted">
@@ -276,6 +291,20 @@ function JobCard({
       )}
 
       <div className="mt-4 flex items-center gap-2 border-t border-line pt-3 text-xs text-faint">
+        {/* 교단은 구직자가 가장 먼저 보는 조건이라 출처보다 앞에 둔다. */}
+        {post.denomination && (
+          <span
+            className="rounded-pill bg-accent-soft px-2 py-0.5 font-medium text-accent"
+            title={
+              post.denomination.basis === "게시판"
+                ? "그 교단 신학교 게시판에 올린 공고입니다. 교회의 소속 교단과 다를 수 있습니다."
+                : "교회 이름에 교단이 적혀 있습니다."
+            }
+          >
+            {post.denomination.name}
+            {post.denomination.basis === "게시판" && " 쪽"}
+          </span>
+        )}
         <span>{SOURCE_LABELS[post.source]}</span>
         {/* 다른 게시판에도 같은 자리가 올라와 있으면 접어 두되 숨기지는 않는다. */}
         {post.alsoOn.map((other) => (

@@ -1,4 +1,5 @@
 import { SIDO, parseKeys, type Sido } from "./region";
+import { sameDenomination } from "./denomination";
 import type { JobListing } from "./scrape/listings";
 import type { Employment, Position } from "./jobs";
 
@@ -22,6 +23,8 @@ export interface Wish {
   position: string;
   employment: string;
   department: string;
+  /** 바라는 교단. 교회는 같은 교단 사람만 뽑는 일이 많다. */
+  denomination: string;
 }
 
 export interface Reason {
@@ -66,6 +69,19 @@ const WEIGHT = {
   지역시도: 32,
   지역인접: 12,
   지역미표기: 4,
+  // 지역 다음으로 무겁다. 교단이 다르면 아예 안 받는 교회가 흔해, 직분보다
+  // 먼저 걸리는 조건인 경우가 많다.
+  교단: 30,
+  교단미표기: 6,
+  /**
+   * 교단이 확실히 다를 때 깎는 점수.
+   *
+   * 다른 칸은 안 맞아도 0점만 주고 끝내는데 교단만 깎는다. 교회가 아예
+   * 안 받는 일이 흔해 사실상 지원할 수 없는 자리이기 때문이다. 깎지 않으면
+   * 지역과 근무 형태만으로 "잘 맞음"까지 올라와, 헛걸음할 공고를 첫 줄에
+   * 올려 주는 셈이 된다.
+   */
+  교단다름: 20,
   직분: 26,
   직분미표기: 6,
   근무형태: 18,
@@ -113,6 +129,25 @@ export function scorePost(post: JobListing, wish: Wish, now = Date.now()): Match
   if (region) {
     score += region[0];
     reasons.push(region[1]);
+  }
+
+  if (wish.denomination) {
+    const verdict = sameDenomination(wish.denomination, post.denomination);
+    if (verdict === "맞음") {
+      score += WEIGHT.교단;
+      // 무엇을 보고 그렇게 봤는지 그대로 적는다. 게시판으로 짐작한 것을
+      // 확정처럼 보여 주면, 교회의 소속 교단이 다를 때 헛걸음하게 된다.
+      reasons.push({
+        label: post.denomination?.basis === "게시판" ? `${wish.denomination} 쪽` : wish.denomination,
+        kind: "맞음",
+      });
+    } else if (verdict === "미표기") {
+      score += WEIGHT.교단미표기;
+      reasons.push({ label: "교단 미표기", kind: "미표기" });
+    } else {
+      score -= WEIGHT.교단다름;
+      reasons.push({ label: post.denomination!.name, kind: "다름" });
+    }
   }
 
   if (wish.position) {
@@ -187,10 +222,14 @@ const isAsked = (r: Reason) => r.label !== "이번 주";
  * 그냥 전체 목록이다.
  */
 export function recommend(posts: JobListing[], wish: Wish, now = Date.now()): Recommendation {
-  const asked = Boolean(wish.region || wish.position || wish.employment || wish.department);
+  const asked = Boolean(
+    wish.region || wish.denomination || wish.position || wish.employment || wish.department
+  );
   if (!asked) return { matches: [], asked: false, perfect: 0, strong: 0 };
 
-  const asks = [wish.region, wish.position, wish.employment, wish.department].filter(Boolean).length;
+  const asks = [wish.region, wish.denomination, wish.position, wish.employment, wish.department].filter(
+    Boolean
+  ).length;
 
   const matches = posts
     .map((post) => scorePost(post, wish, now))
@@ -221,6 +260,7 @@ export function fitLabel(score: number): string {
 export function describeWish(wish: Wish): string {
   const parts = [
     parseKeys(wish.region).map((k) => (k.sigungu ? `${k.sido} ${k.sigungu}` : k.sido)).join(", "),
+    wish.denomination,
     wish.position,
     wish.employment,
     wish.department,

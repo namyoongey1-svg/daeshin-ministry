@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EMPLOYMENT, POSITIONS } from "@/lib/jobs";
+import { DENOMINATIONS } from "@/lib/denomination";
 import { queryJobs } from "@/lib/scrape/store";
 import { describeWish, fitLabel, recommend, type Reason, type Wish } from "@/lib/recommend";
 import { RegionPicker } from "../RegionPicker";
@@ -29,6 +30,7 @@ export default async function RecommendPage({ searchParams }: PageProps<"/jobs/r
   const params = await searchParams;
   const wish: Wish = {
     region: one(params.region),
+    denomination: one(params.denomination),
     position: one(params.position),
     employment: one(params.employment),
     department: one(params.department),
@@ -87,6 +89,7 @@ export default async function RecommendPage({ searchParams }: PageProps<"/jobs/r
 
       <form className="mt-7 flex flex-wrap items-center gap-2">
         <RegionPicker counts={places} selected={wish.region} />
+        {select("denomination", "교단", DENOMINATIONS)}
         {select("position", "직분", POSITIONS)}
         {select("employment", "근무 형태", EMPLOYMENT)}
         {departments.length > 0 && select("department", "부서", departments)}

@@ -1,5 +1,6 @@
 import { inferEmployment } from "./normalize";
 import { parsePlace, placeLabel, type Place } from "@/lib/region";
+import { guessDenomination, type Guess } from "@/lib/denomination";
 import type { ScrapedPost, SourceId } from "./types";
 import type { Employment } from "@/lib/jobs";
 
@@ -36,6 +37,14 @@ export interface JobListing extends ScrapedPost {
    * 접힌 쪽에만 연락처가 있는 일이 있다.
    */
   alsoOn: { source: SourceId; url: string }[];
+  /**
+   * 짐작한 교단. 모르면 null.
+   *
+   * 게시판마다 교단 칸이 없어 이름과 출처에서 읽어 낸다. 무엇을 보고 그렇게
+   * 봤는지(basis)까지 들고 다녀야 화면에서 "백석대 게시판 기준"이라고 밝힐 수
+   * 있다 — 교회의 소속 교단과 늘 같지는 않기 때문이다.
+   */
+  denomination: Guess | null;
 }
 
 /**
@@ -62,6 +71,8 @@ export function decorate(
     location: placeLabel(place),
     churchPostings,
     alsoOn: [],
+    // 합친 뒤에 다시 매긴다. 다른 게시판이 교단을 말해 줄 수 있어서다.
+    denomination: guessDenomination(post.church, post.title, post.source),
   };
 }
 
@@ -255,9 +266,15 @@ export function collapseReposts(posts: ScrapedPost[]): JobListing[] {
 export function buildListings(posts: ScrapedPost[]): JobListing[] {
   const listings = mergeAcrossSources(collapseReposts(posts));
   const counts = countByChurch(listings);
-  return listings.map((listing) =>
-    listing.church
-      ? { ...listing, churchPostings: counts.get(listing.church) ?? 1 }
-      : listing
-  );
+  return listings.map((listing) => ({
+    ...listing,
+    churchPostings: listing.church ? counts.get(listing.church) ?? 1 : listing.churchPostings,
+    // 합쳐진 공고는 대표 게시판만 보면 교단 신호를 놓친다.
+    denomination: guessDenomination(
+      listing.church,
+      listing.title,
+      listing.source,
+      listing.alsoOn.map((a) => a.source)
+    ),
+  }));
 }
