@@ -104,7 +104,12 @@ export function parsePlace(raw: string | null | undefined): Place {
   if (/전국|전지역/.test(text)) return EMPTY;
   if (/\s*외$/.test(text)) return EMPTY;
   // 나라 이름이 보이면 국내 지명을 더 찾지 않는다.
-  if (OVERSEAS_NAMES.test(text)) return { sido: "해외", sigungu: text === "해외" ? null : text };
+  const abroad = text.match(OVERSEAS_NAMES);
+  if (abroad) {
+    // "호주 골드코스트에서 동역자 모십니다" 처럼 제목째 넘어오면 나라만 남긴다.
+    const detail = text === "해외" ? null : text.length <= 12 ? text : abroad[0];
+    return { sido: "해외", sigungu: detail };
+  }
 
   let rest = text;
   let sido: Sido | null = null;
@@ -128,17 +133,38 @@ export function parsePlace(raw: string | null | undefined): Place {
       const found = CITY_SIDO[bare];
       if (!found) continue;
       // 시 이름은 남겨 둔다. "분당구"만 있으면 어느 시인지 알 수 없다.
-      return { sido: found, sigungu: words.slice(i).join(" ") || null };
+      return { sido: found, sigungu: keepPlaceWords(words.slice(i).join(" ")) };
     }
 
     // "강남구 대치동"처럼 구부터 적힌 경우
     const gu = words[0].replace(/구$/, "");
-    if (SEOUL_GU.includes(gu)) return { sido: "서울", sigungu: words.join(" ") };
+    if (SEOUL_GU.includes(gu)) return { sido: "서울", sigungu: keepPlaceWords(words.join(" ")) };
 
     return EMPTY;
   }
 
-  return { sido, sigungu: rest || null };
+  return { sido, sigungu: keepPlaceWords(rest) };
+}
+
+/**
+ * 시·도 뒤에 남은 말에서 진짜 시·군·구만 끊어 낸다.
+ *
+ * 그냥 남은 말을 다 담으면, 지역 칸이 없어 제목에서 지역을 읽는 게시판에서
+ * 제목이 통째로 지역이 된다.
+ *   "[용인] 광림남교회 교회학교 전도사님(파트)을 정중히 모십니다"
+ *   → "경기 용인 광림남교회 교회학교 전도사님 파트 을 정중히 모십니다"
+ * 앞에서부터 지명으로 읽히는 낱말만 가져오고, 아닌 말이 나오면 거기서 멈춘다.
+ */
+function keepPlaceWords(rest: string): string | null {
+  const out: string[] = [];
+  for (const word of rest.split(" ").filter(Boolean)) {
+    const bare = word.replace(/(시|군|구)$/, "");
+    const isPlace =
+      /(시|군|구)$/.test(word) || bare in CITY_SIDO || SEOUL_GU.includes(bare);
+    if (!isPlace) break;
+    out.push(word);
+  }
+  return out.join(" ") || null;
 }
 
 /**

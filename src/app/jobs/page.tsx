@@ -8,7 +8,7 @@ import { ADAPTERS } from "@/lib/scrape";
 export const metadata: Metadata = {
   title: "청빙·구직",
   description:
-    "갓피플·백석대 신대원·총신대 신대원 동창회 게시판의 교역자 청빙공고를 한곳에 모았습니다. 지역, 직분, 전임·준전임·파트로 추려 보세요.",
+    "갓피플·백석대 신대원·총신대 신대원 동창회·청빙넷 게시판의 교역자 청빙공고를 한곳에 모았습니다. 지역, 직분, 전임·준전임·파트로 추려 보세요.",
   alternates: { canonical: "/jobs" },
 };
 
@@ -103,7 +103,7 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
         <div>
           <h1 className="text-3xl font-bold sm:text-4xl">청빙·구직</h1>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
-            갓피플·백석대 신대원·총신대 신대원 동창회 게시판의 공고를 한곳에 모았습니다.
+            갓피플·백석대 신대원·총신대 신대원 동창회·청빙넷 게시판의 공고를 한곳에 모았습니다.
             사역 내용과 연락처는 각 원문에 있습니다.
           </p>
         </div>

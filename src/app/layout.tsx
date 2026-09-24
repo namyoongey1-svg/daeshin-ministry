@@ -78,6 +78,7 @@ const STRUCTURED_DATA = {
 
 const NAV = [
   { href: "/jobs", label: "청빙·구직" },
+  { href: "/jobs/recommend", label: "맞춤 추천" },
   { href: "/alerts", label: "알림" },
   { href: "/qna", label: "Q&A" },
   { href: "/tools/original", label: "원어 파싱" },

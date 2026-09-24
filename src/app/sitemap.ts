@@ -4,6 +4,7 @@ import { getSiteUrl } from "@/lib/site-url";
 /** 색인되길 바라는 공개 화면 */
 const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
   { path: "/", priority: 1, changeFrequency: "daily" },
+  { path: "/jobs/recommend", priority: 0.9, changeFrequency: "daily" },
   { path: "/jobs", priority: 0.9, changeFrequency: "daily" },
   { path: "/tools/original", priority: 0.8, changeFrequency: "monthly" },
   { path: "/tools/bulletin", priority: 0.7, changeFrequency: "monthly" },
