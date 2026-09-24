@@ -1,6 +1,6 @@
 import { inferEmployment } from "./normalize";
 import { parsePlace, placeLabel, type Place } from "@/lib/region";
-import { guessDenomination, type Guess } from "@/lib/denomination";
+import { guessDenomination, type Denomination, type Guess } from "@/lib/denomination";
 import type { ScrapedPost, SourceId } from "./types";
 import type { Employment } from "@/lib/jobs";
 
@@ -45,6 +45,15 @@ export interface JobListing extends ScrapedPost {
    * 있다 — 교회의 소속 교단과 늘 같지는 않기 때문이다.
    */
   denomination: Guess | null;
+  /**
+   * 이 교회가 지원을 받아 주는 교단들. 본문에 적혀 있을 때만 채워진다.
+   *
+   * 소속 교단보다 이쪽이 구직자에게 더 쓸모 있다. 알고 싶은 것은 "저 교회가
+   * 무슨 교단인가"가 아니라 "내가 지원할 수 있는가"이기 때문이다.
+   */
+  accepts: Denomination[];
+  /** 교단을 가리지 않는다고 적혀 있는가 */
+  acceptsAll: boolean;
 }
 
 /**
@@ -73,6 +82,8 @@ export function decorate(
     alsoOn: [],
     // 합친 뒤에 다시 매긴다. 다른 게시판이 교단을 말해 줄 수 있어서다.
     denomination: guessDenomination(post.church, post.title, post.source),
+    accepts: [],
+    acceptsAll: false,
   };
 }
 
@@ -263,6 +274,29 @@ export function collapseReposts(posts: ScrapedPost[]): JobListing[] {
 }
 
 /** 묶은 뒤 교회별 횟수까지 채운 목록. 화면과 알림이 함께 쓴다. */
+/**
+ * 본문에서 읽어 둔 교단을 덮어씌운다.
+ *
+ * 게시판으로 짐작한 값보다 본문에 적힌 값이 세다. 백석대 게시판에 올렸다고
+ * 다 백석 교회가 아니다 — 실제로 읽어 보면 합동·고신·독립교단이 더 많다.
+ * 게시판 신호는 "이 교단 사람을 찾는다"는 뜻이지 교회의 소속이 아니었다.
+ */
+export function applyDenominations(
+  listings: JobListing[],
+  book: Record<string, { own: Denomination | null; accepts: Denomination[]; acceptsAll: boolean }>
+): JobListing[] {
+  return listings.map((listing) => {
+    const entry = book[`${listing.source}:${listing.externalId}`];
+    if (!entry) return listing;
+    return {
+      ...listing,
+      denomination: entry.own ? { name: entry.own, basis: "본문" } : listing.denomination,
+      accepts: entry.accepts,
+      acceptsAll: entry.acceptsAll,
+    };
+  });
+}
+
 export function buildListings(posts: ScrapedPost[]): JobListing[] {
   const listings = mergeAcrossSources(collapseReposts(posts));
   const counts = countByChurch(listings);

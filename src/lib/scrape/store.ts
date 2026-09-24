@@ -2,7 +2,8 @@ import "server-only";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ADAPTERS } from "./index";
-import { buildListings, type JobListing } from "./listings";
+import { applyDenominations, buildListings, type JobListing } from "./listings";
+import { denominationFit, type Denomination } from "@/lib/denomination";
 import type { ScrapedPost, SourceId } from "./types";
 import type { Employment, Position } from "@/lib/jobs";
 import { SIDO, matchesPlace, parseKeys, type Sido } from "@/lib/region";
@@ -13,6 +14,7 @@ export type { JobListing } from "./listings";
 
 const FILE = path.join(process.cwd(), "src", "data", "scraped", "posts.json");
 const PLACES_FILE = path.join(process.cwd(), "src", "data", "scraped", "places.json");
+const DENOM_FILE = path.join(process.cwd(), "src", "data", "scraped", "denominations.json");
 
 let cache: Promise<ScrapedPost[]> | null = null;
 
@@ -31,6 +33,21 @@ export function loadPlaceBook(): Promise<PlaceBook> {
     .then((text) => JSON.parse(text) as PlaceBook)
     .catch(() => ({}));
   return placeCache;
+}
+
+type DenominationBook = Record<
+  string,
+  { own: Denomination | null; accepts: Denomination[]; acceptsAll: boolean }
+>;
+
+let denomCache: Promise<DenominationBook> | null = null;
+
+/** 공고 본문에서 뽑아 둔 교단. npm run denominations 가 채운다. */
+function loadDenominations(): Promise<DenominationBook> {
+  denomCache ??= readFile(DENOM_FILE, "utf8")
+    .then((text) => JSON.parse(text) as DenominationBook)
+    .catch(() => ({}));
+  return denomCache;
 }
 
 export const SOURCE_LABELS: Record<SourceId, string> = Object.fromEntries(
@@ -74,7 +91,7 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
   // 교회별 횟수와 근무 형태는 묶는 단계에서 읽어 내므로, 거르기는 그 뒤에 한다.
   // 세는 일은 거르기 전 전체를 기준으로 해야 같은 교회의 다른 지역 공고가
   // 빠져 숫자가 작아지지 않는다.
-  const everyListing = buildListings(all);
+  const everyListing = applyDenominations(buildListings(all), await loadDenominations());
 
   const selectedPlaces = parseKeys(filter.region);
 
@@ -91,7 +108,7 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
    * 낸다 — 확실히 다른 교단인 공고만 뺀다.
    */
   const keepDenomination = (post: JobListing, wanted: string | undefined) =>
-    !wanted || !post.denomination || post.denomination.name === wanted;
+    !wanted || denominationFit(post, wanted) !== "다름";
 
 
   const filtered = everyListing.filter((post) => {

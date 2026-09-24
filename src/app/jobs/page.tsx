@@ -3,7 +3,7 @@ import { RegionPicker } from "./RegionPicker";
 import type { Metadata } from "next";
 import { EMPLOYMENT, POSITIONS, type Employment } from "@/lib/jobs";
 import { SOURCE_LABELS, queryJobs, type JobListing } from "@/lib/scrape/store";
-import { DENOMINATIONS } from "@/lib/denomination";
+import { DENOMINATIONS, describeAccepts } from "@/lib/denomination";
 import { ADAPTERS } from "@/lib/scrape";
 
 export const metadata: Metadata = {
@@ -303,6 +303,12 @@ function JobCard({
           >
             {post.denomination.name}
             {post.denomination.basis === "게시판" && " 쪽"}
+          </span>
+        )}
+        {/* 소속보다 이쪽이 먼저다 — 내가 지원할 수 있는지를 바로 말해 준다. */}
+        {describeAccepts(post) && (
+          <span className="rounded-pill bg-sunken px-2 py-0.5 font-medium text-muted">
+            {describeAccepts(post)}
           </span>
         )}
         <span>{SOURCE_LABELS[post.source]}</span>

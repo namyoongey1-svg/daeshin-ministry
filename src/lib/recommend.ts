@@ -1,5 +1,5 @@
 import { SIDO, parseKeys, type Sido } from "./region";
-import { sameDenomination } from "./denomination";
+import { denominationFit, describeAccepts } from "./denomination";
 import type { JobListing } from "./scrape/listings";
 import type { Employment, Position } from "./jobs";
 
@@ -132,13 +132,17 @@ export function scorePost(post: JobListing, wish: Wish, now = Date.now()): Match
   }
 
   if (wish.denomination) {
-    const verdict = sameDenomination(wish.denomination, post.denomination);
+    const verdict = denominationFit(post, wish.denomination);
     if (verdict === "맞음") {
       score += WEIGHT.교단;
       // 무엇을 보고 그렇게 봤는지 그대로 적는다. 게시판으로 짐작한 것을
       // 확정처럼 보여 주면, 교회의 소속 교단이 다를 때 헛걸음하게 된다.
       reasons.push({
-        label: post.denomination?.basis === "게시판" ? `${wish.denomination} 쪽` : wish.denomination,
+        // 받아 주는 교단이 적혀 있으면 그것을 보여 준다. "지원 가능"이라고
+        // 쓰여 있는 것과 "소속이 같다"는 것은 구직자에게 무게가 다르다.
+        label:
+          describeAccepts(post) ??
+          (post.denomination?.basis === "게시판" ? `${wish.denomination} 쪽` : wish.denomination),
         kind: "맞음",
       });
     } else if (verdict === "미표기") {
@@ -146,7 +150,7 @@ export function scorePost(post: JobListing, wish: Wish, now = Date.now()): Match
       reasons.push({ label: "교단 미표기", kind: "미표기" });
     } else {
       score -= WEIGHT.교단다름;
-      reasons.push({ label: post.denomination!.name, kind: "다름" });
+      reasons.push({ label: describeAccepts(post) ?? post.denomination!.name, kind: "다름" });
     }
   }
 

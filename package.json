@@ -10,7 +10,8 @@
     "import:bible": "node scripts/import-bible.mjs",
     "scrape": "tsx scripts/scrape.ts",
     "notify": "tsx scripts/notify.ts",
-    "geocode": "tsx scripts/geocode.ts"
+    "geocode": "tsx scripts/geocode.ts",
+    "denominations": "tsx scripts/denominations.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
