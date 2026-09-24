@@ -85,6 +85,8 @@ const NAV = [
   { href: "/tools/setlist", label: "콘티" },
   { href: "/tools/songs", label: "곡" },
   { href: "/tools/bulletin", label: "주보" },
+  { href: "/tools/poster", label: "포스터" },
+  { href: "/tools/roster", label: "명단·출석" },
   { href: "/tools/video", label: "영상 기획" },
 ] as const;
 
