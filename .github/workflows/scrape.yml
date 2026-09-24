@@ -37,6 +37,20 @@ jobs:
         continue-on-error: true
         run: npm run scrape -- --pages 25 --prune 12
 
+      # 새로 올라온 교회만 카카오에 묻는다. 열쇠가 없으면 스스로 건너뛰므로
+      # 지도 때문에 수집이 막히지는 않는다.
+      - name: 교회 좌표 찾기
+        if: always()
+        continue-on-error: true
+        env:
+          KAKAO_REST_KEY: ${{ secrets.KAKAO_REST_KEY }}
+        run: |
+          if [ -z "$KAKAO_REST_KEY" ]; then
+            echo "KAKAO_REST_KEY 가 없어 좌표 찾기를 건너뜁니다."
+            exit 0
+          fi
+          npm run geocode
+
       - name: 수집 결과 요약
         if: always()
         run: |
@@ -73,13 +87,13 @@ jobs:
       - name: 변경분 커밋
         if: always()
         run: |
-          if git diff --quiet -- src/data/scraped/posts.json; then
+          if git diff --quiet -- src/data/scraped/; then
             echo "바뀐 공고가 없어 커밋하지 않습니다."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/scraped/posts.json
+          git add src/data/scraped/
           git commit -m "청빙공고 수집 $(date -u -d '+9 hours' +'%Y-%m-%d')"
           # 수집 중에 누군가 다른 커밋을 올렸을 수 있다.
           git pull --rebase --autostash

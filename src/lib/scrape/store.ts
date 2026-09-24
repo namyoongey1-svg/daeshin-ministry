@@ -6,11 +6,13 @@ import { buildListings, type JobListing } from "./listings";
 import type { ScrapedPost, SourceId } from "./types";
 import type { Employment, Position } from "@/lib/jobs";
 import { SIDO, matchesPlace, parseKeys, type Sido } from "@/lib/region";
+import { makeKey, type PlaceBook } from "@/lib/places";
 import type { PlaceCount } from "@/app/jobs/RegionPicker";
 
 export type { JobListing } from "./listings";
 
 const FILE = path.join(process.cwd(), "src", "data", "scraped", "posts.json");
+const PLACES_FILE = path.join(process.cwd(), "src", "data", "scraped", "places.json");
 
 let cache: Promise<ScrapedPost[]> | null = null;
 
@@ -19,6 +21,16 @@ export function loadScrapedPosts(): Promise<ScrapedPost[]> {
     .then((text) => JSON.parse(text) as ScrapedPost[])
     .catch(() => []);
   return cache;
+}
+
+let placeCache: Promise<PlaceBook> | null = null;
+
+/** 교회 이름을 좌표로 바꿔 둔 파일. npm run geocode 가 채운다. */
+export function loadPlaceBook(): Promise<PlaceBook> {
+  placeCache ??= readFile(PLACES_FILE, "utf8")
+    .then((text) => JSON.parse(text) as PlaceBook)
+    .catch(() => ({}));
+  return placeCache;
 }
 
 export const SOURCE_LABELS: Record<SourceId, string> = Object.fromEntries(
