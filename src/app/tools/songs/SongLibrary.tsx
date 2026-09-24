@@ -80,6 +80,19 @@ export function SongLibrary() {
   const patch = (id: string, changes: Partial<LibrarySong>) =>
     setSongs((prev) => prev.map((s) => (s.id === id ? { ...s, ...changes } : s)));
 
+  /**
+   * 송폼 마디를 덧붙인다.
+   *
+   * 직전 값을 밖에서 읽어 이어 붙이면, 단추를 빠르게 연달아 누를 때 앞서 누른
+   * 것이 사라진다. 화면이 다시 그려지기 전까지 모두 같은 옛값을 보기 때문이다.
+   */
+  const appendForm = (id: string, part: string) =>
+    setSongs((prev) =>
+      prev.map((s) =>
+        s.id === id ? { ...s, form: s.form.trim() ? `${s.form.trim()} - ${part}` : part } : s
+      )
+    );
+
   const save = (song: LibrarySong) =>
     run(async () => {
       await updateSong(song.id, song);
@@ -211,6 +224,7 @@ export function SongLibrary() {
                 <SongDetail
                   song={song}
                   onPatch={(changes) => patch(song.id, changes)}
+                  onAppendForm={(part) => appendForm(song.id, part)}
                   onSave={() => save(song)}
                   onRemove={() => remove(song)}
                   onError={setError}
@@ -227,12 +241,14 @@ export function SongLibrary() {
 function SongDetail({
   song,
   onPatch,
+  onAppendForm,
   onSave,
   onRemove,
   onError,
 }: {
   song: LibrarySong;
   onPatch: (changes: Partial<LibrarySong>) => void;
+  onAppendForm: (part: string) => void;
   onSave: () => void;
   onRemove: () => void;
   onError: (message: string) => void;
@@ -312,7 +328,7 @@ function SongDetail({
             <button
               key={part}
               type="button"
-              onClick={() => onPatch({ form: song.form.trim() ? `${song.form.trim()} - ${part}` : part })}
+              onClick={() => onAppendForm(part)}
               className="h-7 rounded-pill border border-line px-2.5 text-xs text-muted transition-colors hover:border-line-strong hover:text-foreground"
             >
               {part}

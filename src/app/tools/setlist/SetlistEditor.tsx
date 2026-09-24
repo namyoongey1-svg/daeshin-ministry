@@ -99,8 +99,16 @@ export default function SetlistEditor() {
     });
   }
 
+  /** 저장된 값을 그자리에서 읽어 고친다. 밖에서 읽은 옛값을 다시 쓰면 연달아
+   *  누른 것이 서로를 지운다. */
+  const updateSong = (id: string, fn: (song: Song) => Song) =>
+    store.update((current) => ({
+      ...current,
+      songs: current.songs.map((s) => (s.id === id ? fn(s) : s)),
+    }));
+
   const patchSong = (id: string, changes: Partial<Song>) =>
-    patch({ songs: setlist.songs.map((s) => (s.id === id ? { ...s, ...changes } : s)) });
+    updateSong(id, (song) => ({ ...song, ...changes }));
 
   function move(index: number, delta: number) {
     const next = [...setlist.songs];
@@ -359,9 +367,10 @@ export default function SetlistEditor() {
                         key={part}
                         type="button"
                         onClick={() =>
-                          patchSong(song.id, {
-                            form: song.form.trim() ? `${song.form.trim()} - ${part}` : part,
-                          })
+                          updateSong(song.id, (s) => ({
+                            ...s,
+                            form: s.form.trim() ? `${s.form.trim()} - ${part}` : part,
+                          }))
                         }
                         className="h-7 rounded-pill border border-line px-2.5 text-xs text-muted transition-colors hover:border-line-strong hover:text-foreground"
                       >
