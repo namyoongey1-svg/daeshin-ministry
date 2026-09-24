@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RolePicker } from "./RolePicker";
 import { SOURCE_LABELS, queryJobs } from "@/lib/scrape/store";
 
 const TOOLS = [
@@ -62,30 +63,17 @@ export default async function Home() {
           설교 준비는 더 깊게.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-muted">
-          세 곳의 청빙게시판을 매일 모아 지역과 근무 형태로 추려 보여 드립니다.
-          원어 성경과 주보·영상 도구도 함께 쓰실 수 있습니다.
+          네 곳의 청빙게시판을 매일 모아 지역·직분·교단으로 추려 보여 드립니다.
+          콘티·설교 노트·주보·명단 같은 사역 도구도 함께 쓰실 수 있습니다.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-2.5">
-          <Link
-            href="/jobs"
-            className="rounded-pill bg-accent px-6 py-3 text-sm font-semibold text-background transition-colors hover:bg-accent-hover"
-          >
-            청빙공고 {all.toLocaleString()}건 보기
-          </Link>
-          <Link
-            href="/tools/original"
-            className="rounded-pill border border-line bg-surface px-6 py-3 text-sm font-semibold transition-colors hover:border-line-strong"
-          >
-            원어 파싱 써보기
-          </Link>
-        </div>
+        <RolePicker />
 
         <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-line pt-6">
           {[
             { label: "모집 중인 공고", value: all.toLocaleString() },
             { label: "전임 공고", value: fullTime.toLocaleString() },
-            { label: "모으는 게시판", value: "3곳" },
+            { label: "모으는 게시판", value: "4곳" },
             { label: "원어 성경", value: "66권" },
           ].map((stat) => (
             <div key={stat.label}>

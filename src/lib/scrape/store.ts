@@ -6,7 +6,7 @@ import { buildListings, type JobListing } from "./listings";
 import type { ScrapedPost, SourceId } from "./types";
 import type { Employment, Position } from "@/lib/jobs";
 import { SIDO, matchesPlace, parseKeys, type Sido } from "@/lib/region";
-import { makeKey, type PlaceBook } from "@/lib/places";
+import type { PlaceBook } from "@/lib/places";
 import type { PlaceCount } from "@/app/jobs/RegionPicker";
 
 export type { JobListing } from "./listings";

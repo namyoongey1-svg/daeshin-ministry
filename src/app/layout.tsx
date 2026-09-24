@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { RoleNav } from "./RoleNav";
 import { Noto_Sans_KR, Noto_Serif, Noto_Serif_Hebrew } from "next/font/google";
 import { Logo } from "@/components/Logo";
 import { getSiteUrl } from "@/lib/site-url";
@@ -76,20 +77,6 @@ const STRUCTURED_DATA = {
   },
 };
 
-const NAV = [
-  { href: "/jobs", label: "청빙·구직" },
-  { href: "/jobs/recommend", label: "맞춤 추천" },
-  { href: "/jobs/map", label: "지도" },
-  { href: "/alerts", label: "알림" },
-  { href: "/qna", label: "Q&A" },
-  { href: "/tools/original", label: "원어 파싱" },
-  { href: "/tools/sermon", label: "설교 노트" },
-  { href: "/tools/setlist", label: "콘티" },
-  { href: "/tools/songs", label: "곡" },
-  { href: "/tools/bulletin", label: "주보" },
-  { href: "/tools/poster", label: "포스터" },
-  { href: "/tools/roster", label: "명단·출석" },
-] as const;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -122,18 +109,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               내 정보
             </Link>
 
-            {/* 메뉴가 한 줄을 넘으면 옆으로 밀어서 본다 */}
-            <nav className="order-2 -mx-1 mt-1.5 flex w-full items-center gap-1 overflow-x-auto px-1 [scrollbar-width:none] lg:order-none lg:mt-0 lg:w-auto lg:flex-1 [&::-webkit-scrollbar]:hidden">
-              {NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="shrink-0 rounded-pill px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-sunken hover:text-foreground"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+            <RoleNav />
           </div>
         </header>
 
