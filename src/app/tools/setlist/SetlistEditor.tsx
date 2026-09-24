@@ -1,9 +1,14 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore, useTransition } from "react";
 import { createLocalStore } from "@/lib/local-store";
 import { SaveBar } from "./SaveBar";
+import { SheetLibrary } from "./SheetLibrary";
+import { getSaveState, type SaveState } from "./actions";
+import { listSheets, type Sheet } from "@/lib/sheets";
+import { buildSetlistPdf, downloadPdf } from "@/lib/setlist-pdf";
 import {
+  FORM_PARTS,
   LINKS,
   MOODS,
   PARTS,
@@ -51,6 +56,27 @@ export default function SetlistEditor() {
     savedIdStore.getServerSnapshot
   );
 
+  /** 저장과 악보는 로그인해야 쓰므로 화면이 뜼고 나서 따로 물어본다. */
+  const [state, setState] = useState<SaveState | null>(null);
+  const [sheets, setSheets] = useState<Sheet[]>([]);
+  const [pdfBusy, startPdf] = useTransition();
+  const [pdfNote, setPdfNote] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      const next = await getSaveState().catch(() => ({ signedIn: false, items: [] }));
+      if (!alive) return;
+      setState(next);
+      if (!next.signedIn) return;
+      const loaded = await listSheets().catch(() => []);
+      if (alive) setSheets(loaded);
+    })();
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   const patch = (changes: Partial<Setlist>) =>
     store.update((current) => ({ ...current, ...changes }));
 
@@ -63,6 +89,24 @@ export default function SetlistEditor() {
     if (target < 0 || target >= next.length) return;
     [next[index], next[target]] = [next[target], next[index]];
     patch({ songs: next });
+  }
+
+  /** 콘티 한 장 + 곡별 악보를 PDF 하나로. */
+  function makePdf() {
+    setPdfNote(null);
+    startPdf(async () => {
+      try {
+        const { bytes, skipped } = await buildSetlistPdf(setlist, sheets);
+        downloadPdf(bytes, `${setlist.serviceName} ${setlist.date}.pdf`.replace(/[\/:*?"<>|]/g, " "));
+        setPdfNote(
+          skipped.length
+            ? `만들었습니다. 다만 이 악보는 붙이지 못했습니다 — ${skipped.join(", ")}`
+            : "PDF를 만들었습니다."
+        );
+      } catch (err) {
+        setPdfNote(err instanceof Error ? err.message : String(err));
+      }
+    });
   }
 
   const hints = reviewSetlist(setlist.songs);
@@ -101,6 +145,7 @@ export default function SetlistEditor() {
         song.note.trim(),
       ].filter(Boolean).join(" · ");
       if (sub) lines.push(`   ${sub}`);
+      if (song.form.trim()) lines.push(`   ${song.form.trim()}`);
     });
 
     if (minutes > 0) lines.push("", `총 ${minutes}분`);
@@ -144,6 +189,14 @@ export default function SetlistEditor() {
             </button>
             <button
               type="button"
+              onClick={makePdf}
+              disabled={pdfBusy}
+              className="rounded-pill border border-line px-5 py-2 text-sm font-medium transition-colors hover:border-line-strong disabled:opacity-40"
+            >
+              {pdfBusy ? "묶는 중…" : "악보까지 PDF 하나로"}
+            </button>
+            <button
+              type="button"
               onClick={() => window.print()}
               className="rounded-pill border border-line px-5 py-2 text-sm font-medium transition-colors hover:border-line-strong"
             >
@@ -164,7 +217,11 @@ export default function SetlistEditor() {
           </div>
         </div>
 
+        {pdfNote && <p className="mt-3 text-xs leading-relaxed text-muted">{pdfNote}</p>}
+
         <SaveBar
+          signedIn={state ? state.signedIn : null}
+          initialItems={state?.items ?? []}
           setlist={setlist}
           savedId={savedId}
           onSavedIdChange={savedIdStore.set}
@@ -240,9 +297,63 @@ export default function SetlistEditor() {
                   </label>
                 </div>
 
+                {/* 송폼 — 단추는 없는 것보다 빠르라고 둔다. 그냥 적어도 된다. */}
+                <div className="mt-3">
+                  <span className={label}>송폼</span>
+                  <input
+                    className={field}
+                    placeholder="인트로 - 1절 - 후렴 - 2절 - 후렴 - 브릿지 x2 - 후렴 - 엔딩"
+                    value={song.form}
+                    onChange={(e) => patchSong(song.id, { form: e.target.value })}
+                  />
+                  <div className="mt-1.5 flex flex-wrap gap-1">
+                    {FORM_PARTS.map((part) => (
+                      <button
+                        key={part}
+                        type="button"
+                        onClick={() =>
+                          patchSong(song.id, {
+                            form: song.form.trim() ? `${song.form.trim()} - ${part}` : part,
+                          })
+                        }
+                        className="h-7 rounded-pill border border-line px-2.5 text-xs text-muted transition-colors hover:border-line-strong hover:text-foreground"
+                      >
+                        {part}
+                      </button>
+                    ))}
+                    {song.form.trim() && (
+                      <button
+                        type="button"
+                        onClick={() => patchSong(song.id, { form: "" })}
+                        className="h-7 rounded-pill px-2.5 text-xs text-faint transition-colors hover:text-highlight"
+                      >
+                        비우기
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {state?.signedIn && (
+                  <label className="mt-3 block">
+                    <span className={label}>악보</span>
+                    <select
+                      className={field}
+                      value={song.sheetId}
+                      onChange={(e) => patchSong(song.id, { sheetId: e.target.value })}
+                    >
+                      <option value="">— 없음</option>
+                      {sheets.map((sheet) => (
+                        <option key={sheet.id} value={sheet.id}>
+                          {sheet.title}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                )}
+
                 <input
-                  className={`${field} mt-2`}
-                  placeholder="비고 — 1절만 / 브릿지 2회 / 마지막에 자유 찬양"
+                  className={`${field} mt-3`}
+                  placeholder="비고 — 1절만 / 마지막에 자유 찬양"
                   value={song.note}
                   onChange={(e) => patchSong(song.id, { note: e.target.value })}
                 />
@@ -307,6 +418,14 @@ export default function SetlistEditor() {
                 onChange={(e) => patch({ note: e.target.value })} />
             </label>
           </div>
+
+          {state?.signedIn && (
+            <SheetLibrary
+              sheets={sheets}
+              onChange={setSheets}
+              usedIds={new Set(setlist.songs.map((s) => s.sheetId).filter(Boolean))}
+            />
+          )}
         </section>
 
         {/* ------------------------------------------------------- 미리보기 */}
@@ -349,6 +468,9 @@ export default function SetlistEditor() {
                           <span className="text-muted">{song.link}</span>
                         )}
                       </div>
+                      {song.form && (
+                        <p className="ml-6 mt-1 text-xs leading-relaxed">{song.form}</p>
+                      )}
                       {song.note && (
                         <p className="ml-6 mt-1 text-xs leading-relaxed text-muted">{song.note}</p>
                       )}

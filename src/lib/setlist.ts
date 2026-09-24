@@ -99,8 +99,23 @@ export interface Song {
   link: LinkKind;
   /** 예상 길이(분) */
   minutes: string;
+  /**
+   * 송폼 — 곡을 어떤 순서로 부를지.
+   *
+   * 정해진 칸으로 나누지 않고 한 줄 글로 둔다. 현장에서는
+   * "후렴 x2", "반절 내려서" 처럼 말로 적는 일이 많기 때문이다.
+   * 자주 쓰는 마디는 단추로 집어넣는다.
+   */
+  form: string;
+  /** 연결한 악보(sheets.id). 없으면 빈 문자열 */
+  sheetId: string;
   note: string;
 }
+
+/** 송폼을 적을 때 단추 하나로 넣는 마디들 */
+export const FORM_PARTS = [
+  "인트로", "1절", "2절", "3절", "프리코러스", "후렴", "브릿지", "간주", "엔딩",
+] as const;
 
 export const PARTS = ["인도", "건반", "일렉", "어쿠스틱", "베이스", "드럼", "싱어"] as const;
 
@@ -125,6 +140,8 @@ export function emptySong(): Song {
     mood: "빠른 찬양",
     link: "바로",
     minutes: "",
+    form: "",
+    sheetId: "",
     note: "",
   };
 }
@@ -274,6 +291,8 @@ export function reviveSetlist(raw: unknown): Setlist {
           mood: oneOf(s.mood, MOODS, "빠른 찬양"),
           link: oneOf(s.link, LINKS, "바로"),
           minutes: text(s.minutes, 5),
+          form: text(s.form, MAX_TEXT),
+          sheetId: text(s.sheetId, 40),
           note: text(s.note, MAX_NOTE),
         };
       })

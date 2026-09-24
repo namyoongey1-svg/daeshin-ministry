@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
 import type { Setlist } from "@/lib/setlist";
 import {
   deleteSetlist,
-  getSaveState,
   listSetlists,
   loadSetlist,
   saveSetlist,
@@ -21,19 +20,22 @@ import {
  * 로그인하면 그대로 저장할 수 있다.
  */
 export function SaveBar({
+  signedIn,
+  initialItems,
   setlist,
   savedId,
   onSavedIdChange,
   onLoad,
 }: {
+  /** null 은 "아직 모름". 로그인 안 한 것과 구별해야 칸이 깜빡이지 않는다. */
+  signedIn: boolean | null;
+  initialItems: SetlistSummary[];
   setlist: Setlist;
   savedId: string | null;
   onSavedIdChange: (id: string | null) => void;
   onLoad: (setlist: Setlist) => void;
 }) {
-  // null 은 "아직 모름". 로그인 안 한 것과 구별해야 칸이 깜빡이지 않는다.
-  const [signedIn, setSignedIn] = useState<boolean | null>(null);
-  const [items, setItems] = useState<SetlistSummary[]>([]);
+  const [items, setItems] = useState<SetlistSummary[]>(initialItems);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -41,19 +43,12 @@ export function SaveBar({
 
   const filled = setlist.songs.filter((s) => s.title.trim()).length;
 
-  useEffect(() => {
-    let alive = true;
-    start(async () => {
-      const state = await getSaveState();
-      if (!alive) return;
-      setSignedIn(state.signedIn);
-      setItems(state.items);
-    });
-    return () => {
-      alive = false;
-    };
-    // 한 번만 물어본다. 이후의 목록은 저장·삭제 때 갱신한다.
-  }, []);
+  // 불러온 목록이 늦게 도착하면 한 번 맞춰 둔다. 이후는 저장·삭제 때 갱신한다.
+  const [seeded, setSeeded] = useState(false);
+  if (!seeded && initialItems.length && items.length === 0) {
+    setItems(initialItems);
+    setSeeded(true);
+  }
 
   function run(work: () => Promise<void>) {
     setError(null);
