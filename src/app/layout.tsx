@@ -122,6 +122,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <p className="mt-2 max-w-md text-xs leading-relaxed text-faint">
                 대신 교단 사역자를 위해 만들었습니다. 청빙공고는 각 게시판의 공개 정보를
                 모은 것이며, 지원과 문의는 원문에서 해 주세요.
+                <br />
+                모아서 정리한 자료를 기계로 퍼 가는 것은 삼가 주세요. 쓰실 일이 있으면
+                말씀해 주시면 상의해 드립니다.
               </p>
             </div>
             <p className="text-xs leading-relaxed text-faint sm:text-right">
