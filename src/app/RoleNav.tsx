@@ -32,6 +32,8 @@ export const GROUPS: Record<Role, { href: string; label: string }[]> = {
     { href: "/tools/bulletin", label: "주보" },
     { href: "/tools/poster", label: "포스터" },
     { href: "/tools/roster", label: "명단·출석" },
+    { href: "/recreation", label: "레크리에이션" },
+    { href: "/quiz", label: "설교 퀴즈" },
     { href: "/qna", label: "Q&A" },
   ],
 };
