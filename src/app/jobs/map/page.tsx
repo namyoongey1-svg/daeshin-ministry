@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EMPLOYMENT, POSITIONS } from "@/lib/jobs";
-import { makeKey } from "@/lib/places";
+import { makeKey, makeLooseKey } from "@/lib/places";
 import { SOURCE_LABELS, loadPlaceBook, queryJobs } from "@/lib/scrape/store";
 import { RegionPicker } from "../RegionPicker";
 import { MapView, type MapPin } from "./MapView";
@@ -34,9 +34,19 @@ export default async function JobsMapPage({ searchParams }: PageProps<"/jobs/map
   const byChurch = new Map<string, MapPin>();
   for (const post of posts) {
     if (!post.church) continue;
-    const key = makeKey(post.church, post.place);
-    const pin = key ? book[key] : null;
-    if (!key || !pin) continue;
+    /*
+      키를 둘 다 본다.
+
+      이름으로 찾아 둔 교회는 그 주소에서 지역을 되읽어 채우므로, 이 자리에
+      오면 이미 지역을 아는 공고가 되어 있다. 그러면 makeKey 가 키를 내주는데
+      정작 좌표는 이름 키(`교회명|?`) 아래 들어 있다. 앞의 키만 보면 방금
+      채운 교회가 전부 지도에서 빠진다.
+    */
+    const strict = makeKey(post.church, post.place);
+    const loose = makeLooseKey(post.church);
+    const key = (strict && book[strict] ? strict : null) ?? (loose && book[loose] ? loose : null);
+    if (!key) continue;
+    const pin = book[key];
 
     const entry =
       byChurch.get(key) ??

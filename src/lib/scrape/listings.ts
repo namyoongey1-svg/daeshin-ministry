@@ -1,5 +1,6 @@
 import { inferEmployment } from "./normalize";
 import { parsePlace, placeLabel, type Place } from "@/lib/region";
+import { makeLooseKey } from "@/lib/places";
 import { guessDenomination, type Denomination, type Guess } from "@/lib/denomination";
 import type { ScrapedPost, SourceId } from "./types";
 import type { Employment } from "@/lib/jobs";
@@ -321,4 +322,30 @@ export function buildListings(posts: ScrapedPost[]): JobListing[] {
       listing.alsoOn.map((a) => a.source)
     ),
   }));
+}
+
+/**
+ * 지역을 모르는 공고에 이름으로 찾은 좌표의 지역을 채운다.
+ *
+ * 장신대 게시판은 지역 칸이 없어 공고의 80%가 지역 미표기다. 그 교회를
+ * 이름으로 찾아 두었다면 카카오가 준 주소에 지역이 들어 있으므로, 그것을
+ * 되읽어 채운다. 지도뿐 아니라 지역 거르기와 추천까지 함께 살아난다.
+ *
+ * 이름이 전국에 하나뿐일 때만 찾아 두었으므로, 여기 들어오는 값은 같은
+ * 이름의 다른 교회일 걱정이 없다. 그 걸러내기는 찾는 단계에서 이미 했다.
+ */
+export function applyLoosePlaces(
+  listings: JobListing[],
+  book: Record<string, { address: string }>
+): JobListing[] {
+  return listings.map((listing) => {
+    if (listing.place.sido || !listing.church) return listing;
+    const key = makeLooseKey(listing.church);
+    const pin = key ? book[key] : null;
+    if (!pin) return listing;
+
+    const place = parsePlace(pin.address);
+    if (!place.sido) return listing;
+    return { ...listing, place, region: place.sido, location: placeLabel(place) };
+  });
 }

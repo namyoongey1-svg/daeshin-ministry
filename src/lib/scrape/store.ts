@@ -2,7 +2,7 @@ import "server-only";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ADAPTERS } from "./index";
-import { applyDenominations, buildListings, type JobListing } from "./listings";
+import { applyDenominations, applyLoosePlaces, buildListings, type JobListing } from "./listings";
 import { denominationFit, type Denomination } from "@/lib/denomination";
 import type { ScrapedPost, SourceId } from "./types";
 import type { Employment, Position } from "@/lib/jobs";
@@ -93,7 +93,10 @@ export async function queryJobs(filter: JobFilter = {}): Promise<JobQueryResult>
   // 교회별 횟수와 근무 형태는 묶는 단계에서 읽어 내므로, 거르기는 그 뒤에 한다.
   // 세는 일은 거르기 전 전체를 기준으로 해야 같은 교회의 다른 지역 공고가
   // 빠져 숫자가 작아지지 않는다.
-  const everyListing = applyDenominations(buildListings(all), await loadDenominations());
+  const everyListing = applyLoosePlaces(
+    applyDenominations(buildListings(all), await loadDenominations()),
+    await loadPlaceBook()
+  );
 
   const selectedPlaces = parseKeys(filter.region);
 

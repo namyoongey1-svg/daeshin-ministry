@@ -16,8 +16,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { buildListings } from "@/lib/scrape/listings";
-import { agrees, makeKey, makeQuery, type PlaceBook, type Pin } from "@/lib/places";
-import type { Place } from "@/lib/region";
+import { agrees, makeKey, makeLooseKey, makeQuery, type PlaceBook, type Pin } from "@/lib/places";
+import { parsePlace, type Place } from "@/lib/region";
 import type { ScrapedPost } from "@/lib/scrape/types";
 
 const DIR = path.join(process.cwd(), "src", "data", "scraped");
@@ -94,8 +94,28 @@ async function main() {
     wanted.set(key, { church: l.church, query: makeQuery(l.church, l.place), place: l.place });
   }
 
+  /*
+    지역을 모르는 교회는 이름만으로 묻는다.
+
+    아무거나 집으면 안 되므로, 카카오가 그 이름으로 딱 하나만 돌려줄 때만
+    받는다. 전국에 하나뿐인 이름이라는 뜻이다. 여럿이면 어느 것인지 알 수
+    없으니 버린다 — 핀이 없는 것보다 틀린 핀이 나쁘다.
+
+    여기서 얻은 주소로 지역까지 되읽으므로, 지도뿐 아니라 지역 거르기도
+    함께 채워진다.
+  */
+  const loose = new Map<string, string>();
+  for (const l of listings) {
+    if (!l.church || l.place.sido) continue;
+    const key = makeLooseKey(l.church);
+    if (!key || (book[key] && !recheck)) continue;
+    loose.set(key, l.church);
+  }
+
   console.log(
-    `모집 중 ${listings.length}건 / 이미 찾아 둔 교회 ${Object.keys(book).length}곳 / 이번에 물을 교회 ${wanted.size}곳`
+    `모집 중 ${listings.length}건 / 이미 찾아 둔 교회 ${Object.keys(book).length}곳` +
+      `
+지역을 아는 교회 ${wanted.size}곳 · 이름만 아는 교회 ${loose.size}곳`
   );
 
   let found = 0;
@@ -146,14 +166,72 @@ async function main() {
     await sleep(delay);
   }
 
+  /*
+    이름만 아는 교회. 딱 하나만 나올 때만 받는다.
+
+    이름이 같은 교회가 둘 이상이면 어느 것인지 알 수 없으므로 버린다.
+    "세 곳 중 하나겠지" 하고 첫 번째를 집으면, 서울에서 자리를 찾는 사람에게
+    같은 이름의 부산 교회를 서울 공고처럼 보여 주게 된다.
+  */
+  let alone = 0;
+  let ambiguous = 0;
+  let unfound = 0;
+  let looseDone = 0;
+
+  for (const [key, church] of loose) {
+    if (done + looseDone >= limit) break;
+    looseDone++;
+
+    let docs: KakaoPlace[] = [];
+    try {
+      docs = await search(church);
+    } catch (err) {
+      console.error(`\n${err instanceof Error ? err.message : String(err)}`);
+      break;
+    }
+
+    const target = bare(church);
+    // 이름이 같은 곳만 남긴다. "서울교회"를 찾는데 "서울교회사랑카페"가
+    // 딸려 오면 하나뿐인 것처럼 보이거나, 반대로 여럿으로 보여 버려진다.
+    const named = docs.filter((d) => bare(d.place_name) === target);
+
+    if (named.length === 0) {
+      unfound++;
+    } else if (named.length > 1) {
+      ambiguous++;
+    } else {
+      const hit = named[0];
+      const address = hit.address_name || hit.road_address_name;
+      // 주소에서 시·도를 못 읽으면 지역을 채울 수 없으니 받지 않는다.
+      if (parsePlace(address).sido) {
+        book[key] = {
+          lat: Number(hit.y),
+          lng: Number(hit.x),
+          name: hit.place_name,
+          address,
+          // 지역을 우리가 안 것이 아니라 카카오가 알려 준 것이다.
+          matched: "이름",
+        };
+        alone++;
+      } else {
+        unfound++;
+      }
+    }
+
+    if (looseDone % 25 === 0) process.stdout.write(`  이름 ${looseDone}/${loose.size}\r`);
+    await sleep(delay);
+  }
+
   // 키 순서로 저장해야 날마다 도는 수집에서 줄만 바뀐 diff 가 안 생긴다.
   const sorted = Object.fromEntries(Object.entries(book).sort(([a], [b]) => a.localeCompare(b)));
   await writeFile(PLACES, JSON.stringify(sorted, null, 2) + "\n", "utf8");
 
-  const byMatch = Object.values(sorted).filter((p) => p.matched === "구").length;
+  const count = (kind: Pin["matched"]) =>
+    Object.values(sorted).filter((p) => p.matched === kind).length;
   console.log(
-    `\n찾음 ${found}곳 · 지역이 어긋나 버림 ${mismatched}곳 · 카카오에 없음 ${missing}곳` +
-      `\n모두 ${Object.keys(sorted).length}곳 (구까지 맞은 것 ${byMatch}곳)`
+    `\n지역을 아는 교회  찾음 ${found} · 지역이 어긋나 버림 ${mismatched} · 카카오에 없음 ${missing}` +
+      `\n이름만 아는 교회  찾음 ${alone} · 같은 이름 여럿이라 버림 ${ambiguous} · 못 찾음 ${unfound}` +
+      `\n모두 ${Object.keys(sorted).length}곳 (구 ${count("구")} · 시도 ${count("시도")} · 이름 ${count("이름")})`
   );
 }
 

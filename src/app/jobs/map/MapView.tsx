@@ -31,8 +31,8 @@ export interface MapPin {
   lng: number;
   name: string;
   address: string;
-  /** "구"면 구·군까지 확인된 핀, "시도"면 같은 이름의 다른 교회일 수 있다. */
-  matched: "구" | "시도";
+  /** 어디까지 확인했는가. "구"가 가장 믿을 만하고, 뒤 둘은 같은 이름의 다른 교회일 수 있다. */
+  matched: "구" | "시도" | "이름";
   posts: MapPost[];
 }
 
@@ -259,11 +259,12 @@ export function MapView({ pins, appKey }: { pins: MapPin[]; appKey: string }) {
               </button>
             </div>
             <p className="mt-1 text-xs leading-relaxed text-faint">{picked.address}</p>
-            {picked.matched === "시도" && (
+            {picked.matched !== "구" && (
               // 어디까지 확인했는지 밝힌다. 같은 이름의 교회가 전국에 여럿 있다.
               <p className="mt-2 rounded-card bg-sunken px-3 py-2 text-xs leading-relaxed text-muted">
-                공고에 시·도까지만 적혀 있어 이름으로 찾은 자리입니다. 같은 이름의
-                다른 교회일 수 있으니 원문을 확인하세요.
+                {picked.matched === "시도"
+                  ? "공고에 시·도까지만 적혀 있어 이름으로 찾은 자리입니다. 같은 이름의 다른 교회일 수 있으니 원문을 확인하세요."
+                  : "공고에 지역이 없어 교회 이름으로 찾았습니다. 그 이름이 전국에 하나뿐이라 고른 자리지만, 원문에서 한 번 확인하세요."}
               </p>
             )}
             <ul className="mt-3 flex flex-col gap-3">

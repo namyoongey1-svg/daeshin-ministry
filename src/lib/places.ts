@@ -24,10 +24,11 @@ export interface Pin {
    * 어디까지 맞춰 보고 통과시켰는가.
    *
    * "구"는 시·군·구까지 우리 기록과 같다는 뜻이고, "시도"는 시·도만 같다는
-   * 뜻이다. 시·도만 맞춘 핀은 같은 이름의 다른 교회일 수 있어 화면에서
-   * 따로 표시한다.
+   * 뜻이다. "이름"은 공고에 지역이 없어 교회 이름만으로 찾은 것으로,
+   * 전국에 그 이름이 하나뿐일 때만 받는다. 뒤 둘은 같은 이름의 다른 교회일
+   * 수 있어 화면에서 따로 표시한다.
    */
-  matched: "구" | "시도";
+  matched: "구" | "시도" | "이름";
 }
 
 /** 좌표를 찾아 둔 교회들. 키는 makeKey 가 만든다. */
@@ -83,4 +84,25 @@ export function distanceKm(
     Math.sin(dLat / 2) ** 2 +
     Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+/**
+ * 지역을 모르는 교회의 키.
+ *
+ * 장신대 게시판은 지역 칸이 아예 없어 공고의 80%가 지역 미표기다. 그러면
+ * makeKey 가 null 이라 좌표를 찾을 수도, 찾아 둔 것을 꺼낼 수도 없다.
+ *
+ * 이름만으로 찾는 것은 위험하다. 호산나교회도 예수로교회도 전국에 여럿이라
+ * 아무거나 집으면 엉뚱한 곳에 핀이 꽂힌다. 그래서 카카오가 그 이름으로 딱
+ * 하나만 돌려줄 때 — 즉 전국에 하나뿐인 이름일 때 — 만 받는다. 여럿이면
+ * 저절로 걸러진다.
+ */
+export function makeLooseKey(church: string): string | null {
+  const bare = church.replace(/\s+/g, "");
+  return bare ? `${bare}|?` : null;
+}
+
+/** 지번 주소에서 시·도와 시·군·구를 되읽는다. 이름만으로 찾은 교회의 지역이 된다. */
+export function placeFromAddress(address: string): Place {
+  return parsePlace(address);
 }
