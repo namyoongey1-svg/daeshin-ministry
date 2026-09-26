@@ -7,6 +7,7 @@ import { puts } from "./sources/puts";
 import { hapdong } from "./sources/hapdong";
 import { kosin } from "./sources/kosin";
 import { kehc } from "./sources/kehc";
+import { mtu } from "./sources/mtu";
 import type { ScrapedPost, SourceAdapter, SourceId } from "./types";
 
 export const ADAPTERS: SourceAdapter[] = [
@@ -18,6 +19,7 @@ export const ADAPTERS: SourceAdapter[] = [
   hapdong,
   kosin,
   kehc,
+  mtu,
 ];
 
 export function adapterFor(id: string): SourceAdapter | undefined {

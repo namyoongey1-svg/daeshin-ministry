@@ -8,7 +8,8 @@ export type SourceId =
   | "puts"
   | "hapdong"
   | "kosin"
-  | "kehc";
+  | "kehc"
+  | "mtu";
 
 /**
  * 외부 청빙게시판에서 모아 오는 한 건.

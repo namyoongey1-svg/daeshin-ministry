@@ -59,6 +59,7 @@ const BOARD: Partial<Record<SourceId, Denomination>> = {
   hapdong: "예장 합신",
   kosin: "예장 고신",
   kehc: "기독교대한성결교회",
+  mtu: "기독교대한감리회",
 };
 
 /**

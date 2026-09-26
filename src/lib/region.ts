@@ -203,7 +203,9 @@ export function findPlaceIn(text: string | null | undefined): string | null {
   const 조사 = "(?:에서|에게|에|의|은|는|이|가|으로|로|시|도)?";
   for (const name of SIDO) {
     if (name === "해외") continue;
-    if (new RegExp("(^|[ ·,])" + name + 조사 + "(?=[ ·,]|$)").test(cleaned)) return name;
+    // 빗금도 구분자로 친다. 감리회 게시판은 "[서울/도봉]"처럼 연회와 지방을
+    // 빗금으로 잇는데, 빼놓으면 서울이 "서울/"에 걸려 한 건도 안 잡힌다.
+    if (new RegExp("(^|[ ·,/])" + name + 조사 + "(?=[ ·,/]|$)").test(cleaned)) return name;
   }
 
   return null;
