@@ -155,3 +155,19 @@ export function locationLabel(regionRaw: string | null, region: Region | null): 
   if (raw && /\s*외$/.test(raw)) return `${raw.replace(/\s*외$/, "")} 외 지역`;
   return raw ?? "지역 미표기";
 }
+
+/**
+ * 문장 안에서 교회 이름을 찾는다.
+ *
+ * "○○교회"가 가장 흔하고 선교회·기도원·복지관도 올라온다. 앞에 붙은 지역
+ * 이름까지 삼키지 않도록, 띄어쓰기로 끊어 마지막 덩이만 가져온다.
+ *   "대전 전민새생명교회 부교역자 초빙" → 전민새생명교회
+ * 다만 끊은 것이 너무 짧으면("새 교회") 통째로 둔다.
+ */
+export function findChurchIn(text: string | null | undefined): string | null {
+  if (!text) return null;
+  const m = text.match(/([가-힣A-Za-z0-9·\s]{1,18}?(?:교회|선교회|기도원|복지관|선교단체|신학교|수도원))/);
+  if (!m) return null;
+  const tail = m[1].trim().split(/\s+/).pop() ?? "";
+  return tail.length >= 3 ? tail : m[1].trim();
+}

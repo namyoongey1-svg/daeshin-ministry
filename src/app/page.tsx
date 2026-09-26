@@ -63,7 +63,7 @@ export default async function Home() {
           설교 준비는 더 깊게.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-muted">
-          네 곳의 청빙게시판을 매일 모아 지역·직분·교단으로 추려 보여 드립니다.
+          다섯 곳의 청빙게시판을 매일 모아 지역·직분·교단으로 추려 보여 드립니다.
           콘티·설교 노트·주보·명단 같은 사역 도구도 함께 쓰실 수 있습니다.
         </p>
 
@@ -73,7 +73,7 @@ export default async function Home() {
           {[
             { label: "모집 중인 공고", value: all.toLocaleString() },
             { label: "전임 공고", value: fullTime.toLocaleString() },
-            { label: "모으는 게시판", value: "4곳" },
+            { label: "모으는 게시판", value: "5곳" },
             { label: "원어 성경", value: "66권" },
           ].map((stat) => (
             <div key={stat.label}>

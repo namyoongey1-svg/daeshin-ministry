@@ -1,6 +1,6 @@
 import type { Position, Region } from "@/lib/jobs";
 
-export type SourceId = "godpeople" | "baekseok" | "aats" | "minitries";
+export type SourceId = "godpeople" | "baekseok" | "aats" | "minitries" | "puts";
 
 /**
  * 외부 청빙게시판에서 모아 오는 한 건.
