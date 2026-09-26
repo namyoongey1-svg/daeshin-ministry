@@ -2270,5 +2270,15 @@
     "own": "예장 합동",
     "accepts": [],
     "acceptsAll": false
+  },
+  "minitries:174789866": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:174794547": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
   }
 }
