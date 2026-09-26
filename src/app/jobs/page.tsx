@@ -9,7 +9,7 @@ import { ADAPTERS } from "@/lib/scrape";
 export const metadata: Metadata = {
   title: "청빙·구직",
   description:
-    "아홉 곳의 청빙게시판에 흩어진 교역자 청빙공고를 한곳에 모았습니다. 지역·교단·직분·근무 형태로 추려 보세요.",
+    "열 곳의 청빙게시판에 흩어진 교역자 청빙공고를 한곳에 모았습니다. 지역·교단·직분·근무 형태로 추려 보세요.",
   alternates: { canonical: "/jobs" },
 };
 
@@ -106,7 +106,7 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
         <div>
           <h1 className="text-3xl font-bold sm:text-4xl">청빙·구직</h1>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
-            아홉 곳의 청빙게시판에 흩어진 공고를 한곳에 모았습니다.
+            열 곳의 청빙게시판에 흩어진 공고를 한곳에 모았습니다.
             사역 내용과 연락처는 각 원문에 있습니다.
           </p>
         </div>

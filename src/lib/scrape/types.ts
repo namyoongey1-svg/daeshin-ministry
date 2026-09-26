@@ -9,7 +9,8 @@ export type SourceId =
   | "hapdong"
   | "kosin"
   | "kehc"
-  | "mtu";
+  | "mtu"
+  | "nambu";
 
 /**
  * 외부 청빙게시판에서 모아 오는 한 건.
