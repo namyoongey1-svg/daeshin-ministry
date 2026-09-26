@@ -4,9 +4,21 @@ import { baekseok } from "./sources/baekseok";
 import { godpeople } from "./sources/godpeople";
 import { minitries } from "./sources/minitries";
 import { puts } from "./sources/puts";
+import { hapdong } from "./sources/hapdong";
+import { kosin } from "./sources/kosin";
+import { kehc } from "./sources/kehc";
 import type { ScrapedPost, SourceAdapter, SourceId } from "./types";
 
-export const ADAPTERS: SourceAdapter[] = [godpeople, baekseok, aats, minitries, puts];
+export const ADAPTERS: SourceAdapter[] = [
+  godpeople,
+  baekseok,
+  aats,
+  minitries,
+  puts,
+  hapdong,
+  kosin,
+  kehc,
+];
 
 export function adapterFor(id: string): SourceAdapter | undefined {
   return ADAPTERS.find((a) => a.id === id);

@@ -56,6 +56,9 @@ const BOARD: Partial<Record<SourceId, Denomination>> = {
   baekseok: "예장 백석",
   aats: "예장 합동",
   puts: "예장 통합",
+  hapdong: "예장 합신",
+  kosin: "예장 고신",
+  kehc: "기독교대한성결교회",
 };
 
 /**

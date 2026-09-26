@@ -13,7 +13,7 @@ const hebrew = Noto_Serif_Hebrew({ variable: "--font-hebrew", subsets: ["hebrew"
 const SITE_URL = getSiteUrl();
 
 const DESCRIPTION =
-  "대신 교단 사역자를 위한 자리입니다. 갓피플·백석대·총신대 게시판에 흩어진 청빙공고를 한곳에 모으고, 구약 히브리어·신약 헬라어 원어 분석과 주보·설교·영상 준비 도구를 함께 씁니다.";
+  "대신 교단 사역자를 위한 자리입니다. 여덟 곳의 청빙게시판에 흩어진 공고를 한곳에 모으고, 구약 히브리어·신약 헬라어 원어 분석과 주보·설교·콘티 준비 도구를 함께 씁니다.";
 
 export const metadata: Metadata = {
   // 상대 경로로 적은 canonical·og 이미지가 이 주소를 기준으로 절대 경로가 된다.

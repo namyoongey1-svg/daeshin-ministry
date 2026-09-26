@@ -171,3 +171,16 @@ export function findChurchIn(text: string | null | undefined): string | null {
   const tail = m[1].trim().split(/\s+/).pop() ?? "";
   return tail.length >= 3 ? tail : m[1].trim();
 }
+
+/**
+ * 두 자리 연도로 적은 날짜를 편다. "26.09.26" → "2026-09-26"
+ *
+ * 기성 총회 게시판이 이렇게 적는다. 그냥 parseDate 에 넣으면 26년을 못 읽어
+ * 날짜가 통째로 비고, 그러면 새 공고 알림이 아무것도 못 보낸다.
+ */
+export function parseShortDate(text: string | null | undefined): string | null {
+  const m = (text ?? "").match(/^(\d{2})\.(\d{1,2})\.(\d{1,2})$/);
+  if (!m) return parseDate(text);
+  const [, yy, mm, dd] = m;
+  return `20${yy}-${mm.padStart(2, "0")}-${dd.padStart(2, "0")}`;
+}
