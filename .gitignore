@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Supabase 비밀번호 메모. 저장소가 공개라 올라가면 안 된다.
 supabase.txt
+
+# 조사하다 만든 일회용 스크립트. 남길 것이 아니다.
+scripts/tmp/
