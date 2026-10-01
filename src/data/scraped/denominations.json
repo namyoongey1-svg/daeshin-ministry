@@ -1374,6 +1374,56 @@
     "accepts": [],
     "acceptsAll": false
   },
+  "baekseok:59588": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59589": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59590": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59591": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59598": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59599": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59600": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59602": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59603": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59604": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
   "minitries:167946847": {
     "own": null,
     "accepts": [],
@@ -2332,6 +2382,11 @@
     "acceptsAll": false
   },
   "minitries:174893624": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:174902275": {
     "own": null,
     "accepts": [],
     "acceptsAll": false
