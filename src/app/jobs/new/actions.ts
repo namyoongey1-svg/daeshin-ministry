@@ -4,10 +4,13 @@ import { revalidatePath } from "next/cache";
 import { DENOMINATIONS } from "@/lib/denomination";
 import { EMPLOYMENT, POSITIONS } from "@/lib/jobs";
 import { createClient } from "@/lib/supabase/server";
+import type { PostedJob } from "@/lib/crosspost";
 
 export interface PostResult {
   error?: string;
   ok?: boolean;
+  /** 방금 올린 내용. 다른 게시판에 붙일 글을 만드는 데 쓴다. */
+  posted?: PostedJob;
 }
 
 const text = (form: FormData, key: string) => String(form.get(key) ?? "").trim();
@@ -120,5 +123,26 @@ export async function createJobPost(formData: FormData): Promise<PostResult> {
 
   revalidatePath("/jobs");
   revalidatePath("/jobs/new");
-  return { ok: true };
+  return {
+    ok: true,
+    posted: {
+      church: churchName,
+      denomination,
+      region,
+      address: text(formData, "address"),
+      pastor: text(formData, "pastor"),
+      title,
+      position,
+      employment,
+      department: text(formData, "department"),
+      duties,
+      payMin,
+      payMax,
+      payNote,
+      housing: formData.get("housing") === "on",
+      deadline,
+      contactName,
+      contactPhone,
+    },
+  };
 }

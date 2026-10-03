@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { RoleNav } from "./RoleNav";
+import { VisitCounter } from "./VisitCounter";
 import { Noto_Sans_KR, Noto_Serif, Noto_Serif_Hebrew } from "next/font/google";
 import { Logo } from "@/components/Logo";
 import { getSiteUrl } from "@/lib/site-url";
@@ -127,11 +128,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 말씀해 주시면 상의해 드립니다.
               </p>
             </div>
+            <div className="flex flex-col gap-2 sm:items-end">
+            <VisitCounter />
             <p className="text-xs leading-relaxed text-faint sm:text-right">
               원어 본문 SBLGNT (CC BY-SA 4.0)
               <br />
               OpenScriptures OSHB (CC BY 4.0)
             </p>
+            </div>
           </div>
         </footer>
       </body>

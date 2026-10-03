@@ -6,6 +6,7 @@ import { DENOMINATIONS } from "@/lib/denomination";
 import { EMPLOYMENT, POSITIONS } from "@/lib/jobs";
 import { SIDO } from "@/lib/region";
 import { createJobPost, type PostResult } from "./actions";
+import { CrossPost } from "./CrossPost";
 
 /*
   청빙공고를 직접 올리는 폼.
@@ -56,6 +57,7 @@ export function PostForm() {
 
   if (state.ok) {
     return (
+      <>
       <div className="mt-8 rounded-card border border-line bg-surface p-6">
         <h2 className="text-lg font-bold">공고를 올렸습니다.</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
@@ -70,6 +72,8 @@ export function PostForm() {
           </Link>
         </div>
       </div>
+      {state.posted && <CrossPost job={state.posted} />}
+      </>
     );
   }
 
