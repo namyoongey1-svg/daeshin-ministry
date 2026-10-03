@@ -91,6 +91,18 @@ jobs:
           NEXT_PUBLIC_SITE_URL: https://daeshin-ministry.vercel.app
         run: npm run notify
 
+      # 어제 올라온 공고를 분석해 스레드에 올린다. 수집이 실패한 날은 돌리지
+      # 않는다 — 반쯤 모인 숫자를 공개적으로 올리게 된다. 토큰이 없으면 스스로
+      # 건너뛰고, 하루에 한 번만 올린다.
+      - name: 스레드 분석글
+        if: steps.scrape.outcome == 'success'
+        continue-on-error: true
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://pkjmvceeafeekhxxexcn.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+        run: npm run threads
+
       - name: 변경분 커밋
         if: always()
         run: |
