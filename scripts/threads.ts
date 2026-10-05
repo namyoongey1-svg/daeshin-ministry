@@ -24,6 +24,8 @@ import { applyDenominations, applyLoosePlaces, buildListings } from "@/lib/scrap
 import type { ScrapedPost } from "@/lib/scrape/types";
 
 const API = "https://graph.threads.net";
+/** 주제 태그. 1~50자, 마침표와 & 는 쓸 수 없다. */
+const TOPIC = "청빙";
 const DIR = path.join(process.cwd(), "src", "data", "scraped");
 const DRY = process.argv.includes("--dry");
 const FORCE = process.argv.includes("--force");
@@ -173,6 +175,9 @@ async function publish(token: string, text: string): Promise<string> {
   const container = await call("POST", "/v1.0/me/threads", {
     media_type: "TEXT",
     text,
+    // 주제 태그. 없으면 스레드가 "기독교"처럼 넓게 묶는데, 이 분야에서 반응이
+    // 큰 글들은 "청빙"·"부교역자" 태그에 모여 있다. 찾는 사람이 거기서 찾는다.
+    topic_tag: TOPIC,
     access_token: token,
   });
 
