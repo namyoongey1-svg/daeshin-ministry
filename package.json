@@ -12,7 +12,8 @@
     "notify": "tsx scripts/notify.ts",
     "geocode": "tsx scripts/geocode.ts",
     "denominations": "tsx scripts/denominations.ts",
-    "threads": "tsx scripts/threads.ts"
+    "threads": "tsx scripts/threads.ts",
+    "manna-threads": "tsx scripts/manna-threads.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

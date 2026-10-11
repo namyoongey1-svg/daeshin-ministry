@@ -1,0 +1,58 @@
+name: 마나 게임 홍보글
+
+# 로블록스 게임 "마나 수집 시뮬레이터" 홍보 글을 스레드에 하루 한 편 올린다.
+#
+# 청빙공고 수집(scrape.yml)과 **일부러 분리했다.** 올리는 계정이 다르고,
+# 수집이 실패한 날에도 홍보는 올라가야 하며, 둘이 엮이면 한쪽 고장이
+# 다른 쪽을 멈춘다.
+#
+# 처음 한 번 넣어야 할 Secret: MANNA_THREADS_ACCESS_TOKEN
+# (게임용 스레드 계정의 토큰. 청빙 계정 토큰과 다른 값이다.)
+
+on:
+  schedule:
+    # 매일 11:00 UTC = 20:00 KST = 미국 동부 오전 6~7시.
+    # 해외 유저가 목표라 한국 아침이 아니라 **미국 아침**에 맞췄다.
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+    inputs:
+      dry:
+        description: "올리지 않고 글만 확인"
+        type: boolean
+        default: false
+
+# 같은 글이 두 번 올라가지 않게 한 번에 하나만 돈다.
+concurrency:
+  group: manna-threads
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # 글 길이부터 본다. 500자를 넘는 글이 있으면 여기서 걸린다.
+      - name: 글 묶음 검사
+        run: npm run manna-threads -- --all
+
+      - name: 스레드에 올리기
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://pkjmvceeafeekhxxexcn.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          MANNA_THREADS_ACCESS_TOKEN: ${{ secrets.MANNA_THREADS_ACCESS_TOKEN }}
+        run: |
+          if [ "${{ inputs.dry }}" = "true" ]; then
+            npm run manna-threads -- --dry
+          else
+            npm run manna-threads
+          fi
