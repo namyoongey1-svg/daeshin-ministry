@@ -13,7 +13,8 @@
     "geocode": "tsx scripts/geocode.ts",
     "denominations": "tsx scripts/denominations.ts",
     "threads": "tsx scripts/threads.ts",
-    "manna-threads": "tsx scripts/manna-threads.ts"
+    "manna-threads": "tsx scripts/manna-threads.ts",
+    "manna-feedback": "tsx scripts/manna-feedback.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
