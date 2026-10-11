@@ -7,7 +7,13 @@
  *   npm run threads -- --dry --weekly           -- 주간 요약도 만들어 본다
  *   npm run threads -- --dry --at 2026-10-05    -- 그날 아침인 셈 치고 만든다
  *
+ * 화·목요일은 숫자 글, 나머지 요일은 숫자 없는 이야기 글을 올린다.
  * 월요일 아침에는 지난주(월~일) 요약을 한 편 더 올린다.
+ *
+ * 그날 운영자가 하고 싶은 말이나 소개할 답글은 src/data/threads-notes.json 에
+ * 올리는 날짜로 적어 둔다. GitHub 에서 그 파일을 고치면 다음 날 아침 글에 붙는다.
+ *
+ *   { "2026-10-14": { "note": "운영자 한마디", "quote": "답글 내용(이름은 빼고)" } }
  *
  * 매일 아침 수집이 끝난 뒤 GitHub Actions 가 돌린다. 수집이 실패한 날에는
  * 돌리지 않는다 — 반쯤 모인 숫자를 공개적으로 올리게 되기 때문이다.
@@ -19,7 +25,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { buildDailyReport, buildWeeklyReport, isKstMonday } from "@/lib/daily-report";
+import { buildDailyReport, buildWeeklyReport, isKstMonday, kstDay, type DayNote } from "@/lib/daily-report";
 import { applyDenominations, applyLoosePlaces, buildListings } from "@/lib/scrape/listings";
 import type { ScrapedPost } from "@/lib/scrape/types";
 
@@ -111,9 +117,20 @@ async function main() {
   const open = listings.filter((l) => !l.closedAt).length;
 
   // 올릴 글을 모은다. 날마다 하루치 하나, 월요일엔 지난주 요약을 하나 더.
-  const daily = buildDailyReport(listings, open, NOW);
-  const jobs: { kind: string; key: string; mark: string; count: number; text: string }[] = [
-    { kind: "일간", key: "threads_last_day", mark: daily.day, count: daily.count, text: daily.text },
+  // 운영자의 한마디는 올리는 날(오늘) 날짜로 찾는다.
+  const notes = await readFile(path.join(process.cwd(), "src", "data", "threads-notes.json"), "utf8")
+    .then((t) => JSON.parse(t) as Record<string, DayNote>)
+    .catch(() => ({}) as Record<string, DayNote>);
+  const daily = buildDailyReport(listings, open, NOW, notes[kstDay(0, NOW)]);
+  const jobs: { kind: string; key: string; mark: string; count: number; needsData: boolean; text: string }[] = [
+    {
+      kind: daily.kind === "stats" ? "일간" : "이야기",
+      key: "threads_last_day",
+      mark: daily.day,
+      count: daily.count,
+      needsData: daily.kind === "stats",
+      text: daily.text,
+    },
   ];
   if (isKstMonday(NOW) || WEEKLY) {
     const weekly = buildWeeklyReport(listings, open, NOW);
@@ -122,6 +139,7 @@ async function main() {
       key: "threads_last_week",
       mark: weekly.weekStart,
       count: weekly.count,
+      needsData: true,
       text: weekly.text,
     });
   }
@@ -154,7 +172,8 @@ async function main() {
 
   for (const job of jobs) {
     // 0건이면 수집이 덜 됐거나 명절이다. 어느 쪽이든 "0건"을 공개적으로 올릴 일은 아니다.
-    if (job.count === 0) {
+    // 이야기 글은 숫자를 쓰지 않으므로 공고 수와 상관없이 올린다.
+    if (job.needsData && job.count === 0) {
       console.log(`${job.kind}: 공고가 없어 올리지 않습니다.`);
       continue;
     }
