@@ -1774,6 +1774,61 @@
     "accepts": [],
     "acceptsAll": false
   },
+  "baekseok:59910": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59911": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59912": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59913": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59946": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59947": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59949": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59950": {
+    "own": "예장 통합",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59951": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59952": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:59953": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
   "minitries:167946847": {
     "own": null,
     "accepts": [],
@@ -2828,6 +2883,16 @@
   },
   "minitries:175080959": {
     "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175090364": {
+    "own": "기독교대한성결교회",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175092875": {
+    "own": "예장 통합",
     "accepts": [],
     "acceptsAll": false
   }
