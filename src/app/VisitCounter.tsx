@@ -42,6 +42,29 @@ function firstVisitToday(): boolean {
   }
 }
 
+/**
+ * 어디서 왔는가. 주소는 보내지 않고 이름 하나만 보낸다.
+ * 카카오톡 안에서 연 링크는 referrer 가 없어 "direct"로 잡힌다.
+ */
+function referrerKind(): string {
+  let host = "";
+  try {
+    host = new URL(document.referrer).hostname;
+  } catch {
+    return "direct";
+  }
+  if (!host || host === location.hostname) return "direct";
+  if (/threads\.(com|net)$/.test(host)) return "threads";
+  if (/facebook\.com$|fb\.me$|fb\.com$/.test(host)) return "facebook";
+  if (/instagram\.com$/.test(host)) return "instagram";
+  if (/kakao\.com$|kakao\.co\.kr$/.test(host)) return "kakao";
+  if (/google\./.test(host)) return "google";
+  if (/naver\.com$/.test(host)) return "naver";
+  if (/daum\.net$/.test(host)) return "daum";
+  if (/bing\.com$/.test(host)) return "bing";
+  return "other";
+}
+
 const n = (v: number) => Number(v).toLocaleString("ko-KR");
 
 export function VisitCounter() {
@@ -59,7 +82,14 @@ export function VisitCounter() {
     }
 
     (async () => {
-      await supabase.rpc("record_visit", { new_visitor: firstVisitToday() });
+      const newVisitor = firstVisitToday();
+      // 출처는 그날 처음 왔을 때만 뜻이 있다. 두 번째부터는 사이트 안에서 옮겨 다니는 것이다.
+      const { error } = await supabase.rpc("record_visit", {
+        new_visitor: newVisitor,
+        ref: newVisitor ? referrerKind() : null,
+      });
+      // 두 인자짜리 함수가 아직 없으면(site_referrers.sql 적용 전) 옛 꼴로 센다.
+      if (error) await supabase.rpc("record_visit", { new_visitor: newVisitor });
       const { data } = await supabase.rpc("site_stats");
       const row = Array.isArray(data) ? data[0] : data;
       if (alive && row) setStats(row as Stats);

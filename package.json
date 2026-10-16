@@ -14,7 +14,8 @@
     "denominations": "tsx scripts/denominations.ts",
     "threads": "tsx scripts/threads.ts",
     "manna-threads": "tsx scripts/manna-threads.ts",
-    "manna-feedback": "tsx --env-file-if-exists=.env.local scripts/manna-feedback.ts"
+    "manna-feedback": "tsx --env-file-if-exists=.env.local scripts/manna-feedback.ts",
+    "visits": "tsx --env-file-if-exists=.env.local scripts/visits.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
