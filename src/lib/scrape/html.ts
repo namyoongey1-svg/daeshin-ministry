@@ -4,11 +4,21 @@ const ENTITIES: Record<string, string> = {
   amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", middot: "·",
 };
 
-export function decodeEntities(input: string): string {
+function decodeOnce(input: string): string {
   return input
     .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
     .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
     .replace(/&([a-z]+);/gi, (m, name) => ENTITIES[name.toLowerCase()] ?? m);
+}
+
+/**
+ * 장신대처럼 한 번 감싼 것을 또 감싸 보내는 곳이 있다 (`&amp;#12314;`).
+ * 한 번 풀고도 엔티티 꼴이 남으면 한 번 더 푼다. 제목에 "&amp;lt;"를 그대로
+ * 보이려는 글은 없다고 봐도 된다.
+ */
+export function decodeEntities(input: string): string {
+  const once = decodeOnce(input);
+  return /&(#\d+|#x[0-9a-f]+|[a-z]+);/i.test(once) ? decodeOnce(once) : once;
 }
 
 /** 태그를 걷어내고 공백을 한 칸으로 정리한다. */
