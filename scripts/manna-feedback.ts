@@ -220,7 +220,12 @@ async function main() {
   if (!token) {
     say("## 스레드");
     say();
-    say("토큰이 없어 반응을 보지 못했습니다.");
+    // 토큰은 청빙 쪽이 날마다 연장해 Supabase 에 넣어 둔다. 여기서 못 찾으면 대개 열쇠가 없어서다.
+    say(
+      db
+        ? "토큰이 없어 반응을 보지 못했습니다."
+        : "토큰이 없어 반응을 보지 못했습니다 — .env.local 에 SUPABASE_SERVICE_ROLE_KEY 가 없어 저장된 토큰을 읽지 못했습니다.",
+    );
     say();
   } else {
     try {
@@ -268,6 +273,8 @@ async function main() {
     say("(이번 주 숫자를 저장했습니다. 다음 주에 증감으로 보입니다.)");
   } else if (PEEK) {
     say("(--peek 라 저장하지 않았습니다.)");
+  } else if (!db) {
+    say("(SUPABASE_SERVICE_ROLE_KEY 가 없어 이번 주 숫자를 저장하지 못했습니다. 다음 주에도 증감이 안 나옵니다.)");
   }
 }
 
