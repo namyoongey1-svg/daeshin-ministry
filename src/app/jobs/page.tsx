@@ -5,6 +5,7 @@ import { EMPLOYMENT, POSITIONS, type Employment } from "@/lib/jobs";
 import { SOURCE_LABELS, jobId, queryJobs, type JobListing } from "@/lib/scrape/store";
 import { DENOMINATIONS, describeAccepts } from "@/lib/denomination";
 import { ADAPTERS } from "@/lib/scrape";
+import { kstToday, readSignals } from "@/lib/job-signals";
 
 export const metadata: Metadata = {
   title: "청빙·구직",
@@ -57,6 +58,7 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
 
   const { posts, total, all, departments, collectedAt, places, denominationKnown } =
     await queryJobs(filter);
+  const today = kstToday();
   const pageCount = Math.max(1, Math.ceil(total / PER_PAGE));
   const current = Math.min(page, pageCount);
   const visible = posts.slice((current - 1) * PER_PAGE, current * PER_PAGE);
@@ -179,7 +181,7 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
       ) : (
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {visible.map((post) => (
-            <JobCard key={`${post.source}:${post.externalId}`} post={post} linkTo={linkTo} />
+            <JobCard key={`${post.source}:${post.externalId}`} post={post} linkTo={linkTo} today={today} />
           ))}
         </ul>
       )}
@@ -212,10 +214,16 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
 function JobCard({
   post,
   linkTo,
+  today,
 }: {
   post: JobListing;
   linkTo: (changes: Record<string, string>) => string;
+  today: string;
 }) {
+  // 교회의 1년 청빙 횟수와 다른 게시판은 카드의 다른 자리에 이미 있다.
+  const badges = readSignals(post, (src) => SOURCE_LABELS[src], today).filter(
+    (s) => s.kind !== "church" && s.kind !== "alsoOn"
+  );
   return (
     <li className="group flex flex-col rounded-card border border-line bg-surface p-5 transition-all hover:border-line-strong hover:shadow-card">
       <div className="flex items-start justify-between gap-3">
@@ -267,6 +275,29 @@ function JobCard({
       >
         {post.title}
       </Link>
+
+      {/*
+        공고에는 안 적혀 있지만 모아 두면 보이는 것. 오래 떠 있거나 여러 번
+        올라온 자리는 그만큼 뽑기 어려운 자리일 가능성이 커서, 제목 바로
+        아래에서 먼저 보인다. 규칙은 상세 화면과 같은 곳(job-signals)에 있다.
+      */}
+      {badges.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {badges.map((b) => (
+            <span
+              key={b.kind}
+              title={b.long}
+              className={`rounded-pill px-2 py-0.5 text-[0.7rem] font-semibold ${
+                b.tone === "warn"
+                  ? "bg-highlight-soft text-highlight ring-1 ring-inset ring-highlight/25"
+                  : "bg-sunken text-muted ring-1 ring-inset ring-line"
+              }`}
+            >
+              {b.short}
+            </span>
+          ))}
+        </div>
+      )}
 
       {(post.positions.length > 0 || post.departments.length > 0) && (
         <div className="mt-3 flex flex-wrap gap-1.5">
@@ -327,14 +358,6 @@ function JobCard({
           </a>
         ))}
         {post.postedAt && <span>· {formatDate(post.postedAt)}</span>}
-        {post.repostCount > 1 && (
-          <span
-            className="text-highlight"
-            title="같은 공고가 여러 번 올라왔습니다. 아직 사람을 못 구했을 가능성이 큽니다."
-          >
-            · 재게시 {post.repostCount}회
-          </span>
-        )}
         <span className="ml-auto whitespace-nowrap">
           {post.deadlineText && post.deadlineText !== "채용시까지"
             ? `마감 ${post.deadlineText}`

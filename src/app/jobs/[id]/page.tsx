@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import { describeAccepts } from "@/lib/denomination";
 import type { Employment } from "@/lib/jobs";
+import { daysBetween, kstToday, readSignals } from "@/lib/job-signals";
 import { placeKey } from "@/lib/region";
 import { SOURCE_LABELS, findJob, jobId, type JobListing } from "@/lib/scrape/store";
 import { ShareButton } from "./ShareButton";
@@ -23,15 +24,6 @@ const EMPLOYMENT_STYLE: Record<Employment, string> = {
   파트: "bg-highlight-soft text-highlight ring-1 ring-inset ring-highlight/25",
   협동: "bg-sunken text-muted ring-1 ring-inset ring-line-strong",
 };
-
-/** 한국 날짜. 서버는 UTC 라 그대로 두면 아침 아홉 시까지 어제다. */
-function kstToday(): string {
-  return new Date(Date.now() + 9 * 3600_000).toISOString().slice(0, 10);
-}
-
-function daysBetween(from: string, to: string): number {
-  return Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
-}
 
 function longDate(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
@@ -85,26 +77,8 @@ export default async function JobPage({ params }: PageProps<"/jobs/[id]">) {
   const { job, siblings, pin } = found;
   const today = kstToday();
   const sincePosted = job.postedAt ? daysBetween(job.postedAt, today) : null;
-  const deadlinePassed = Boolean(job.deadline && job.deadline < today);
+  const signals = readSignals(job, (src) => SOURCE_LABELS[src], today);
   const accepts = describeAccepts(job);
-
-  // 목록에는 흩어져 있던 신호를 한곳에 모은다. 해석은 보는 사람 몫이라
-  // "가능성이 큽니다"까지만 말한다.
-  const signals: { text: string; tone: "warn" | "info" }[] = [];
-  if (job.closedAt) {
-    signals.push({ text: `${longDate(job.closedAt.slice(0, 10))}에 게시판에서 내려갔습니다. 사람을 구했거나 글쓴이가 지웠을 수 있습니다.`, tone: "warn" });
-  } else if (deadlinePassed) {
-    signals.push({ text: `적어 둔 마감일(${job.deadlineText})이 지났지만 아직 게시판에 남아 있습니다. 지원 전에 원문에서 확인하세요.`, tone: "warn" });
-  }
-  if (job.repostCount >= 2) {
-    signals.push({ text: `같은 공고가 ${job.repostCount}번 올라왔습니다. 아직 사람을 못 구했을 가능성이 큽니다.`, tone: "info" });
-  }
-  if (job.churchPostings >= 3) {
-    signals.push({ text: `이 교회는 최근 1년 동안 서로 다른 공고를 ${job.churchPostings}건 올렸습니다. 부서를 늘리는 중일 수도, 사람이 자주 바뀌는 중일 수도 있습니다.`, tone: "info" });
-  }
-  if (job.alsoOn.length > 0) {
-    signals.push({ text: `${job.alsoOn.map((a) => SOURCE_LABELS[a.source]).join("·")}에도 같은 자리가 올라와 있습니다. 게시판마다 적어 둔 내용이 달라, 연락처가 한쪽에만 있는 일이 있습니다.`, tone: "info" });
-  }
 
   const facts: [string, React.ReactNode][] = [
     ["직분", job.positions.length ? job.positions.map((p) => (
@@ -185,9 +159,9 @@ export default async function JobPage({ params }: PageProps<"/jobs/[id]">) {
           <h2 className="text-sm font-bold">이 공고를 읽는 법</h2>
           <ul className="mt-3 flex flex-col gap-2 text-sm leading-relaxed">
             {signals.map((s) => (
-              <li key={s.text} className={`flex gap-2 ${s.tone === "warn" ? "text-highlight" : "text-muted"}`}>
+              <li key={s.kind} className={`flex gap-2 ${s.tone === "warn" ? "text-highlight" : "text-muted"}`}>
                 <span aria-hidden="true">•</span>
-                <span>{s.text}</span>
+                <span>{s.long}</span>
               </li>
             ))}
           </ul>
