@@ -25,7 +25,20 @@ function Shell({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default async function AlertsPage() {
+function one(v: string | string[] | undefined): string {
+  return typeof v === "string" ? v : "";
+}
+
+export default async function AlertsPage({ searchParams }: PageProps<"/alerts">) {
+  const params = await searchParams;
+  // 목록에서 "이 조건으로 알림 받기"를 눌러 온 사람의 조건. 비어 있으면 그냥 연다.
+  const preset = {
+    region: one(params.region),
+    position: one(params.position),
+    employment: one(params.employment),
+    denomination: one(params.denomination),
+  };
+  const presetQuery = new URLSearchParams(Object.entries(preset).filter(([, v]) => v)).toString();
   if (!getSupabaseEnv()) {
     return (
       <Shell>
@@ -43,10 +56,19 @@ export default async function AlertsPage() {
       <Shell>
         <p className="mt-8 rounded-card border border-dashed border-line p-8 text-center text-sm text-muted">
           알림을 받으려면{" "}
-          <Link href="/login" className="text-accent underline-offset-4 hover:underline">
+          <Link
+            href={`/login?next=${encodeURIComponent(`/alerts${presetQuery ? `?${presetQuery}` : ""}`)}`}
+            className="text-accent underline-offset-4 hover:underline"
+          >
             로그인
           </Link>
           이 필요합니다.
+          {presetQuery && (
+            <>
+              <br />
+              <span className="text-faint">고르신 조건은 로그인 뒤에도 그대로 있습니다.</span>
+            </>
+          )}
         </p>
       </Shell>
     );
@@ -89,6 +111,7 @@ export default async function AlertsPage() {
           matching: counts.get(alert.id) ?? 0,
         }))}
         email={session.email}
+        preset={preset}
       />
     </Shell>
   );

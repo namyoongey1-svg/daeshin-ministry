@@ -6,6 +6,7 @@ import { SOURCE_LABELS, jobId, queryJobs, type JobListing } from "@/lib/scrape/s
 import { DENOMINATIONS, describeAccepts } from "@/lib/denomination";
 import { ADAPTERS } from "@/lib/scrape";
 import { kstToday, readSignals } from "@/lib/job-signals";
+import { parseKeys } from "@/lib/region";
 
 export const metadata: Metadata = {
   title: "청빙·구직",
@@ -59,6 +60,12 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
   const { posts, total, all, departments, collectedAt, places, denominationKnown } =
     await queryJobs(filter);
   const today = kstToday();
+  // 알림은 시·도 하나와 직분·근무·교단을 받는다. 여러 지역을 골랐으면 첫 곳만.
+  const alertQuery = new URLSearchParams();
+  const firstSido = parseKeys(filter.region)[0]?.sido;
+  if (firstSido) alertQuery.set("region", firstSido);
+  for (const k of ["position", "employment", "denomination"] as const) if (filter[k]) alertQuery.set(k, filter[k]);
+  const alertHref = `/alerts${alertQuery.size ? `?${alertQuery}` : ""}`;
   const pageCount = Math.max(1, Math.ceil(total / PER_PAGE));
   const current = Math.min(page, pageCount);
   const visible = posts.slice((current - 1) * PER_PAGE, current * PER_PAGE);
@@ -168,6 +175,19 @@ export default async function JobsPage({ searchParams }: PageProps<"/jobs">) {
           <b className="font-medium">확실히 다른</b> 공고만 뺐고, 모르는 공고는
           남겨 두었습니다 — 숨겼다가 정작 맞는 자리를 놓치면 안 되기 때문입니다.
         </p>
+      )}
+
+      {/*
+        조건을 고른 사람은 다음에도 같은 조건으로 찾아올 사람이다. 알림 화면은
+        있는데 들어가는 문이 없었다. 조건을 그대로 들고 가게 한다.
+      */}
+      {alertQuery.size > 0 && total > 0 && (
+        <div className="mt-4 flex flex-wrap items-center gap-3 rounded-card border border-accent/30 bg-accent-soft px-4 py-3 text-sm">
+          <span className="text-foreground">이 조건으로 새 공고가 올라오면 아침에 메일로 알려 드릴까요?</span>
+          <Link href={alertHref} className="ml-auto rounded-pill bg-accent px-4 py-1.5 text-xs font-semibold text-background transition-colors hover:bg-accent-hover">
+            이 조건으로 알림 받기
+          </Link>
+        </div>
       )}
 
       {total === 0 ? (

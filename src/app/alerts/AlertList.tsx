@@ -19,10 +19,13 @@ const field =
 export default function AlertList({
   alerts,
   email,
+  preset,
 }: {
   alerts: AlertRow[];
   /** 카카오로 들어왔고 이메일 동의를 안 했으면 없다. */
   email: string | null;
+  /** 목록에서 들고 온 조건. 칸을 미리 채운다. */
+  preset?: { region: string; position: string; employment: string; denomination: string };
 }) {
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -47,19 +50,19 @@ export default function AlertList({
         </p>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          <select name="region" className={field} defaultValue="">
+          <select name="region" className={field} defaultValue={preset?.region ?? ""}>
             <option value="">지역 전체</option>
             {REGIONS.map((r) => <option key={r} value={r}>{r}</option>)}
           </select>
-          <select name="denomination" className={field} defaultValue="">
+          <select name="denomination" className={field} defaultValue={preset?.denomination ?? ""}>
             <option value="">교단 전체</option>
             {DENOMINATIONS.map((d) => <option key={d} value={d}>{d}</option>)}
           </select>
-          <select name="position" className={field} defaultValue="">
+          <select name="position" className={field} defaultValue={preset?.position ?? ""}>
             <option value="">직분 전체</option>
             {POSITIONS.map((p) => <option key={p} value={p}>{p}</option>)}
           </select>
-          <select name="employment" className={field} defaultValue="">
+          <select name="employment" className={field} defaultValue={preset?.employment ?? ""}>
             <option value="">근무 형태 전체</option>
             {EMPLOYMENT.map((e) => <option key={e} value={e}>{e}</option>)}
           </select>
