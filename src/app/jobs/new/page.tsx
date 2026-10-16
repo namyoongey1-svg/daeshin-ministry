@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getSession, isApproved } from "@/lib/auth";
+import { getSession, isAdmin, isApproved } from "@/lib/auth";
+import { createJobPost } from "./actions";
 import { PostForm } from "./PostForm";
 
 export const metadata: Metadata = {
@@ -35,6 +36,26 @@ export default async function NewJobPage() {
         있습니다.
       </p>
 
+      {/*
+        교회 쪽은 가입까지 가지 않는 일이 많다. 로그인 없이 접수하는 길을 먼저
+        보여 주고, 사역자가 담임목사님께 그 주소만 보내면 되게 한다.
+      */}
+      <p className="mt-4 max-w-xl rounded-card border border-line bg-surface px-4 py-3 text-sm leading-relaxed">
+        <b>가입 없이 보내려면</b>{" "}
+        <Link href="/jobs/submit" className="text-accent underline-offset-4 hover:underline">
+          /jobs/submit
+        </Link>
+        <span className="text-muted"> — 교회 담당자에게 이 주소를 보내 주세요. 운영진이 확인한 뒤 올립니다.</span>
+        {isAdmin(session) && (
+          <>
+            {" "}
+            <Link href="/jobs/submissions" className="text-accent underline-offset-4 hover:underline">
+              접수된 공고 보기
+            </Link>
+          </>
+        )}
+      </p>
+
       {!session ? (
         <Gate title="로그인이 필요합니다">
           공고를 올린 분이 누구인지 남아야 합니다.{" "}
@@ -55,7 +76,7 @@ export default async function NewJobPage() {
           <span className="text-faint">승인되면 이 화면에서 바로 올리실 수 있습니다.</span>
         </Gate>
       ) : (
-        <PostForm />
+        <PostForm action={createJobPost} mode="post" />
       )}
     </div>
   );

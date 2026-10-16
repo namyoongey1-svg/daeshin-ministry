@@ -5,7 +5,7 @@ import { useActionState } from "react";
 import { DENOMINATIONS } from "@/lib/denomination";
 import { EMPLOYMENT, POSITIONS } from "@/lib/jobs";
 import { SIDO } from "@/lib/region";
-import { createJobPost, type PostResult } from "./actions";
+import type { PostResult } from "./actions";
 import { CrossPost } from "./CrossPost";
 
 /*
@@ -49,11 +49,38 @@ function Select({ name, options, placeholder }: { name: string; options: readonl
   );
 }
 
-export function PostForm() {
+export function PostForm({
+  action: submit,
+  mode,
+}: {
+  action: (formData: FormData) => Promise<PostResult>;
+  /** post 는 회원이 바로 올리는 것, submit 은 로그인 없이 접수하는 것 */
+  mode: "post" | "submit";
+}) {
   const [state, action, pending] = useActionState(
-    async (_prev: PostResult, formData: FormData) => createJobPost(formData),
+    async (_prev: PostResult, formData: FormData) => submit(formData),
     {}
   );
+
+  if (state.ok && mode === "submit") {
+    return (
+      <div className="mt-8 rounded-card border border-line bg-surface p-6">
+        <h2 className="text-lg font-bold">접수했습니다.</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted">
+          운영진이 확인한 뒤 목록에 올립니다. 보통 하루 안에 올라갑니다. 연락처는
+          승인 회원에게만 보입니다.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          <Link href="/jobs" className="rounded-pill bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85">
+            목록 보기
+          </Link>
+          <Link href="/jobs/submit" className="rounded-pill border border-line px-5 py-2.5 text-sm font-medium transition-colors hover:border-line-strong">
+            하나 더 보내기
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   if (state.ok) {
     return (
@@ -79,6 +106,10 @@ export function PostForm() {
 
   return (
     <form action={action} className="mt-8 flex flex-col gap-8">
+      {/* 봇 거르기. 사람에게는 안 보이는 칸이라 비어 있어야 한다. */}
+      {mode === "submit" && (
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+      )}
       <section>
         <h2 className="text-lg font-bold">교회</h2>
         <p className="mt-1 text-xs leading-relaxed text-faint">
@@ -195,7 +226,7 @@ export function PostForm() {
           disabled={pending}
           className="rounded-pill bg-accent px-6 py-3 text-sm font-semibold text-background transition-colors hover:bg-accent-hover disabled:opacity-50"
         >
-          {pending ? "올리는 중…" : "공고 올리기"}
+          {pending ? (mode === "submit" ? "보내는 중…" : "올리는 중…") : mode === "submit" ? "공고 보내기" : "공고 올리기"}
         </button>
       </div>
     </form>
