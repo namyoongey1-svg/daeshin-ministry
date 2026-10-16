@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { RolePicker } from "./RolePicker";
-import { SOURCE_LABELS, queryJobs } from "@/lib/scrape/store";
+import { SOURCE_LABELS, jobId, queryJobs } from "@/lib/scrape/store";
 
 const TOOLS = [
   {
@@ -97,7 +97,7 @@ export default async function Home() {
           {recent.map((post) => (
             <li key={`${post.source}:${post.externalId}`}>
               <Link
-                href="/jobs"
+                href={`/jobs/${jobId(post)}`}
                 className="flex h-full flex-col rounded-card border border-line bg-surface p-4 transition-all hover:border-line-strong hover:shadow-card"
               >
                 <div className="flex items-center justify-between gap-2">

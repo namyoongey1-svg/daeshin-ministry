@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
     "/tools/original/lemma": ["./src/data/**/*.json"],
     "/": ["./src/data/scraped/*.json"],
     "/jobs": ["./src/data/scraped/*.json"],
+    "/jobs/[id]": ["./src/data/scraped/*.json"],
+    "/sitemap.xml": ["./src/data/scraped/*.json"],
   },
 };
 

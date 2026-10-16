@@ -2,7 +2,7 @@ import Link from "next/link";
 import { RegionPicker } from "./RegionPicker";
 import type { Metadata } from "next";
 import { EMPLOYMENT, POSITIONS, type Employment } from "@/lib/jobs";
-import { SOURCE_LABELS, queryJobs, type JobListing } from "@/lib/scrape/store";
+import { SOURCE_LABELS, jobId, queryJobs, type JobListing } from "@/lib/scrape/store";
 import { DENOMINATIONS, describeAccepts } from "@/lib/denomination";
 import { ADAPTERS } from "@/lib/scrape";
 
@@ -260,14 +260,13 @@ function JobCard({
         )}
       </div>
 
-      <a
-        href={post.url}
-        target="_blank"
-        rel="noopener noreferrer"
+      {/* 제목은 우리 상세 화면으로 간다. 거기서 원문으로 나간다 — 공고 하나를 링크로 보낼 수 있어야 해서다. */}
+      <Link
+        href={`/jobs/${jobId(post)}`}
         className="mt-3 line-clamp-2 text-sm leading-relaxed text-foreground/90 underline-offset-4 hover:text-accent hover:underline"
       >
         {post.title}
-      </a>
+      </Link>
 
       {(post.positions.length > 0 || post.departments.length > 0) && (
         <div className="mt-3 flex flex-wrap gap-1.5">
@@ -341,6 +340,15 @@ function JobCard({
             ? `마감 ${post.deadlineText}`
             : "채용 시까지"}
         </span>
+        <a
+          href={post.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whitespace-nowrap font-medium text-accent underline-offset-4 hover:underline"
+          title="원문 게시판으로 갑니다"
+        >
+          원문 ↗
+        </a>
       </div>
     </li>
   );
