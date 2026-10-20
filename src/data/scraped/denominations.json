@@ -1869,6 +1869,66 @@
     "accepts": [],
     "acceptsAll": false
   },
+  "baekseok:60015": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60016": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60017": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60018": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60019": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60021": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60022": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60023": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:60024": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60025": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60026": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:60027": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
   "minitries:167946847": {
     "own": null,
     "accepts": [],
@@ -2947,6 +3007,11 @@
     "acceptsAll": true
   },
   "minitries:175153418": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175173695": {
     "own": null,
     "accepts": [],
     "acceptsAll": false
