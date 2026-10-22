@@ -179,6 +179,28 @@ export async function getChapter(osis: string, chapter: number): Promise<Verse[]
   return out;
 }
 
+/* ---------------------------- 라틴어 ---------------------------- */
+
+interface LatinFile { osis: string; v: Record<string, string> }
+const latinCache = new Map<string, Promise<LatinFile>>();
+
+/**
+ * 불가타 한 절. 형태소 데이터가 없어 글만 돌려준다.
+ * 절 번호는 불가타 것 그대로라 시편은 대개 하나 어긋난다.
+ */
+export async function getLatinVerse(osis: string, chapter: number, verse: number): Promise<string | null> {
+  const book = findBook(osis);
+  if (!book) return null;
+  let hit = latinCache.get(book.osis);
+  if (!hit) {
+    hit = readFile(path.join(DATA, "bible", "lat", `${book.osis}.json`), "utf8")
+      .then((t) => JSON.parse(t) as LatinFile)
+      .catch(() => ({ osis: book.osis, v: {} }));
+    latinCache.set(book.osis, hit);
+  }
+  return (await hit).v[`${chapter}:${verse}`] ?? null;
+}
+
 /* ---------------------------- 용례 검색 ---------------------------- */
 
 export interface Occurrence {

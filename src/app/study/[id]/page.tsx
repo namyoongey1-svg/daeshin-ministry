@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import VerseReader from "@/components/VerseReader";
 import { getSession } from "@/lib/auth";
-import { getVerse } from "@/lib/bible/data";
+import { getLatinVerse, getVerse } from "@/lib/bible/data";
 import type { Verse } from "@/lib/bible/types";
 import { passageFromRow, type StudyRow } from "@/lib/study";
 import { createClient } from "@/lib/supabase/server";
@@ -42,10 +42,16 @@ export default async function StudyPage({ params }: PageProps<"/study/[id]">) {
 
   const passage = passageFromRow(study);
   const verses: Verse[] = [];
+  // 라틴어 스터디는 불가타를 위에, 원어 파싱을 아래에 둔다. 퀴즈는 원어로 낸다.
+  const latin = new Map<number, string>();
   if (passage) {
     for (let v = passage.from; v <= passage.to; v++) {
       const verse = await getVerse(passage.book.osis, passage.chapter, v);
       if (verse) verses.push(verse);
+      if (study.lang === "lat") {
+        const text = await getLatinVerse(passage.book.osis, passage.chapter, v);
+        if (text) latin.set(v, text);
+      }
     }
   }
   const mine = session?.userId === study.created_by;
@@ -92,8 +98,12 @@ export default async function StudyPage({ params }: PageProps<"/study/[id]">) {
       )}
 
       <section className="mt-8">
-        <h2 className="text-sm font-bold">본문</h2>
-        <p className="mt-1 text-xs text-faint">낱말을 누르면 파싱과 사전이 열립니다. 설교 노트에 담을 수도 있습니다.</p>
+        <h2 className="text-sm font-bold">본문{study.lang === "lat" && " — 라틴어(불가타)와 원어"}</h2>
+        <p className="mt-1 text-xs text-faint">
+          {study.lang === "lat"
+            ? "불가타 본문 아래에 원어를 둡니다. 원어 낱말을 누르면 파싱과 사전이 열립니다. 불가타 절 번호는 원어와 다를 수 있습니다 (시편)."
+            : "낱말을 누르면 파싱과 사전이 열립니다. 설교 노트에 담을 수도 있습니다."}
+        </p>
         {verses.length === 0 ? (
           <p className="mt-4 rounded-card border border-dashed border-line px-4 py-8 text-center text-sm text-muted">
             본문을 찾지 못했습니다.
@@ -105,6 +115,11 @@ export default async function StudyPage({ params }: PageProps<"/study/[id]">) {
               return (
                 <div key={verse.ref}>
                   <h3 className="mb-2 text-sm font-semibold text-muted">{label}</h3>
+                  {latin.get(verse.verse) && (
+                    <p lang="la" className="mb-3 rounded-card border border-line bg-surface px-4 py-3 font-serif text-base leading-relaxed">
+                      {latin.get(verse.verse)}
+                    </p>
+                  )}
                   <VerseReader verse={verse} refLabel={label} />
                 </div>
               );

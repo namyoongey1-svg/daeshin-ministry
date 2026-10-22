@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { getVerse } from "@/lib/bible/data";
 import type { Verse } from "@/lib/bible/types";
 import { makeCode } from "@/lib/quiz";
-import { formatPassage, generateQuestions, parsePassage } from "@/lib/study";
+import { formatPassage, generateQuestions, parsePassage, type StudyLang } from "@/lib/study";
 import { createClient } from "@/lib/supabase/server";
 
 export interface StudyResult {
@@ -42,6 +42,13 @@ export async function createStudy(formData: FormData): Promise<StudyResult> {
   const passage = parsePassage(passageText);
   if (!passage) return { error: "본문을 알아보지 못했습니다. 「요 1:1-5」 처럼 적어 주세요. 한 번에 40절까지입니다." };
 
+  // 언어와 본문이 맞아야 한다. 헬라어 본문은 신약뿐이고, 히브리어 본문은 구약뿐이다.
+  const lang = String(formData.get("lang") ?? "") as StudyLang;
+  const testament = passage.book.testament;
+  if (lang === "grc" && testament !== "nt") return { error: "헬라어 본문은 신약만 있습니다. 구약은 히브리어나 라틴어를 골라 주세요." };
+  if (lang === "hbo" && testament !== "ot") return { error: "히브리어 본문은 구약만 있습니다. 신약은 헬라어나 라틴어를 골라 주세요." };
+  if (!["grc", "hbo", "lat"].includes(lang)) return { error: "언어를 골라 주세요." };
+
   const verses: Verse[] = [];
   for (let v = passage.from; v <= passage.to; v++) {
     const verse = await getVerse(passage.book.osis, passage.chapter, v);
@@ -59,6 +66,7 @@ export async function createStudy(formData: FormData): Promise<StudyResult> {
       verse_from: passage.from,
       verse_to: verses[verses.length - 1].verse,
       notes,
+      lang,
       published: formData.get("published") !== "off",
       created_by: userId,
     })

@@ -58,6 +58,7 @@ export default async function StudyListPage() {
                 </div>
                 <p className="text-sm text-muted">
                   {s.passage}
+                  {s.lang === "lat" && " · 라틴어"}
                   {s.quiz_code && " · 퀴즈 있음"}
                   {!s.published && " · 비공개"}
                 </p>

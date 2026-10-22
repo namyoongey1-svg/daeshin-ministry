@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useActionState } from "react";
+import { STUDY_LANGS } from "@/lib/study";
 import { createStudy, type StudyResult } from "../actions";
 
 const LABEL = "block text-sm font-medium";
@@ -26,9 +27,18 @@ export function StudyForm() {
         <input id="title" name="title" required className={FIELD} placeholder="10월 셋째 주 — 말씀이 육신이 되어" />
       </label>
 
+      <label className={LABEL} htmlFor="lang">
+        언어
+        <select id="lang" name="lang" defaultValue="grc" className={`${FIELD} cursor-pointer`}>
+          {STUDY_LANGS.map((l) => (
+            <option key={l.value} value={l.value}>{l.label} — {l.note}</option>
+          ))}
+        </select>
+      </label>
+
       <label className={LABEL} htmlFor="passage">
         본문
-        <span className="ml-2 text-xs font-normal text-faint">한 번에 40절까지. 신약은 헬라어, 구약은 히브리어로 뜹니다.</span>
+        <span className="ml-2 text-xs font-normal text-faint">한 번에 40절까지. 라틴어는 불가타 절 번호를 따릅니다 (시편은 대개 하나 작습니다).</span>
         <input id="passage" name="passage" required className={FIELD} placeholder="요 1:1-5" />
       </label>
 

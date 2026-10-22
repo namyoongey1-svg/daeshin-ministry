@@ -269,8 +269,20 @@ export function generateQuestions(verses: Verse[], book: Book, count: number, se
   return out;
 }
 
+/**
+ * 스터디 언어. 헬라어·히브리어는 본문이 정한다(신약·구약). 라틴어는 어느 책이든
+ * 불가타로 읽되, 퀴즈는 원어 낱말로 낸다 — 불가타에는 형태소 데이터가 없다.
+ */
+export type StudyLang = "grc" | "hbo" | "lat";
+export const STUDY_LANGS: { value: StudyLang; label: string; note: string }[] = [
+  { value: "grc", label: "헬라어 (신약)", note: "SBLGNT 본문, 낱말마다 파싱" },
+  { value: "hbo", label: "히브리어 (구약)", note: "OSHB 본문, 낱말마다 파싱" },
+  { value: "lat", label: "라틴어 (불가타)", note: "클레멘스 불가타 본문. 원어 파싱과 나란히 보여 줍니다" },
+];
+
 export interface StudyRow {
   id: string;
+  lang: StudyLang;
   title: string;
   passage: string;
   book: string;

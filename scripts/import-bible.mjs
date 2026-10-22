@@ -5,6 +5,7 @@
  *   히브리어 본문+형태소: OpenScriptures OSHB    (CC BY 4.0)
  *   헬라어 사전        : Strong's Greek         (CC BY-SA, 1890 원본은 퍼블릭 도메인)
  *   히브리어 사전      : Strong's Hebrew        (동일)
+ *   라틴어 본문        : Clementine Vulgate     (퍼블릭 도메인, seven1m/open-bibles)
  *
  * 실행: npm run import:bible
  */
@@ -168,8 +169,51 @@ async function importLexicons() {
   console.log(`히브리어 사전 ${Object.keys(hebrew).length.toLocaleString()}항목`);
 }
 
+/* ---------------------------- 라틴어 ---------------------------- */
+
+const VULGATE = "https://raw.githubusercontent.com/seven1m/open-bibles/master/lat-clementine.usfx.xml";
+
+/** USFX 책 코드 → OSIS. 66권만 가져온다. 제2경전은 우리 책 목록에 없다. */
+const USFX_TO_OSIS = {
+  GEN: "Gen", EXO: "Exod", LEV: "Lev", NUM: "Num", DEU: "Deut", JOS: "Josh", JDG: "Judg", RUT: "Ruth",
+  "1SA": "1Sam", "2SA": "2Sam", "1KI": "1Kgs", "2KI": "2Kgs", "1CH": "1Chr", "2CH": "2Chr", EZR: "Ezra",
+  NEH: "Neh", EST: "Esth", JOB: "Job", PSA: "Ps", PRO: "Prov", ECC: "Eccl", SNG: "Song", ISA: "Isa",
+  JER: "Jer", LAM: "Lam", EZK: "Ezek", DAN: "Dan", HOS: "Hos", JOL: "Joel", AMO: "Amos", OBA: "Obad",
+  JON: "Jonah", MIC: "Mic", NAM: "Nah", HAB: "Hab", ZEP: "Zeph", HAG: "Hag", ZEC: "Zech", MAL: "Mal",
+  MAT: "Matt", MRK: "Mark", LUK: "Luke", JHN: "John", ACT: "Acts", ROM: "Rom", "1CO": "1Cor", "2CO": "2Cor",
+  GAL: "Gal", EPH: "Eph", PHP: "Phil", COL: "Col", "1TH": "1Thess", "2TH": "2Thess", "1TI": "1Tim",
+  "2TI": "2Tim", TIT: "Titus", PHM: "Phlm", HEB: "Heb", JAS: "Jas", "1PE": "1Pet", "2PE": "2Pet",
+  "1JN": "1John", "2JN": "2John", "3JN": "3John", JUD: "Jude", REV: "Rev",
+};
+
+/**
+ * 불가타는 형태소 데이터가 없어 본문만 둔다. 절 번호는 불가타 것 그대로다 —
+ * 시편은 히브리어 성경보다 대개 하나 작다 (불가타 22편 = 우리 23편).
+ */
+async function importLatin() {
+  const xml = await get(VULGATE);
+  await mkdir(path.join(ROOT, "bible", "lat"), { recursive: true });
+  let books = 0;
+  let verses = 0;
+  for (const m of xml.matchAll(/<book id="([^"]+)">([\s\S]*?)<\/book>/g)) {
+    const osis = USFX_TO_OSIS[m[1]];
+    if (!osis) continue;
+    const v = {};
+    let chapter = 0;
+    for (const t of m[2].matchAll(/<c id="(\d+)"\/>|<v id="(\d+)"\/>([\s\S]*?)<ve\/>/g)) {
+      if (t[1]) { chapter = Number(t[1]); continue; }
+      const text = t[3].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").replace(/\s+([,.;:?!])/g, "$1").trim();
+      if (text) { v[`${chapter}:${t[2]}`] = text; verses++; }
+    }
+    await writeFile(path.join(ROOT, "bible", "lat", `${osis}.json`), JSON.stringify({ osis, lang: "lat", v }));
+    books++;
+  }
+  console.log(`라틴어 ${books}권 ${verses.toLocaleString()}절`);
+}
+
 const only = process.argv[2];
 if (!only || only === "greek") await importGreek();
 if (!only || only === "hebrew") await importHebrew();
 if (!only || only === "lexicon") await importLexicons();
+if (!only || only === "latin") await importLatin();
 console.log("완료");
