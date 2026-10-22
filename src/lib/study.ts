@@ -42,7 +42,8 @@ export function formatPassage(p: Passage): string {
 }
 
 /** 저장된 행에서 다시 만든다. 책을 못 찾으면 null. */
-export function passageFromRow(row: { book: string; chapter: number; verse_from: number; verse_to: number }): Passage | null {
+export function passageFromRow(row: { book: string | null; chapter: number | null; verse_from: number | null; verse_to: number | null }): Passage | null {
+  if (!row.book || !row.chapter || !row.verse_from || !row.verse_to) return null;
   const book = findBook(row.book);
   if (!book) return null;
   return { book, chapter: row.chapter, from: row.verse_from, to: row.verse_to };
@@ -58,7 +59,7 @@ export interface DraftQuestion {
 /* ------------------------------------------------------------ 문제 만들기 */
 
 /** 같은 입력이면 같은 문제가 나오게 하는 작은 난수. 미리보기와 저장본이 같아야 한다. */
-function rng(seed: number) {
+export function rng(seed: number) {
   let t = seed >>> 0;
   return () => {
     t = (t + 0x6d2b79f5) >>> 0;
@@ -68,7 +69,7 @@ function rng(seed: number) {
   };
 }
 
-function shuffle<T>(items: T[], rand: () => number): T[] {
+export function shuffle<T>(items: T[], rand: () => number): T[] {
   const out = [...items];
   for (let i = out.length - 1; i > 0; i--) {
     const j = Math.floor(rand() * (i + 1));
@@ -283,12 +284,14 @@ export const STUDY_LANGS: { value: StudyLang; label: string; note: string }[] = 
 export interface StudyRow {
   id: string;
   lang: StudyLang;
+  /** 워드 문서로 올린 글의 구조. 본문만 적은 글은 null. */
+  content: import("./study-doc").StudyContent | null;
   title: string;
   passage: string;
-  book: string;
-  chapter: number;
-  verse_from: number;
-  verse_to: number;
+  book: string | null;
+  chapter: number | null;
+  verse_from: number | null;
+  verse_to: number | null;
   notes: string;
   quiz_code: string | null;
   published: boolean;

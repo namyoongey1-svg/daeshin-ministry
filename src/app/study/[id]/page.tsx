@@ -8,6 +8,7 @@ import type { Verse } from "@/lib/bible/types";
 import { passageFromRow, type StudyRow } from "@/lib/study";
 import { createClient } from "@/lib/supabase/server";
 import { removeStudy } from "../actions";
+import { StudyContentView } from "./StudyContentView";
 
 /*
   스터디 한 편.
@@ -97,36 +98,60 @@ export default async function StudyPage({ params }: PageProps<"/study/[id]">) {
         </section>
       )}
 
+      {study.content ? (
+        <section className="mt-8">
+          <StudyContentView content={study.content} />
+          {verses.length > 0 && passage && (
+            <details className="mt-8 rounded-card border border-line p-5">
+              <summary className="cursor-pointer text-sm font-semibold text-muted hover:text-foreground">
+                {passage.book.testament === "ot" ? "히브리어" : "헬라어"} 본문 파싱 보기 — 낱말을 누르면 형태소와 사전이 열립니다
+              </summary>
+              <div className="mt-4 flex flex-col gap-8">
+                {verses.map((verse) => {
+                  const label = `${passage.book.ko} ${verse.chapter}:${verse.verse}`;
+                  return (
+                    <div key={verse.ref}>
+                      <h3 className="mb-2 text-sm font-semibold text-muted">{label}</h3>
+                      <VerseReader verse={verse} refLabel={label} />
+                    </div>
+                  );
+                })}
+              </div>
+            </details>
+          )}
+        </section>
+      ) : (
       <section className="mt-8">
-        <h2 className="text-sm font-bold">본문{study.lang === "lat" && " — 라틴어(불가타)와 원어"}</h2>
-        <p className="mt-1 text-xs text-faint">
-          {study.lang === "lat"
-            ? "불가타 본문 아래에 원어를 둡니다. 원어 낱말을 누르면 파싱과 사전이 열립니다. 시편은 불가타 편 번호로 맞춰 찾습니다 (합쳐진 편은 절이 어긋날 수 있습니다)."
-            : "낱말을 누르면 파싱과 사전이 열립니다. 설교 노트에 담을 수도 있습니다."}
-        </p>
-        {verses.length === 0 ? (
-          <p className="mt-4 rounded-card border border-dashed border-line px-4 py-8 text-center text-sm text-muted">
-            본문을 찾지 못했습니다.
+          <h2 className="text-sm font-bold">본문{study.lang === "lat" && " — 라틴어(불가타)와 원어"}</h2>
+          <p className="mt-1 text-xs text-faint">
+            {study.lang === "lat"
+              ? "불가타 본문 아래에 원어를 둡니다. 원어 낱말을 누르면 파싱과 사전이 열립니다. 시편은 불가타 편 번호로 맞춰 찾습니다 (합쳐진 편은 절이 어긋날 수 있습니다)."
+              : "낱말을 누르면 파싱과 사전이 열립니다. 설교 노트에 담을 수도 있습니다."}
           </p>
-        ) : (
-          <div className="mt-4 flex flex-col gap-8">
-            {verses.map((verse) => {
-              const label = `${passage!.book.ko} ${verse.chapter}:${verse.verse}`;
-              return (
-                <div key={verse.ref}>
-                  <h3 className="mb-2 text-sm font-semibold text-muted">{label}</h3>
-                  {latin.get(verse.verse) && (
-                    <p lang="la" className="mb-3 rounded-card border border-line bg-surface px-4 py-3 font-serif text-base leading-relaxed">
-                      {latin.get(verse.verse)}
-                    </p>
-                  )}
-                  <VerseReader verse={verse} refLabel={label} />
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </section>
+          {verses.length === 0 ? (
+            <p className="mt-4 rounded-card border border-dashed border-line px-4 py-8 text-center text-sm text-muted">
+              본문을 찾지 못했습니다.
+            </p>
+          ) : (
+            <div className="mt-4 flex flex-col gap-8">
+              {verses.map((verse) => {
+                const label = `${passage!.book.ko} ${verse.chapter}:${verse.verse}`;
+                return (
+                  <div key={verse.ref}>
+                    <h3 className="mb-2 text-sm font-semibold text-muted">{label}</h3>
+                    {latin.get(verse.verse) && (
+                      <p lang="la" className="mb-3 rounded-card border border-line bg-surface px-4 py-3 font-serif text-base leading-relaxed">
+                        {latin.get(verse.verse)}
+                      </p>
+                    )}
+                    <VerseReader verse={verse} refLabel={label} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      )}
 
       {mine && (
         <form action={removeStudy} className="mt-10 border-t border-line pt-4">
