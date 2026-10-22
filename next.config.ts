@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/tools/original": ["./src/data/**/*.json"],
     "/tools/original/lemma": ["./src/data/**/*.json"],
+    "/study/[id]": ["./src/data/**/*.json"],
+    "/study/new": ["./src/data/**/*.json"],
     "/": ["./src/data/scraped/*.json"],
     "/jobs": ["./src/data/scraped/*.json"],
     "/jobs/[id]": ["./src/data/scraped/*.json"],
