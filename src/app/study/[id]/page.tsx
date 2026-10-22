@@ -101,7 +101,7 @@ export default async function StudyPage({ params }: PageProps<"/study/[id]">) {
         <h2 className="text-sm font-bold">본문{study.lang === "lat" && " — 라틴어(불가타)와 원어"}</h2>
         <p className="mt-1 text-xs text-faint">
           {study.lang === "lat"
-            ? "불가타 본문 아래에 원어를 둡니다. 원어 낱말을 누르면 파싱과 사전이 열립니다. 불가타 절 번호는 원어와 다를 수 있습니다 (시편)."
+            ? "불가타 본문 아래에 원어를 둡니다. 원어 낱말을 누르면 파싱과 사전이 열립니다. 시편은 불가타 편 번호로 맞춰 찾습니다 (합쳐진 편은 절이 어긋날 수 있습니다)."
             : "낱말을 누르면 파싱과 사전이 열립니다. 설교 노트에 담을 수도 있습니다."}
         </p>
         {verses.length === 0 ? (

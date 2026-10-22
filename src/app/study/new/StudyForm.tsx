@@ -38,7 +38,7 @@ export function StudyForm() {
 
       <label className={LABEL} htmlFor="passage">
         본문
-        <span className="ml-2 text-xs font-normal text-faint">한 번에 40절까지. 라틴어는 불가타 절 번호를 따릅니다 (시편은 대개 하나 작습니다).</span>
+        <span className="ml-2 text-xs font-normal text-faint">한 번에 40절까지. 우리 성경 번호로 적으세요. 라틴어 시편은 불가타 번호로 자동으로 맞춥니다.</span>
         <input id="passage" name="passage" required className={FIELD} placeholder="요 1:1-5" />
       </label>
 

@@ -185,12 +185,30 @@ interface LatinFile { osis: string; v: Record<string, string> }
 const latinCache = new Map<string, Promise<LatinFile>>();
 
 /**
+ * 히브리어 시편 번호를 불가타(70인역) 번호로 바꾼다.
+ *
+ * 9·10편이 하나로, 114·115편이 하나로 합쳐지고 116편과 147편이 둘로 나뉘어
+ * 그 사이가 하나씩 밀린다. 장 단위로만 맞추고 절 번호는 그대로 둔다 —
+ * 합쳐진 편의 뒷부분은 절 번호가 어긋날 수 있다.
+ */
+export function vulgatePsalm(chapter: number): number {
+  if (chapter === 10) return 9;
+  if (chapter >= 11 && chapter <= 113) return chapter - 1;
+  if (chapter === 114 || chapter === 115) return 113;
+  if (chapter === 116) return 114;
+  if (chapter >= 117 && chapter <= 146) return chapter - 1;
+  if (chapter === 147) return 146;
+  return chapter;
+}
+
+/**
  * 불가타 한 절. 형태소 데이터가 없어 글만 돌려준다.
- * 절 번호는 불가타 것 그대로라 시편은 대개 하나 어긋난다.
+ * 시편은 우리 번호를 받아 불가타 번호로 바꿔 찾는다.
  */
 export async function getLatinVerse(osis: string, chapter: number, verse: number): Promise<string | null> {
   const book = findBook(osis);
   if (!book) return null;
+  if (book.osis === "Ps") chapter = vulgatePsalm(chapter);
   let hit = latinCache.get(book.osis);
   if (!hit) {
     hit = readFile(path.join(DATA, "bible", "lat", `${book.osis}.json`), "utf8")
