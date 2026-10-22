@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getSession } from "@/lib/auth";
+import { getSession, isAdmin } from "@/lib/auth";
 import { getSupabaseEnv } from "@/lib/supabase/env";
 import ProfileForm from "./ProfileForm";
 import { signOut } from "./actions";
@@ -99,6 +99,21 @@ export default async function AccountPage() {
             </summary>
             <ProfileForm profile={profile} />
           </details>
+
+          {/* 운영진만 보는 일거리. 접수된 공고와 기다리는 회원. */}
+          {isAdmin(session) && (
+            <div className="mt-6 rounded-lg border border-accent/30 bg-accent-soft p-4 text-sm">
+              <b>운영진</b>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <Link href="/members" className="rounded-pill bg-surface px-3.5 py-1.5 text-xs font-medium ring-1 ring-inset ring-line hover:ring-line-strong">
+                  회원 승인
+                </Link>
+                <Link href="/jobs/submissions" className="rounded-pill bg-surface px-3.5 py-1.5 text-xs font-medium ring-1 ring-inset ring-line hover:ring-line-strong">
+                  접수된 공고
+                </Link>
+              </div>
+            </div>
+          )}
         </>
       )}
 
