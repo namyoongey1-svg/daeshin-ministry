@@ -6,6 +6,7 @@
  *   헬라어 사전        : Strong's Greek         (CC BY-SA, 1890 원본은 퍼블릭 도메인)
  *   히브리어 사전      : Strong's Hebrew        (동일)
  *   라틴어 본문        : Clementine Vulgate     (퍼블릭 도메인, seven1m/open-bibles)
+ *   70인역 본문        : Brenton LXX 1851       (퍼블릭 도메인, eBible.org grcbrent)
  *
  * 실행: npm run import:bible
  */
@@ -211,9 +212,51 @@ async function importLatin() {
   console.log(`라틴어 ${books}권 ${verses.toLocaleString()}절`);
 }
 
+/* ---------------------------- 70인역 ---------------------------- */
+
+const LXX_ZIP = "https://ebible.org/Scriptures/grcbrent_usfx.zip";
+
+/**
+ * 브렌튼 70인역. 구약을 헬라어로 읽는 스터디에 쓴다. 형태소 데이터는 없다.
+ * eBible 은 zip 으로만 내주므로, 미리 풀어 둔 XML 경로를 LXX_XML 로 준다.
+ * (zip 풀기를 위해 의존성을 더하지 않는다.)
+ *
+ * 책 코드가 불가타와 조금 다르다: 에스더 ESG, 다니엘 DAG, 에스라·느헤미야는
+ * EZR 한 책(23장)이라 11장부터를 느헤미야로 돌린다. 시편은 그리스어 번호
+ * 그대로 둔다 — 읽을 때 vulgatePsalm 으로 맞춘다.
+ */
+async function importLxx() {
+  const file = process.env.LXX_XML;
+  if (!file) throw new Error(`LXX_XML 에 풀어 둔 grcbrent_usfx.xml 경로를 주세요 (${LXX_ZIP})`);
+  const xml = await (await import("node:fs/promises")).readFile(file, "utf8");
+  await mkdir(path.join(ROOT, "bible", "lxx"), { recursive: true });
+  const map = { ...USFX_TO_OSIS, ESG: "Esth", DAG: "Dan" };
+  const books = {};
+  for (const m of xml.matchAll(/<book id="([^"]+)">([\s\S]*?)<\/book>/g)) {
+    const osis = map[m[1]];
+    if (!osis) continue;
+    let chapter = 0;
+    for (const t of m[2].matchAll(/<c id="(\d+)"\s*\/>|<v id="(\d+)"[^>]*\/>([\s\S]*?)<ve\s*\/>/g)) {
+      if (t[1]) { chapter = Number(t[1]); continue; }
+      const text = t[3].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+      if (!text) continue;
+      let book = osis, ch = chapter;
+      if (osis === "Ezra" && chapter > 10) { book = "Neh"; ch = chapter - 10; }
+      (books[book] ??= {})[`${ch}:${t[2]}`] = text;
+    }
+  }
+  let verses = 0;
+  for (const [osis, v] of Object.entries(books)) {
+    verses += Object.keys(v).length;
+    await writeFile(path.join(ROOT, "bible", "lxx", `${osis}.json`), JSON.stringify({ osis, lang: "lxx", v }));
+  }
+  console.log(`70인역 ${Object.keys(books).length}권 ${verses.toLocaleString()}절`);
+}
+
 const only = process.argv[2];
 if (!only || only === "greek") await importGreek();
 if (!only || only === "hebrew") await importHebrew();
 if (!only || only === "lexicon") await importLexicons();
 if (!only || only === "latin") await importLatin();
+if (only === "lxx") await importLxx();
 console.log("완료");

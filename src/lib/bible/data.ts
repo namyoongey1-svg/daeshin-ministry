@@ -219,6 +219,25 @@ export async function getLatinVerse(osis: string, chapter: number, verse: number
   return (await hit).v[`${chapter}:${verse}`] ?? null;
 }
 
+/* ---------------------------- 70인역 ---------------------------- */
+
+const lxxCache = new Map<string, Promise<LatinFile>>();
+
+/** 브렌튼 70인역 한 절. 글만 있다. 시편은 우리 번호를 받아 그리스어 번호로 바꿔 찾는다. */
+export async function getLxxVerse(osis: string, chapter: number, verse: number): Promise<string | null> {
+  const book = findBook(osis);
+  if (!book) return null;
+  if (book.osis === "Ps") chapter = vulgatePsalm(chapter);
+  let hit = lxxCache.get(book.osis);
+  if (!hit) {
+    hit = readFile(path.join(DATA, "bible", "lxx", `${book.osis}.json`), "utf8")
+      .then((t) => JSON.parse(t) as LatinFile)
+      .catch(() => ({ osis: book.osis, v: {} }));
+    lxxCache.set(book.osis, hit);
+  }
+  return (await hit).v[`${chapter}:${verse}`] ?? null;
+}
+
 /* ---------------------------- 용례 검색 ---------------------------- */
 
 export interface Occurrence {
