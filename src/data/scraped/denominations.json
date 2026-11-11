@@ -3557,5 +3557,37 @@
     "own": null,
     "accepts": [],
     "acceptsAll": false
+  },
+  "minitries:175547503": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175547651": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175550461": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175555644": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175563904": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:175564192": {
+    "own": null,
+    "accepts": [
+      "기독교대한하나님의성회"
+    ],
+    "acceptsAll": false
   }
 }
