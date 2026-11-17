@@ -2559,6 +2559,11 @@
     "accepts": [],
     "acceptsAll": true
   },
+  "baekseok:60830": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
   "minitries:167946847": {
     "own": null,
     "accepts": [],
@@ -3776,6 +3781,21 @@
     "acceptsAll": true
   },
   "minitries:175648924": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175686920": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175695622": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175697989": {
     "own": null,
     "accepts": [],
     "acceptsAll": false
