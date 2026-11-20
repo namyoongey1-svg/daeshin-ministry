@@ -2629,6 +2629,26 @@
     "accepts": [],
     "acceptsAll": false
   },
+  "baekseok:61014": {
+    "own": "독립교단",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61015": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61016": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61022": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
   "minitries:167946847": {
     "own": null,
     "accepts": [],
@@ -3883,6 +3903,11 @@
     "acceptsAll": false
   },
   "minitries:175751273": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "minitries:175762278": {
     "own": null,
     "accepts": [],
     "acceptsAll": false
