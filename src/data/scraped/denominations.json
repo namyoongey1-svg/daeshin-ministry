@@ -3911,5 +3911,12 @@
     "own": null,
     "accepts": [],
     "acceptsAll": false
+  },
+  "minitries:175778750": {
+    "own": "예장 합동",
+    "accepts": [
+      "예장 합동"
+    ],
+    "acceptsAll": false
   }
 }
