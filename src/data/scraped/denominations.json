@@ -2709,6 +2709,31 @@
     "accepts": [],
     "acceptsAll": false
   },
+  "baekseok:61081": {
+    "own": "기독교한국침례회",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61082": {
+    "own": "기장",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61084": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61085": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61091": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
   "minitries:167946847": {
     "own": null,
     "accepts": [],
@@ -3977,6 +4002,16 @@
     "accepts": [
       "예장 합동"
     ],
+    "acceptsAll": false
+  },
+  "minitries:175882931": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "minitries:175907921": {
+    "own": null,
+    "accepts": [],
     "acceptsAll": false
   }
 }
