@@ -2734,6 +2734,56 @@
     "accepts": [],
     "acceptsAll": false
   },
+  "baekseok:61124": {
+    "own": "예장 백석",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61125": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61126": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61127": {
+    "own": "예장 대신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61128": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61129": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61130": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": true
+  },
+  "baekseok:61131": {
+    "own": "예장 합신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61132": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61133": {
+    "own": null,
+    "accepts": [],
+    "acceptsAll": false
+  },
   "minitries:167946847": {
     "own": null,
     "accepts": [],
