@@ -2784,6 +2784,26 @@
     "accepts": [],
     "acceptsAll": false
   },
+  "baekseok:61160": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61161": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61162": {
+    "own": "예장 고신",
+    "accepts": [],
+    "acceptsAll": false
+  },
+  "baekseok:61163": {
+    "own": "예장 합동",
+    "accepts": [],
+    "acceptsAll": false
+  },
   "minitries:167946847": {
     "own": null,
     "accepts": [],
@@ -4052,6 +4072,11 @@
     "accepts": [
       "예장 합동"
     ],
+    "acceptsAll": false
+  },
+  "minitries:175780384": {
+    "own": null,
+    "accepts": [],
     "acceptsAll": false
   },
   "minitries:175882931": {
