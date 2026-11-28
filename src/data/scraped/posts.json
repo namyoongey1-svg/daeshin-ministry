@@ -1,6 +1,1173 @@
 [
   {
     "source": "puts",
+    "externalId": "161719",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161719&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "청운교회에서 함께 동역할 준전임 전도사님(미취학, 어린이)을 청빙합니다.",
+    "church": "청운교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161718",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161718&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "서울 중구 신광교회에서 준전임(청년부) 목사님 및 전도사님을 모십니다.",
+    "church": "신광교회",
+    "regionRaw": "서울",
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [
+      "청년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161717",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161717&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "포항연일교회에 청년 사역에 뜨거운 마음을 가지신 청년부 사역자를 모십니다.",
+    "church": "포항연일교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "청년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161716",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161716&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "[남양주] 두레교회 사무행정 전임간사를 모십니다",
+    "church": "두레교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "행정간사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161715",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161715&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "면일교회에서 유치, 아동부를 지도하실 교육전도사(교육목사)님을 모십니다.",
+    "church": "면일교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "아동부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161714",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161714&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "백양로교회 부목사 및 소년부 교육전도사(교육목사) 청빙",
+    "church": "백양로교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161713",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161713&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "안양에 위치한 석수중앙교회에서 교육전도사(교육목사)님 2분을 청빙합니다.(아동부 1인, 청소년부 1인)",
+    "church": "석수중앙교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "청소년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161712",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161712&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "난곡신일교회에서 준전임 or 파트 교역자님을 청빙합니다.",
+    "church": "난곡신일교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161711",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161711&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "참된교회에서 부목사님(교육부 총괄)을 1분 모십니다.",
+    "church": "참된교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161710",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161710&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "망원제일교회 준전임, 교육전도사 청빙",
+    "church": "망원제일교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161709",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161709&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "전주동신교회에서 교육전도사님, 교육목사님을 모십니다.",
+    "church": "전주동신교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161708",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161708&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "명성제일교회(수원 영통)에서 동역하실 부목사님과 준전임 사역자를 모십니다.",
+    "church": "명성제일교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161707",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161707&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "전임교역자 청빙",
+    "church": "벧엘교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161706",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161706&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "[남양주] 두레교회 청년부 담당 전임 부목사 초빙",
+    "church": "두레교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [
+      "청년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161705",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161705&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "천안동산교회에서 부목사/전임전도사 님을 청빙합니다.",
+    "church": "천안동산교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161704",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161704&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "서울 정릉교회에서 교육부 목회자를 모십니다.(교육 3명)",
+    "church": "정릉교회",
+    "regionRaw": "서울",
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161703",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161703&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "목천교회에서 어르신 사역을 담당할 부목사님을 청빙합니다.",
+    "church": "목천교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161702",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161702&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "평택시온성교회 아동부 교육목사님 및 교육전도사님을 모십니다.",
+    "church": "평택시온성교회",
+    "regionRaw": "평택시",
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "아동부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161701",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161701&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "일암교회에서 소년부(4~6학년), 고등부 파트 사역자(준전임)를 초빙합니다.",
+    "church": "일암교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "고등부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kosin",
+    "externalId": "34599",
+    "url": "https://www.kts.ac.kr/home/pinvit/34599",
+    "title": "경남노회 진영중앙교회(경남노회) 동역자를 모십니다.",
+    "church": "진영중앙교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:48.997Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kosin",
+    "externalId": "34598",
+    "url": "https://www.kts.ac.kr/home/pinvit/34598",
+    "title": "울산노회 (추가청빙) 참 좋은 울산갈릴리교회에서 45세 이하 동역자님을 모십니다!",
+    "church": "울산갈릴리교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:48.997Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28275",
+    "url": "https://kehc.org/home/recruit/read_post/28275",
+    "title": "경기남 안성교회에서 부목사님 또는 전도사님 모십니다.",
+    "church": "안성교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [
+      "목사"
+    ],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28274",
+    "url": "https://kehc.org/home/recruit/read_post/28274",
+    "title": "사랑의교회(강원서지방회)에서 함께 동역할 전담사역자를 모십니다.",
+    "church": "사랑의교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [
+      "전도사"
+    ],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "aats",
+    "externalId": "128",
+    "url": "http://aats.kr/main/bbs/board.php?bo_table=b05&wr_id=128",
+    "title": "중고등부 교육전도사 구합니다.",
+    "church": null,
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "중고등부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-28",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-09-20T09:14:32.374Z",
+    "listingCount": 1,
+    "lastSeenAt": "2026-09-20T09:14:32.374Z",
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161700",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161700&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "주기쁨교회에서 준전임 사역자를 모십니다!",
+    "church": "주기쁨교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161699",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161699&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "[내용수정] 영광교회(남원)에서 부목사님 또는 전임 전도사님을 청빙합니다.",
+    "church": "영광교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161698",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161698&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "기쁨의교회(포항)에서 청년부 전임 사역자를 청빙합니다.",
+    "church": "기쁨의교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "청년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161697",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161697&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "<경기도 파주> 벧엘교회 유치부 전임여교역자 청빙",
+    "church": "벧엘교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "유치부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161696",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161696&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "화전교회에서 중고등부 교역자를 모십니다 (준전임 또는 파트)",
+    "church": "화전교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "중고등부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161695",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161695&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "석수중앙교회에서 교역자 2분을 모십니다.(아동부 1인, 청소년부 1인)",
+    "church": "석수중앙교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "청소년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161694",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161694&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "청주 동산교회에서 교구 및 청년부를 담당할 부목사님(전임전도사님)과 교육전도사님(교육목사님)을 청빙합니다.",
+    "church": "동산교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "청년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161693",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161693&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "수지소망교회에서 청년부 준전임(또는 파트) 사역자를 청빙합니다(기존 지원자 유효)",
+    "church": "수지소망교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "청년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161692",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161692&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "정읍중앙교회에서 교육전도사/교육목사 또는 준전임전도사를 청빙합니다.",
+    "church": "정읍중앙교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161691",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161691&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "개봉교회에서 사역하실 부목사 1분을 모시고자 합니다.",
+    "church": "개봉교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161690",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161690&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "[수정 재공고] 성지교회(서울 개포동 소재)에서 전임 부목사님을 모십니다.",
+    "church": "성지교회",
+    "regionRaw": "서울",
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161689",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161689&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "충북교회 부목사 혹은 전임전도사님을 청빙합니다.",
+    "church": "충북교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161688",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161688&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "구성제일교회에서 중고등부(준전임) 사역자를 초빙합니다",
+    "church": "구성제일교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "중고등부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161687",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161687&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "[청빙] 주예수교회에서 함께 동역할 부목사님, 전도사님을 모십니다",
+    "church": "주예수교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161686",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161686&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "행복을전하는교회 교육전도사님(여성/파트)교육 목사님 청빙합니다!",
+    "church": "행복을전하는교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161685",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161685&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "온누리교회 예배본부에서 파트교역자님을 청빙합니다.",
+    "church": "온누리교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161684",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161684&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "수인중앙교회에서 전임 부목사님을 청빙합니다. (경기도 시흥)",
+    "church": "수인중앙교회",
+    "regionRaw": "경기",
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161683",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161683&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "의정부 녹양교회에서 전임교역자[청년부전담] 한분을 모십니다.",
+    "church": "녹양교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "청년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161682",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161682&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "제주성안교회 교육부 파트목회자를 청빙합니다",
+    "church": "제주성안교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161681",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161681&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "행신임마누엘교회 청소년부 교육전도사 혹은 교육목사 청빙합니다.",
+    "church": "행신임마누엘교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "청소년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161680",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161680&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "서울베다니 교회에서 준전임 교역자 1분(목사 또는 전도사)을 청빙합니다.",
+    "church": "서울베다니교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161679",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161679&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "서부광성교회에서 유치부교육전도사를 청빙합니다.",
+    "church": "서부광성교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "유치부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161678",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161678&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "사회적기업 디자인마이러브 동역자 청빙",
+    "church": null,
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161677",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161677&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "대전 은평교회에서 함께하실 교육목사님 또는 교육전도사님을 모십니다",
+    "church": "은평교회",
+    "regionRaw": "대전",
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161676",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161676&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "서울시 노원구 상신교회에서 유아부, 유치부 교육목사, 교육전도사(파트)를 청빙합니다.",
+    "church": "상신교회",
+    "regionRaw": "서울시 노원구",
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "유아부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161675",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161675&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "서울시 노원구 상신교회에서 부목사 또는 전임전도사님을 청빙합니다.",
+    "church": "상신교회",
+    "regionRaw": "서울시 노원구",
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161674",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161674&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "성도교회에서 유치부 교육전도사 혹은 교육목사를 청빙합니다",
+    "church": "성도교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "유치부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161673",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161673&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "예원참된교회에서 교육목사님(또는 교육전도사님)을 모십니다.",
+    "church": "예원참된교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161672",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161672&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "서울 대양교회 교육전도사(유치부, 중등부) 및 심방 준전임 전도사 청빙",
+    "church": "대양교회",
+    "regionRaw": "서울",
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "유치부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161671",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161671&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "[ 제자광성교회 ]에서 \"교구 담당 - 전임 부목사님\"을 정중하게 모십니다.",
+    "church": "제자광성교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161670",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161670&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "그빛교회에서 어린이부 사역자를 청빙합니다. (내발산동)",
+    "church": "그빛교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:40.282Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161669",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161669&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "강서교회에서 전임사역자(부목사 및 전임전도사)를 청빙합니다.(영등포노회 강서교회)",
+    "church": "강서교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:41.915Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161668",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161668&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "강서교회에서 교육 전도사님 및 교육 목사님을 청빙합니다.(영등포노회 강서교회)",
+    "church": "강서교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:41.915Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
+    "externalId": "161667",
+    "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161667&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
+    "title": "[민잡] 흩어진 청빙 공고를 한곳에 모았습니다",
+    "church": null,
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:41.915Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "puts",
     "externalId": "161666",
     "url": "https://www.puts.ac.kr/www/board/view.general.asp?seq=161666&design=lounge&m1=4&m2=4&m3=1&bd_name=jangshin_jboard04",
     "title": "일산신광교회에서 부목사님을 청빙합니다.",
@@ -503,6 +1670,88 @@
   },
   {
     "source": "mtu",
+    "externalId": "20928",
+    "url": "https://www.mtu.ac.kr/mtu/board/view.do?mId=162&brdIdx=20928",
+    "title": "[서울남/금천] 평안교회에서 담임전도사&담임목사님을 모십니다.",
+    "church": "평안교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "담임목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:56.436Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "mtu",
+    "externalId": "20927",
+    "url": "https://www.mtu.ac.kr/mtu/board/view.do?mId=162&brdIdx=20927",
+    "title": "[삼남/부산서] 동래온천교회에서 수련목회자, 전임전도사를 정중하게 모십니다",
+    "church": "동래온천교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:56.436Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "mtu",
+    "externalId": "20926",
+    "url": "https://www.mtu.ac.kr/mtu/board/view.do?mId=162&brdIdx=20926",
+    "title": "[서울남/강남동] 강남선한목자교회에서 심방전도사님을 모십니다. (풀타임)",
+    "church": "강남선한목자교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:56.436Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "mtu",
+    "externalId": "20925",
+    "url": "https://www.mtu.ac.kr/mtu/board/view.do?mId=162&brdIdx=20925",
+    "title": "[서울남/강남동] 강남선한목자교회에서 유치부 교육전도사님을 모십니다.(파트타임)",
+    "church": "강남선한목자교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [
+      "유치부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:56.436Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "mtu",
     "externalId": "20924",
     "url": "https://www.mtu.ac.kr/mtu/board/view.do?mId=162&brdIdx=20924",
     "title": "[서울/강남] 나우리교회에서 파트(교육) 전도사님을 모십니다.",
@@ -561,10 +1810,10 @@
   },
   {
     "source": "kosin",
-    "externalId": "34585",
-    "url": "https://www.kts.ac.kr/home/pinvit/34585",
-    "title": "경남남마산노회 제일신마산교회에서 동역자를 모십니다.",
-    "church": "제일신마산교회",
+    "externalId": "34595",
+    "url": "https://www.kts.ac.kr/home/pinvit/34595",
+    "title": "경기서부노회 김포하사랑교회(경기서부노회)에서 함께 사역할 동역자를 모십니다.",
+    "church": "김포하사랑교회",
     "regionRaw": null,
     "region": null,
     "positions": [],
@@ -573,7 +1822,222 @@
     "postedAt": "2026-11-27",
     "deadline": null,
     "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:48.997Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kosin",
+    "externalId": "34589",
+    "url": "https://www.kts.ac.kr/home/pinvit/34589",
+    "title": "부산남부노회 수영교회에서 유치부 사역자(파트)를 모십니다.",
+    "church": "수영교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "유치부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:48.997Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kosin",
+    "externalId": "34585",
+    "url": "https://www.kts.ac.kr/home/pinvit/34585",
+    "title": "경남남마산노회 제일신마산교회에서 전임사역자(부목사, 강도사)를 모십니다",
+    "church": "제일신마산교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
     "collectedAt": "2026-11-27T03:51:16.846Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28273",
+    "url": "https://kehc.org/home/recruit/read_post/28273",
+    "title": "(서울강서) 서울중앙교회에서 전임 부목사님을 모십니다.",
+    "church": "서울중앙교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [
+      "목사"
+    ],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28272",
+    "url": "https://kehc.org/home/recruit/read_post/28272",
+    "title": "[내용수정] 군산평안교회에서 함께 사역하실 전담사역자(목사, 전도사)를 정중히 ...",
+    "church": "군산평안교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [
+      "목사"
+    ],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28271",
+    "url": "https://kehc.org/home/recruit/read_post/28271",
+    "title": "말씀이 삶되는 공동체 대전서지방 \"사랑샘교회\"에서 동역자를 모십니다.",
+    "church": "사랑샘교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [
+      "목사"
+    ],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28270",
+    "url": "https://kehc.org/home/recruit/read_post/28270",
+    "title": "인천서지방 인천금곡교회에서 부목사(1명), 교육전도사(1명)을 모십니다.",
+    "church": "인천금곡교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사",
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [
+      "목사"
+    ],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28269",
+    "url": "https://kehc.org/home/recruit/read_post/28269",
+    "title": "(내용수정) 서울 남지방 서울교회에서 교회학교 사역자를 모십니다.",
+    "church": "서울교회",
+    "regionRaw": "서울",
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [
+      "목사"
+    ],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28268",
+    "url": "https://kehc.org/home/recruit/read_post/28268",
+    "title": "서울강서지방 광음교회에서 전임, 준전임, 파트 사역자를 청빙합니다.",
+    "church": "광음교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [
+      "목사"
+    ],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28267",
+    "url": "https://kehc.org/home/recruit/read_post/28267",
+    "title": "서울남지방 서울수정교회에서 음향간사님을 모십니다.",
+    "church": "서울수정교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [
+      "음악사역자"
+    ],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "kehc",
+    "externalId": "28266",
+    "url": "https://kehc.org/home/recruit/read_post/28266",
+    "title": "춘천 소양제일교회에서 전담사역자를 청빙합니다.",
+    "church": "소양제일교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "부목사"
+    ],
+    "departments": [],
+    "tagsRaw": [
+      "목사"
+    ],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:52.158Z",
     "listingCount": 1,
     "closedAt": null
   },
@@ -621,6 +2085,328 @@
     "deadline": null,
     "deadlineText": null,
     "collectedAt": "2026-11-27T03:51:19.935Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16304",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16304",
+    "title": "새소망교회(서울시 구로구)에서 유초등부 사역자를 청빙합니다.",
+    "church": "새소망교회",
+    "regionRaw": "서울시 구로구",
+    "region": null,
+    "positions": [],
+    "departments": [
+      "유초등부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:45.588Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16303",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16303",
+    "title": "<끌어올림> (성광교회, 합신) 중고등부 파트사역자를 청빙합니다.",
+    "church": "성광교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "중고등부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:45.588Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16302",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16302",
+    "title": "<예수사랑교회 전임 사역자 청빙>",
+    "church": "예수사랑교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:45.588Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16301",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16301",
+    "title": "도토리교회에서 교육전도사를 모집합니다.",
+    "church": "도토리교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "교육전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:45.588Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16300",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16300",
+    "title": "전주동양교회에서 비전이 있는 다음세대를 맡아 지도하실 사역자를 모십니다",
+    "church": "전주동양교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "다음세대"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:45.588Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16299",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16299",
+    "title": "(합동) 수봉산교회에서 유치부 사역자를 모십니다.",
+    "church": "수봉산교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "유치부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:45.588Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16298",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16298",
+    "title": "제천성도교회 전임사역자를 정중히 모십니다",
+    "church": "제천성도교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:45.588Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16297",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16297",
+    "title": "[삼광교회(서울, 천호동)에서 동역자(교육 파트)를 모십니다]",
+    "church": "삼광교회",
+    "regionRaw": "서울",
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:45.588Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16296",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16296",
+    "title": "석광교회(성북구 석관동)에서 청년부 파트 사역자를 모십니다.",
+    "church": "석광교회",
+    "regionRaw": "성북구",
+    "region": null,
+    "positions": [],
+    "departments": [
+      "청년부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-27T03:51:13.132Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16295",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16295",
+    "title": "엘사랑교회에서 함께 사역할 동역자를 모십니다(전임).",
+    "church": "엘사랑교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-27T03:51:13.132Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16294",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16294",
+    "title": "분당 더THE사랑교회에서 함께 사역할 교역자 모십니다.",
+    "church": "더THE사랑교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-27T03:51:13.132Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16293",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16293",
+    "title": "상동21세기교회에서 고등부 파트 교역자님을 모십니다",
+    "church": "상동21세기교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [],
+    "departments": [
+      "고등부"
+    ],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-27T03:51:13.132Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "hapdong",
+    "externalId": "16292",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16292",
+    "title": "김포성문교회에서 함께 사역할 교구 전임 여전도사님을 모십니다.",
+    "church": "김포성문교회",
+    "regionRaw": null,
+    "region": null,
+    "positions": [
+      "전도사"
+    ],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-27T03:51:13.132Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "baekseok",
+    "externalId": "61219",
+    "url": "https://www.bu.ac.kr/bbs/graduateschool/1110/61219/artclView.do",
+    "title": "[경기도 광주시] 복된이웃교회",
+    "church": "복된이웃교회",
+    "regionRaw": "경기도 광주시",
+    "region": "경기",
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:30.112Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "baekseok",
+    "externalId": "61218",
+    "url": "https://www.bu.ac.kr/bbs/graduateschool/1110/61218/artclView.do",
+    "title": "[서울시 서대문구] 엘사랑교회",
+    "church": "엘사랑교회",
+    "regionRaw": "서울시 서대문구",
+    "region": "서울",
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:30.112Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "baekseok",
+    "externalId": "61217",
+    "url": "https://www.bu.ac.kr/bbs/graduateschool/1110/61217/artclView.do",
+    "title": "[서울시 송파구] 성현교회",
+    "church": "성현교회",
+    "regionRaw": "서울시 송파구",
+    "region": "서울",
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:30.112Z",
+    "listingCount": 1,
+    "closedAt": null
+  },
+  {
+    "source": "baekseok",
+    "externalId": "61216",
+    "url": "https://www.bu.ac.kr/bbs/graduateschool/1110/61216/artclView.do",
+    "title": "[서울시 마포구] 서울제자교회",
+    "church": "서울제자교회",
+    "regionRaw": "서울시 마포구",
+    "region": "서울",
+    "positions": [],
+    "departments": [],
+    "tagsRaw": [],
+    "postedAt": "2026-11-27",
+    "deadline": null,
+    "deadlineText": null,
+    "collectedAt": "2026-11-28T03:36:30.112Z",
     "listingCount": 1,
     "closedAt": null
   },
@@ -13127,7 +14913,7 @@
     "source": "kosin",
     "externalId": "34460",
     "url": "https://www.kts.ac.kr/home/pinvit/34460",
-    "title": "재공고 서울서부노회 서울알곡교회에서 부목사(강도사, 전도사)를 청빙합니다.",
+    "title": "초빙완료 서울서부노회 서울알곡교회에서 부목사(강도사, 전도사)를 청빙합니다.",
     "church": "서울알곡교회",
     "regionRaw": null,
     "region": null,
@@ -13212,7 +14998,7 @@
     "deadline": null,
     "deadlineText": null,
     "collectedAt": "2026-11-22T01:44:51.431Z",
-    "listingCount": 1,
+    "listingCount": 2,
     "closedAt": null
   },
   {
@@ -13234,7 +15020,7 @@
     "deadline": null,
     "deadlineText": null,
     "collectedAt": "2026-11-22T01:44:51.431Z",
-    "listingCount": 1,
+    "listingCount": 2,
     "closedAt": null
   },
   {
@@ -15700,7 +17486,7 @@
     "source": "kosin",
     "externalId": "34406",
     "url": "https://www.kts.ac.kr/home/pinvit/34406",
-    "title": "울산노회 화봉교회(울산노회)에서 전도사님을 모십니다.",
+    "title": "재공고 울산노회 화봉교회(울산노회)에서 전도사님을 모십니다.",
     "church": "화봉교회",
     "regionRaw": null,
     "region": null,
@@ -15740,7 +17526,7 @@
     "source": "kosin",
     "externalId": "34403",
     "url": "https://www.kts.ac.kr/home/pinvit/34403",
-    "title": "충청동부노회 대전신일교회에서 아래와 같이 부교역자를 정중히 모십니다",
+    "title": "재공고 충청동부노회 대전신일교회에서 아래와 같이 부교역자를 정중히 모십니다",
     "church": "대전신일교회",
     "regionRaw": null,
     "region": null,
@@ -18105,7 +19891,7 @@
     "source": "kosin",
     "externalId": "34393",
     "url": "https://www.kts.ac.kr/home/pinvit/34393",
-    "title": "전남동부노회 심미교회(전남동부노회)에서 담임목사를 청빙합니다.",
+    "title": "재공고 전남동부노회 심미교회(전남동부노회)에서 담임목사를 청빙합니다.",
     "church": "심미교회",
     "regionRaw": null,
     "region": null,
@@ -18263,7 +20049,7 @@
     "deadline": null,
     "deadlineText": null,
     "collectedAt": "2026-11-19T02:53:05.535Z",
-    "listingCount": 2,
+    "listingCount": 1,
     "closedAt": null
   },
   {
@@ -20450,7 +22236,7 @@
     "deadline": null,
     "deadlineText": null,
     "collectedAt": "2026-11-19T02:53:05.535Z",
-    "listingCount": 2,
+    "listingCount": 1,
     "closedAt": null
   },
   {
@@ -63614,7 +65400,7 @@
     "source": "kosin",
     "externalId": "32047",
     "url": "https://www.kts.ac.kr/home/pinvit/32047",
-    "title": "부산진구 당감동에 위치한 당평교회(부산서부노회)에서 함께 할 동역자님을 정중히 모십니다.",
+    "title": "재공고 부산서부노회 부산진구 당감동에 위치한 당평교회(부산서부노회)에서 함께 할 동역자님을 정중히 모십니다.",
     "church": "당평교회",
     "regionRaw": "부산진구",
     "region": null,
@@ -171856,204 +173642,29 @@
     "closedAt": null
   },
   {
-    "source": "aats",
-    "externalId": "128",
-    "url": "http://aats.kr/main/bbs/board.php?bo_table=b05&wr_id=128",
-    "title": "중고등부 교육전도사 구합니다.",
+    "source": "hapdong",
+    "externalId": "16307",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16307",
+    "title": "전임교역자 청빙",
     "church": null,
     "regionRaw": null,
     "region": null,
-    "positions": [
-      "교육전도사"
-    ],
-    "departments": [
-      "중고등부"
-    ],
-    "tagsRaw": [],
-    "postedAt": "2025-11-28",
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-09-20T09:14:32.374Z",
-    "listingCount": 1,
-    "lastSeenAt": "2026-09-20T09:14:32.374Z",
-    "closedAt": null
-  },
-  {
-    "source": "mtu",
-    "externalId": "20450",
-    "url": "https://www.mtu.ac.kr/mtu/board/view.do?mId=162&brdIdx=20450",
-    "title": "[서울/동대문] 장안원교회에서 유치부 교육전도사님을 모십니다.",
-    "church": "장안원교회",
-    "regionRaw": "서울",
-    "region": null,
-    "positions": [
-      "교육전도사"
-    ],
-    "departments": [
-      "유치부"
-    ],
-    "tagsRaw": [],
-    "postedAt": "2025-11-27",
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-09-26T23:21:29.386Z",
-    "listingCount": 1,
-    "closedAt": null
-  },
-  {
-    "source": "minitries",
-    "externalId": "168796528",
-    "url": "https://minitries.co.kr/index/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=168796528&t=board",
-    "title": "덕양중앙교회 청소년부 파트사역자와 찬양사역자를 청빙합니다.",
-    "church": "덕양중앙교회",
-    "regionRaw": null,
-    "region": null,
-    "positions": [
-      "찬양사역자"
-    ],
-    "departments": [
-      "청소년부"
-    ],
-    "tagsRaw": [],
-    "postedAt": "2025-11-27",
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-09-24T08:48:03.451Z",
-    "listingCount": 1,
-    "closedAt": null
-  },
-  {
-    "source": "minitries",
-    "externalId": "168791055",
-    "url": "https://minitries.co.kr/index/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=168791055&t=board",
-    "title": "인천 서구 예그린교회에서 전임 혹은 파트 전도사님 모십니다.",
-    "church": "예그린교회",
-    "regionRaw": "인천",
-    "region": null,
-    "positions": [
-      "전도사"
-    ],
-    "departments": [],
-    "tagsRaw": [],
-    "postedAt": "2025-11-27",
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-09-24T08:48:03.451Z",
-    "listingCount": 1,
-    "closedAt": null
-  },
-  {
-    "source": "minitries",
-    "externalId": "168781517",
-    "url": "https://minitries.co.kr/index/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=168781517&t=board",
-    "title": "몬떼레이한인교회 사역자 청빙(2명)",
-    "church": "몬떼레이한인교회",
-    "regionRaw": null,
-    "region": null,
     "positions": [],
     "departments": [],
-    "tagsRaw": [],
-    "postedAt": "2025-11-27",
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-09-24T08:48:03.451Z",
-    "listingCount": 1,
-    "closedAt": null
-  },
-  {
-    "source": "kehc",
-    "externalId": "26870",
-    "url": "https://kehc.org/home/recruit/read_post/26870",
-    "title": "▶▶후암백합교회에서 사역 할 영유치부, 유초등부, 청소년부 파트전도사님을 모십니...",
-    "church": "후암백합교회",
-    "regionRaw": null,
-    "region": null,
-    "positions": [
-      "교육전도사",
-      "전도사"
-    ],
-    "departments": [
-      "유초등부"
-    ],
-    "tagsRaw": [
-      "전도사"
-    ],
-    "postedAt": "2025-11-27",
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-09-26T23:04:50.936Z",
-    "listingCount": 1,
-    "closedAt": null
-  },
-  {
-    "source": "kehc",
-    "externalId": "26866",
-    "url": "https://kehc.org/home/recruit/read_post/26866",
-    "title": "(수정)문화촌교회에서 부목사님을 모십니다.",
-    "church": "문화촌교회",
-    "regionRaw": null,
-    "region": null,
-    "positions": [
-      "부목사"
-    ],
-    "departments": [],
-    "tagsRaw": [
-      "목사"
-    ],
-    "postedAt": "2025-11-27",
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-09-26T23:04:50.936Z",
-    "listingCount": 1,
-    "closedAt": null
-  },
-  {
-    "source": "aats",
-    "externalId": "63",
-    "url": "http://aats.kr/main/bbs/board.php?bo_table=b05&wr_id=63",
-    "title": "부 교역자(여전도사, 교육전도사) 청빙(경남 진해)",
-    "church": null,
-    "regionRaw": null,
-    "region": "경남·부산·울산",
-    "positions": [
-      "교육전도사"
-    ],
-    "departments": [],
-    "tagsRaw": [],
-    "postedAt": "2025-11-27",
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-09-20T09:14:00.894Z",
-    "listingCount": 1,
-    "lastSeenAt": "2026-09-20T09:14:00.894Z",
-    "closedAt": null
-  },
-  {
-    "source": "hapdong",
-    "externalId": "16296",
-    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16296",
-    "title": "석광교회(성북구 석관동)에서 청년부 파트 사역자를 모십니다.",
-    "church": "석광교회",
-    "regionRaw": "성북구",
-    "region": null,
-    "positions": [],
-    "departments": [
-      "청년부"
-    ],
     "tagsRaw": [],
     "postedAt": null,
     "deadline": null,
     "deadlineText": null,
-    "collectedAt": "2026-11-27T03:51:13.132Z",
+    "collectedAt": "2026-11-28T03:36:45.588Z",
     "listingCount": 1,
     "closedAt": null
   },
   {
     "source": "hapdong",
-    "externalId": "16295",
-    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16295",
-    "title": "엘사랑교회에서 함께 사역할 동역자를 모십니다(전임).",
-    "church": "엘사랑교회",
+    "externalId": "16306",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16306",
+    "title": "중계충성교회에서 전임 교역자를 모십니다.",
+    "church": "중계충성교회",
     "regionRaw": null,
     "region": null,
     "positions": [],
@@ -172062,16 +173673,16 @@
     "postedAt": null,
     "deadline": null,
     "deadlineText": null,
-    "collectedAt": "2026-11-27T03:51:13.132Z",
+    "collectedAt": "2026-11-28T03:36:45.588Z",
     "listingCount": 1,
     "closedAt": null
   },
   {
     "source": "hapdong",
-    "externalId": "16294",
-    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16294",
-    "title": "분당 더THE사랑교회에서 함께 사역할 교역자 모십니다.",
-    "church": "더THE사랑교회",
+    "externalId": "16305",
+    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16305",
+    "title": "예수봉담교회에서 동역자를 모십니다",
+    "church": "예수봉담교회",
     "regionRaw": null,
     "region": null,
     "positions": [],
@@ -172080,47 +173691,7 @@
     "postedAt": null,
     "deadline": null,
     "deadlineText": null,
-    "collectedAt": "2026-11-27T03:51:13.132Z",
-    "listingCount": 1,
-    "closedAt": null
-  },
-  {
-    "source": "hapdong",
-    "externalId": "16293",
-    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16293",
-    "title": "상동21세기교회에서 고등부 파트 교역자님을 모십니다",
-    "church": "상동21세기교회",
-    "regionRaw": null,
-    "region": null,
-    "positions": [],
-    "departments": [
-      "고등부"
-    ],
-    "tagsRaw": [],
-    "postedAt": null,
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-11-27T03:51:13.132Z",
-    "listingCount": 1,
-    "closedAt": null
-  },
-  {
-    "source": "hapdong",
-    "externalId": "16292",
-    "url": "https://www.hapdong.ac.kr/bbs/board.php?bo_table=e03&wr_id=16292",
-    "title": "김포성문교회에서 함께 사역할 교구 전임 여전도사님을 모십니다.",
-    "church": "김포성문교회",
-    "regionRaw": null,
-    "region": null,
-    "positions": [
-      "전도사"
-    ],
-    "departments": [],
-    "tagsRaw": [],
-    "postedAt": null,
-    "deadline": null,
-    "deadlineText": null,
-    "collectedAt": "2026-11-27T03:51:13.132Z",
+    "collectedAt": "2026-11-28T03:36:45.588Z",
     "listingCount": 1,
     "closedAt": null
   },
